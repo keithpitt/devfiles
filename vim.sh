@@ -9,17 +9,22 @@ case "$1" in
     ;;
 
   setup)
+    devfile::run install
+    devfile::run configure
+    devfile::run reload-plugins
+    ;;
+
+  install)
     os::install "vim"
+    os::download "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" \
+      "$VIM_CONFIG_PATH/autoload/plug.vim"
+    ;;
 
-    curl -fLo "$VIM_CONFIG_PATH/autoload/plug.vim" --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
+  configure)
     os::softdelete "$HOME/.vimrc"
     os::softdelete "$HOME/.vim"
     os::linkfile "$DEVFILES_PATH/vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
     os::linkfile "$DEVFILES_PATH/vim/vimrc-netrw" "$VIM_CONFIG_PATH/vimrc-netrw"
-
-    vim +PlugInstall +qall
     ;;
 
   reload-plugins)
@@ -28,7 +33,7 @@ case "$1" in
 
   edit-config)
     "$EDITOR" "$VIM_CONFIG_PATH/vimrc"
-    vim +PlugInstall +qall
+    devfile::run reload-plugins
     ;;
 
   shellenv)
