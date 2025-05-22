@@ -6,8 +6,8 @@ case "$1" in
 
   setup)
     os::install "git"
-    os::linkfile "$DEVMACHINE_PATH/tools/git/config" "$GIT_CONFIG_PATH/config"
-    os::linkfile "$DEVMACHINE_PATH/tools/git/ignore" "$GIT_CONFIG_PATH/ignore"
+    os::linkfile "$DEVFILES_PATH/git/config" "$GIT_CONFIG_PATH/config"
+    os::linkfile "$DEVFILES_PATH/git/ignore" "$GIT_CONFIG_PATH/ignore"
     ;;
 
   edit-config)

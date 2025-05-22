@@ -5,7 +5,7 @@ VIM_CONFIG_PATH="${VIM_CONFIG_PATH:-$HOME/.config/vim}"
 case "$1" in
 
   logo)
-    echo -e "\n$(cat $DEVMACHINE_PATH/tools/vim/logo.ansi)\n"
+    echo -e "\n$(cat $DEVFILES_PATH/vim/logo.ansi)\n"
     ;;
 
   setup)
@@ -16,8 +16,8 @@ case "$1" in
 
     os::softdelete "$HOME/.vimrc"
     os::softdelete "$HOME/.vim"
-    os::linkfile "$DEVMACHINE_PATH/tools/vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
-    os::linkfile "$DEVMACHINE_PATH/tools/vim/vimrc-netrw" "$VIM_CONFIG_PATH/vimrc-netrw"
+    os::linkfile "$DEVFILES_PATH/vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
+    os::linkfile "$DEVFILES_PATH/vim/vimrc-netrw" "$VIM_CONFIG_PATH/vimrc-netrw"
 
     vim +PlugInstall +qall
     ;;

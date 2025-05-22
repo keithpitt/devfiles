@@ -6,7 +6,7 @@ case "$1" in
 
   setup)
     os::install "lsd"
-    os::linkfile "$DEVMACHINE_PATH/tools/lsd/config.yaml" "$LSD_CONFIG_PATH/config.yaml"
+    os::linkfile "$DEVFILES_PATH/lsd/config.yaml" "$LSD_CONFIG_PATH/config.yaml"
     ;;
 
   edit-config)

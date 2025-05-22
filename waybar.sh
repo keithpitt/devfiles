@@ -7,7 +7,7 @@ case "$1" in
   setup)
     os::install "waybar"
 
-    os::linkfile "$DEVMACHINE_PATH/tools/waybar" "$WAYBAR_CONFIG_PATH"
+    os::linkfile "$DEVFILES_PATH/waybar" "$WAYBAR_CONFIG_PATH"
 
     ;;
 

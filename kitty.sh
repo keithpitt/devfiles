@@ -6,7 +6,7 @@ case "$1" in
 
   setup)
     os::install "kitty"
-    os::linkfile "$DEVMACHINE_PATH/tools/kitty/kitty.conf" "$KITTY_CONFIG_PATH/kitty.conf"
+    os::linkfile "$DEVFILES_PATH/kitty/kitty.conf" "$KITTY_CONFIG_PATH/kitty.conf"
     ;;
 
   reload)

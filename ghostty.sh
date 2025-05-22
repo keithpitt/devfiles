@@ -5,7 +5,7 @@ GHOSTTY_CONFIG_PATH="${GHOSTTY_CONFIG_PATH:-$HOME/.config/ghostty}"
 case "$1" in
 
   logo)
-    stdlib::image::print "$DEVMACHINE_PATH/tools/ghostty/logo.png" 17 10
+    stdlib::image::print "$DEVFILES_PATH/ghostty/logo.png" 17 10
     ;;
 
   setup)
@@ -14,7 +14,7 @@ case "$1" in
     # https://github.com/ghostty-org/ghostty/pull/1102/files
     os::sh touch "$HOME/.hushlogin"
 
-    os::linkfile "$DEVMACHINE_PATH/tools/ghostty/config" "$GHOSTTY_CONFIG_PATH/config"
+    os::linkfile "$DEVFILES_PATH/ghostty/config" "$GHOSTTY_CONFIG_PATH/config"
     ;;
 
   config)

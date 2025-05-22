@@ -3,7 +3,7 @@
 case "$1" in
 
   logo)
-    stdlib::image::print "$DEVMACHINE_PATH/tools/homebrew/logo.png" 15 9
+    stdlib::image::print "$DEVFILES_PATH/homebrew/logo.png" 15 9
     ;;
 
   setup)
