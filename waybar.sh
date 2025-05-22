@@ -1,4 +1,4 @@
-#!/usr/bin/env devtool
+#!/usr/bin/env devmachine
 
 WAYBAR_CONFIG_PATH="${WAYBAR_CONFIG_PATH:-$HOME/.config/waybar}"
 

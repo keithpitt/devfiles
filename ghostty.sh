@@ -1,4 +1,4 @@
-#!/usr/bin/env devtool
+#!/usr/bin/env devmachine
 
 GHOSTTY_CONFIG_PATH="${GHOSTTY_CONFIG_PATH:-$HOME/.config/ghostty}"
 

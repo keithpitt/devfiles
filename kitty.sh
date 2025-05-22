@@ -1,4 +1,4 @@
-#!/usr/bin/env devtool
+#!/usr/bin/env devmachine
 
 KITTY_CONFIG_PATH="${KITTY_CONFIG_PATH:-$HOME/.config/kitty}"
 

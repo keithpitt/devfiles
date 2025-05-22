@@ -1,4 +1,4 @@
-#!/usr/bin/env devtool
+#!/usr/bin/env devmachine
 
 VIM_CONFIG_PATH="${VIM_CONFIG_PATH:-$HOME/.config/vim}"
 

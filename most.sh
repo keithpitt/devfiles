@@ -1,4 +1,4 @@
-#!/usr/bin/env devtool
+#!/usr/bin/env devmachine
 
 # if type most &> /dev/null; then
 #   export PAGER=most

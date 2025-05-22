@@ -1,4 +1,4 @@
-#!/usr/bin/env devtool
+#!/usr/bin/env devmachine
 
 # fyi: tldr is deprecated, tldc is the rust rewrite but its the same thing
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env devtool
+#!/usr/bin/env devmachine
 
 GIT_CONFIG_PATH="${GIT_CONFIG_PATH:-$HOME/.config/git}"
 

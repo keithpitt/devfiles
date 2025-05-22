@@ -1,4 +1,4 @@
-#!/usr/bin/env devtool
+#!/usr/bin/env devmachine
 
 LSD_CONFIG_PATH="${LSD_CONFIG_PATH:-$HOME/.config/lsd}"
 
