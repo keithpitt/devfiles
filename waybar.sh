@@ -6,9 +6,11 @@ case "$1" in
 
   setup)
     os::install "waybar"
+    devfile::run configure
+    ;;
 
+  configure)
     os::linkfile "$DEVFILES_PATH/waybar" "$WAYBAR_CONFIG_PATH"
-
     ;;
 
   --check-eligible)

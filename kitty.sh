@@ -6,6 +6,10 @@ case "$1" in
 
   setup)
     os::install "kitty"
+    devfile::run configure
+    ;;
+
+  configure)
     os::linkfile "$DEVFILES_PATH/kitty/kitty.conf" "$KITTY_CONFIG_PATH/kitty.conf"
     ;;
 

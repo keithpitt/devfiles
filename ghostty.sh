@@ -14,6 +14,10 @@ case "$1" in
     # https://github.com/ghostty-org/ghostty/pull/1102/files
     os::sh touch "$HOME/.hushlogin"
 
+    devfile::run configure
+    ;;
+
+  configure)
     os::linkfile "$DEVFILES_PATH/ghostty/config" "$GHOSTTY_CONFIG_PATH/config"
     ;;
 
