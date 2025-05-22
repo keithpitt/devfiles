@@ -5,7 +5,7 @@ VIM_CONFIG_PATH="${VIM_CONFIG_PATH:-$HOME/.config/vim}"
 case "$1" in
 
   logo)
-    echo -e "\n$(cat $DEVFILES_PATH/vim/logo.ansi)\n"
+    devicon "vim"
     ;;
 
   setup)

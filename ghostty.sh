@@ -5,7 +5,7 @@ GHOSTTY_CONFIG_PATH="${GHOSTTY_CONFIG_PATH:-$HOME/.config/ghostty}"
 case "$1" in
 
   logo)
-    stdlib::image::print "$DEVFILES_PATH/ghostty/logo.png" 17 10
+    devicon "ghostty"
     ;;
 
   setup)
