@@ -19,7 +19,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v mise &> /dev/null && echo yes
+    stdlib::test::iscommand mise && echo yes
     ;;
 
   --check-version)

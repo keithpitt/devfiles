@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v zip &> /dev/null && echo yes
+    stdlib::test::iscommand zip && echo yes
     ;;
 
   --check-version)

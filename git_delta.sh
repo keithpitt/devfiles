@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v delta &> /dev/null && echo yes
+    stdlib::test::iscommand delta && echo yes
     ;;
 
   --check-version)

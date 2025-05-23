@@ -9,7 +9,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v tldc &> /dev/null && echo yes
+    stdlib::test::iscommand tldc && echo yes
     ;;
 
   --check-version)

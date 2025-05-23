@@ -11,7 +11,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v zoxide &> /dev/null && echo yes
+    stdlib::test::iscommand zoxide && echo yes
     ;;
 
   --check-version)

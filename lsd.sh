@@ -18,7 +18,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v lsd &> /dev/null && echo yes
+    stdlib::test::iscommand lsd && echo yes
     ;;
 
   --check-version)

@@ -13,7 +13,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v bat &> /dev/null && echo yes
+    stdlib::test::iscommand bat && echo yes
     ;;
 
   --check-version)

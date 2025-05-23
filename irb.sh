@@ -3,7 +3,7 @@
 case "$1" in
 
   --check-installed)
-    command -v irb &> /dev/null && echo yes
+    stdlib::test::iscommand irb && echo yes
     ;;
 
   --check-version)

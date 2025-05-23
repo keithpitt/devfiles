@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v jq &> /dev/null && echo yes
+    stdlib::test::iscommand jq && echo yes
     ;;
 
   --check-version)

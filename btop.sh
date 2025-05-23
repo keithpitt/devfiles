@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v btop &> /dev/null && echo yes
+    stdlib::test::iscommand btop && echo yes
     ;;
 
   --check-version)

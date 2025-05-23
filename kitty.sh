@@ -22,7 +22,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v kitty &> /dev/null && echo yes
+    stdlib::test::iscommand kitty && echo yes
     ;;
 
   --check-version)

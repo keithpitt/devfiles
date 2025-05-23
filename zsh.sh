@@ -28,7 +28,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v zsh &> /dev/null && echo yes
+    stdlib::test::iscommand zsh && echo yes
     ;;
 
   --check-version)

@@ -33,7 +33,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v most &> /dev/null && echo yes
+    stdlib::test::iscommand most && echo yes
     ;;
 
   --check-version)

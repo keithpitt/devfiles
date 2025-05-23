@@ -23,7 +23,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    command -v git &> /dev/null && echo yes
+    stdlib::test::iscommand git && echo yes
     ;;
 
   --check-version)
