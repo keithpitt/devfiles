@@ -16,15 +16,15 @@ case "$1" in
 
   install)
     os::install "vim"
-    os::download "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" \
-      "$VIM_CONFIG_PATH/autoload/plug.vim"
     ;;
 
   configure)
     os::softdelete "~/.vimrc"
     os::softdelete "~/.vim"
+    os::linkfile "vim/autoload/plug.vim" "$VIM_CONFIG_PATH/autoload/plug.vim"
     os::linkfile "vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
     os::linkfile "vim/vimrc-netrw" "$VIM_CONFIG_PATH/vimrc-netrw"
+    devfile::run reload-plugins
     ;;
 
   reload-plugins)
