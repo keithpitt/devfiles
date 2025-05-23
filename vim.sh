@@ -9,9 +9,9 @@ case "$1" in
     ;;
 
   setup)
-    devfile::run install
-    devfile::run configure
-    devfile::run reload-plugins
+    @run install
+    @run configure
+    @run reload-plugins
     ;;
 
   install)
@@ -24,7 +24,7 @@ case "$1" in
     os::linkfile "vim/autoload/plug.vim" "$VIM_CONFIG_PATH/autoload/plug.vim"
     os::linkfile "vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
     os::linkfile "vim/vimrc-netrw" "$VIM_CONFIG_PATH/vimrc-netrw"
-    devfile::run reload-plugins
+    @run reload-plugins
     ;;
 
   reload-plugins)
@@ -33,7 +33,7 @@ case "$1" in
 
   edit-config)
     "$EDITOR" "$VIM_CONFIG_PATH/vimrc"
-    devfile::run reload-plugins
+    @run reload-plugins
     ;;
 
   shellenv)
