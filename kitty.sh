@@ -10,7 +10,7 @@ case "$1" in
     ;;
 
   configure)
-    os::linkfile "$DEVFILES_PATH/kitty/kitty.conf" "$KITTY_CONFIG_PATH/kitty.conf"
+    os::linkfile "kitty/kitty.conf" "$KITTY_CONFIG_PATH/kitty.conf"
     ;;
 
   reload)

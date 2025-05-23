@@ -21,10 +21,10 @@ case "$1" in
     ;;
 
   configure)
-    os::softdelete "$HOME/.vimrc"
-    os::softdelete "$HOME/.vim"
-    os::linkfile "$DEVFILES_PATH/vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
-    os::linkfile "$DEVFILES_PATH/vim/vimrc-netrw" "$VIM_CONFIG_PATH/vimrc-netrw"
+    os::softdelete "~/.vimrc"
+    os::softdelete "~/.vim"
+    os::linkfile "vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
+    os::linkfile "vim/vimrc-netrw" "$VIM_CONFIG_PATH/vimrc-netrw"
     ;;
 
   reload-plugins)

@@ -3,7 +3,7 @@
 case "$1" in
 
   logo)
-    stdlib::image::print "$DEVFILES_PATH/bash/logo.png" 20 10
+    stdlib::image::print "bash/logo.png" 20 10
     ;;
 
   setup)
@@ -19,15 +19,15 @@ case "$1" in
 
   shellenv)
     if [[ "$2" == "bash" ]]; then
-      cat "$DEVFILES_PATH/bash/history.bash"
-      cat "$DEVFILES_PATH/bash/prompt.bash"
+      cat "bash/history.bash"
+      cat "bash/prompt.bash"
     else
       echo "# skipping bash shellenv"
     fi
     ;;
 
   motd)
-    source "$DEVFILES_PATH/bash/motd.bash"
+    source "bash/motd.bash"
     ;;
 
   --check-installed)

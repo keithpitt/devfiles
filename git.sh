@@ -10,8 +10,8 @@ case "$1" in
     ;;
 
   configure)
-    os::linkfile "$DEVFILES_PATH/git/config" "$GIT_CONFIG_PATH/config"
-    os::linkfile "$DEVFILES_PATH/git/ignore" "$GIT_CONFIG_PATH/ignore"
+    os::linkfile "git/config" "$GIT_CONFIG_PATH/config"
+    os::linkfile "git/ignore" "$GIT_CONFIG_PATH/ignore"
     ;;
 
   edit-config)

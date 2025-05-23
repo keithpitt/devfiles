@@ -15,16 +15,16 @@ case "$1" in
 
   shellenv)
     if [[ "$2" == "zsh" ]]; then
-      cat "$DEVFILES_PATH/zsh/prompt.zsh"
-      cat "$DEVFILES_PATH/zsh/completions.zsh"
-      cat "$DEVFILES_PATH/zsh/history.zsh"
+      cat "zsh/prompt.zsh"
+      cat "zsh/completions.zsh"
+      cat "zsh/history.zsh"
     else
       echo "# skipping zsh shellenv"
     fi
     ;;
 
   motd)
-    exec "$DEVFILES_PATH/zsh/motd.zsh"
+    exec "zsh/motd.zsh"
     ;;
 
   --check-installed)

@@ -18,7 +18,7 @@ case "$1" in
     ;;
 
   configure)
-    os::linkfile "$DEVFILES_PATH/ghostty/config" "$GHOSTTY_CONFIG_PATH/config"
+    os::linkfile "ghostty/config" "$GHOSTTY_CONFIG_PATH/config"
     ;;
 
   config)

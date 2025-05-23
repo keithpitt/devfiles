@@ -10,7 +10,7 @@ case "$1" in
     ;;
 
   configure)
-    os::linkfile "$DEVFILES_PATH/waybar" "$WAYBAR_CONFIG_PATH"
+    os::linkfile "waybar" "$WAYBAR_CONFIG_PATH"
     ;;
 
   --check-eligible)
