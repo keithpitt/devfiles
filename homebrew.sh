@@ -11,7 +11,7 @@ case "$1" in
     ;;
 
   shellenv)
-    /opt/homebrew/bin/brew shellenv
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"'
 
     # man bash always shows the installed version of man, not the one
     # installed with homebrew. dunno why...

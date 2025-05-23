@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   shellenv)
-    zoxide init "$SHELL" --cmd "j"
+    zoxide init "$2" --cmd "j"
     ;;
 
   --check-installed)
