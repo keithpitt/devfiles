@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   shellenv)
-    eval "fzf --$SHELL"
+    eval "fzf --$2"
     ;;
 
   --check-installed)
