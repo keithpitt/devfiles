@@ -6,7 +6,7 @@ case "$1" in
     os::install "jq"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command jq && echo yes
     ;;
 

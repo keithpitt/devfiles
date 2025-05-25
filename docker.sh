@@ -6,7 +6,7 @@ case "$1" in
     os::install "docker"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command docker && echo yes
     ;;
 

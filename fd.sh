@@ -6,7 +6,7 @@ case "$1" in
     os::install "fd"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command fd && echo yes
     ;;
 

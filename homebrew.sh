@@ -26,7 +26,7 @@ case "$1" in
     [[ $(uname -s) == "Darwin" ]]
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command brew && echo yes
     ;;
 

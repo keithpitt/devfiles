@@ -32,7 +32,7 @@ case "$1" in
     os::install "most"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command most && echo yes
     ;;
 

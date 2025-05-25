@@ -12,7 +12,7 @@ case "$1" in
     batman --export-env # batman is part of bat-extras
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command bat && echo yes
     ;;
 

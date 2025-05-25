@@ -17,7 +17,7 @@ case "$1" in
     echo 'alias ls="lsd"'
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command lsd && echo yes
     ;;
 

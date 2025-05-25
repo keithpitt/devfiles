@@ -8,7 +8,7 @@ case "$1" in
     os::install "tldc"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command tldc && echo yes
     ;;
 

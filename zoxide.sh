@@ -10,7 +10,7 @@ case "$1" in
     zoxide init "$2" --cmd "j"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command zoxide && echo yes
     ;;
 

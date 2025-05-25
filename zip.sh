@@ -6,7 +6,7 @@ case "$1" in
     os::install "zip"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command zip && echo yes
     ;;
 

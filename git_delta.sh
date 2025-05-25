@@ -6,7 +6,7 @@ case "$1" in
     os::install "git-delta"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command delta && echo yes
     ;;
 

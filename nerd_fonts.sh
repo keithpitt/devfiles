@@ -7,7 +7,7 @@ case "$1" in
     brew search '/font-.*-nerd-font/' | awk '{ print $1 }' | xargs brew install --cask
     ;;
 
-  --check-installed)
+  --is-installed)
     test -e "$HOME/Library/Fonts/JetBrainsMonoNerdFont-Regular.ttf" && echo "yes"
     ;;
 

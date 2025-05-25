@@ -21,7 +21,7 @@ case "$1" in
     "$EDITOR" "$KITTY_CONFIG_PATH/kitty.conf"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command kitty && echo yes
     ;;
 

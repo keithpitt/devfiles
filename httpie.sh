@@ -6,7 +6,7 @@ case "$1" in
     os::install "httpie"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command httpie && echo yes
     ;;
 

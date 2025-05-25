@@ -30,7 +30,7 @@ case "$1" in
     source "bash/motd.bash"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command bash && echo yes
     ;;
 

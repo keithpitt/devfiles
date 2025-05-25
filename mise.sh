@@ -18,7 +18,7 @@ case "$1" in
     mise activate "$2"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command mise && echo yes
     ;;
 

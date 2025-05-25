@@ -2,7 +2,7 @@
 
 case "$1" in
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command irb && echo yes
     ;;
 

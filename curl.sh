@@ -6,7 +6,7 @@ case "$1" in
     os::install "curl"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command curl && echo yes
     ;;
 

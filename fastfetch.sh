@@ -6,7 +6,7 @@ case "$1" in
     os::install "fastfetch"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command fastfetch && echo yes
     ;;
 

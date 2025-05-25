@@ -18,7 +18,7 @@ case "$1" in
     echo 'export LESS="-w -i -R"'
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command less && echo yes
     ;;
 

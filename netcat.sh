@@ -6,7 +6,7 @@ case "$1" in
     os::install "netcat"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command netcat && echo yes
     ;;
 

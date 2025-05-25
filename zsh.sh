@@ -27,7 +27,7 @@ case "$1" in
     exec "zsh/motd.zsh"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command zsh && echo yes
     ;;
 

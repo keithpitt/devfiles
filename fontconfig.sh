@@ -6,7 +6,7 @@ case "$1" in
     os::install "fontconfig"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command fc-list && echo yes
     ;;
 

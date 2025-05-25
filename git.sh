@@ -22,7 +22,7 @@ case "$1" in
     "$EDITOR" "$GIT_CONFIG_PATH/ignore"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command git && echo yes
     ;;
 

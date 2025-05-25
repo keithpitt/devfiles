@@ -10,7 +10,7 @@ case "$1" in
     eval "fzf --$2"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command fzf && echo yes
     ;;
 

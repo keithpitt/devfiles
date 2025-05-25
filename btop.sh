@@ -6,7 +6,7 @@ case "$1" in
     os::install "btop"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command btop && echo yes
     ;;
 

@@ -40,7 +40,7 @@ case "$1" in
     echo 'export EDITOR="vim"'
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command vim && echo yes
     ;;
 

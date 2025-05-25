@@ -25,7 +25,7 @@ case "$1" in
     "$EDITOR" "$GHOSTTY_CONFIG_PATH/config"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command ghostty && echo yes
     ;;
 

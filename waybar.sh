@@ -18,7 +18,7 @@ case "$1" in
       pacman -Si waybar &> /dev/null
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command waybar && echo yes
     ;;
 

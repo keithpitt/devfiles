@@ -6,7 +6,7 @@ case "$1" in
     os::install "yazi"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command yazi && echo yes
     ;;
 

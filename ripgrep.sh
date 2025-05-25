@@ -6,7 +6,7 @@ case "$1" in
     os::install "ripgrep"
     ;;
 
-  --check-installed)
+  --is-installed)
     stdlib::test::is_command rg && echo yes
     ;;
 
