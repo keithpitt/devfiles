@@ -15,7 +15,7 @@ case "$1" in
     ;;
 
   shellenv)
-    mise activate "$SHELL"
+    mise activate "$2"
     ;;
 
   --check-installed)
