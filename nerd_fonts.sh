@@ -3,7 +3,8 @@
 case "$1" in
 
   setup)
-    brew install fontconfig font-jetbrains-mono-nerd-font
+    brew install fontconfig
+    brew search '/font-.*-nerd-font/' | awk '{ print $1 }' | xargs brew install --cask
     ;;
 
   --check-installed)
