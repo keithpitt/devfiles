@@ -27,7 +27,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand brew && echo yes
+    stdlib::test::is_command brew && echo yes
     ;;
 
   --check-version)

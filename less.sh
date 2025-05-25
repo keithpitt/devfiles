@@ -19,7 +19,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand less && echo yes
+    stdlib::test::is_command less && echo yes
     ;;
 
   --check-version)

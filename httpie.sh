@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand httpie && echo yes
+    stdlib::test::is_command httpie && echo yes
     ;;
 
   --check-version)

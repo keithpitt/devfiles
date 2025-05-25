@@ -26,7 +26,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand ghostty && echo yes
+    stdlib::test::is_command ghostty && echo yes
     ;;
 
   --check-version)

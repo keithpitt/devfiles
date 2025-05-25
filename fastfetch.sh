@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand fastfetch && echo yes
+    stdlib::test::is_command fastfetch && echo yes
     ;;
 
   --check-version)

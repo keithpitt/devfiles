@@ -19,7 +19,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand waybar && echo yes
+    stdlib::test::is_command waybar && echo yes
     ;;
 
   --check-version)

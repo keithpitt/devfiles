@@ -31,7 +31,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand bash && echo yes
+    stdlib::test::is_command bash && echo yes
     ;;
 
   --check-version)

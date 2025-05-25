@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand yazi && echo yes
+    stdlib::test::is_command yazi && echo yes
     ;;
 
   --check-version)

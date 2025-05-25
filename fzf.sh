@@ -11,7 +11,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand fzf && echo yes
+    stdlib::test::is_command fzf && echo yes
     ;;
 
   --check-version)

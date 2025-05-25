@@ -41,7 +41,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand vim && echo yes
+    stdlib::test::is_command vim && echo yes
     ;;
 
   --check-version)

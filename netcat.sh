@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand netcat && echo yes
+    stdlib::test::is_command netcat && echo yes
     ;;
 
   --check-version)

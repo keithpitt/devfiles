@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand docker && echo yes
+    stdlib::test::is_command docker && echo yes
     ;;
 
   --check-version)
