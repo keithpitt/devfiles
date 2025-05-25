@@ -7,7 +7,7 @@ case "$1" in
     ;;
 
   --check-installed)
-    stdlib::test::iscommand fd && echo yes
+    stdlib::test::is_command fd && echo yes
     ;;
 
   --check-version)
