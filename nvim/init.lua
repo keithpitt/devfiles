@@ -28,6 +28,10 @@ vim.api.nvim_set_keymap( 'n', ',s', ':Neotree toggle<cr>', { noremap = true, sil
 vim.keymap.set( 'n', '<leader>w', '<cmd>write<cr>', { desc = "Save file" })
 vim.keymap.set( 'n', '<leader>q', '<cmd>quitall<cr>', { desc = "Exit vim" })
 
+vim.keymap.set( 'n', '\\[', '<cmd>tabprevious<cr>', { desc = "Previous tab" })
+vim.keymap.set( 'n', '\\]', '<cmd>tabnext<cr>', { desc = "Next tab" })
+vim.keymap.set( 'n', '\\n', '<cmd>tabnew<cr>', { desc = "New tab" })
+
 -- Shortcut `` to jump back to last buffer
 vim.api.nvim_set_keymap( 'n', '``', '<C-^>', { noremap = true, silent = true })
 
