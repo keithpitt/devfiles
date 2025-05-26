@@ -83,6 +83,20 @@ vim.lsp.config('bashls', {
   }
 })
 
+vim.lsp.enable('vimls')
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { "vim" },
+      },
+    },
+  }
+})
+
+vim.lsp.enable('lua_ls')
+
 -- Automatically switch the vim working directory when we open a new file
 -- vim.opt.autochdir = true
 

@@ -7,6 +7,7 @@ case "$1" in
   install)
     os::install "neovim"
     os::install "shellcheck"
+    os::install "lua-language-server"
     # npm i -g bash-language-server
     ;;
 
