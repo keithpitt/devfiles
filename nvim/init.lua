@@ -17,8 +17,8 @@ vim.cmd.colorscheme('jellybeans')
 
 -- Custom keymaps for opening/closing directory view
 vim.keymap.set( 'n', '<leader>r', ':Neotree reveal_file=% reveal_force_cwd<cr>', { noremap = true, silent = true })
-vim.keymap.set( 'n', '<leader>s', ':Neotree reveal_file=% reveal_force_cwd<cr>', { noremap = true, silent = true })
--- vim.api.nvim_set_keymap( 'n', ',s', ':Neotree toggle<cr>', { noremap = true, silent = true })
+-- vim.keymap.set( 'n', '<leader>s', ':Neotree reveal_file=% reveal_force_cwd<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap( 'n', ',s', ':Neotree toggle<cr>', { noremap = true, silent = true })
 --
 vim.keymap.set( 'n', '<leader>w', '<cmd>write<cr>', { desc = "Save file" })
 vim.keymap.set( 'n', '<leader>q', '<cmd>quitall<cr>', { desc = "Exit vim" })
@@ -61,8 +61,8 @@ require('telescope').setup({
 })
 
 -- Custom keymaps for toggling telescope
-vim.keymap.set('n', '<leader>t', telescope_builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>f', telescope_builtin.oldfiles, { desc = 'Telescope old files' })
+vim.keymap.set('n', '<leader>f', ':Telescope frecency workspace=CWD <cr>', { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>l', telescope_builtin.oldfiles, { desc = 'Telescope old files' })
 vim.keymap.set('n', '<leader>d', telescope_builtin.lsp_workspace_symbols, { desc = 'Telescope lsp workspace symbols' })
 
 -- There is only 1 correct config for tabs, and this is it

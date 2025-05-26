@@ -52,6 +52,14 @@ return {
     }
   },
 
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+    version = "*",
+    config = function()
+      require("telescope").load_extension "frecency"
+    end,
+  },
+
   -- Removes trailing white space and empty lines at EOF on save
   {
     'mcauley-penney/tidy.nvim',
