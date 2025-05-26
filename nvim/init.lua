@@ -34,8 +34,18 @@ vim.opt.termguicolors = true
 -- Hide the status bar at the bottom of the window
 vim.opt.laststatus = 0
 
+local telescope_actions = require("telescope.actions")
+local telescope_builtin = require('telescope.builtin')
+
 require('telescope').setup({
   defaults = {
+    mappings = {
+      i = {
+        -- Escape telescope with <ESC> when in insert mode (otherwise you need
+        -- to hit it twice which is kinda annoying)
+        ["<esc>"] = telescope_actions.close
+      },
+    },
     preview = {
       -- Hide previewer when picker starts
       hide_on_startup = true
@@ -44,9 +54,8 @@ require('telescope').setup({
 })
 
 -- Custom keymaps for toggling telescope
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', ',t', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', ',f', builtin.oldfiles, { desc = 'Telescope old files' })
+vim.keymap.set('n', ',t', telescope_builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', ',f', telescope_builtin.oldfiles, { desc = 'Telescope old files' })
 
 -- There is only 1 correct config for tabs, and this is it
 vim.opt.tabstop = 2
