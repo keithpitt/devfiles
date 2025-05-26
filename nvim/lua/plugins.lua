@@ -68,4 +68,9 @@ return {
     'echasnovski/mini.nvim',
     version = '*'
   },
+
+  -- Better autochdir
+  {
+    'airblade/vim-rooter',
+  }
 }

@@ -1,5 +1,9 @@
+-- Disable netrw entirely since we use neotree
 vim.g.loaded_netrw = 0
 vim.g.loaded_netrwPlugin = 0
+
+-- Embrace , as our true and only leader
+vim.g.mapleader = ','
 
 require("config.lazy")
 -- require("config.netrw")
@@ -12,15 +16,18 @@ require("config.lazy")
 vim.cmd.colorscheme('jellybeans')
 
 -- Custom keymaps for opening/closing directory view
-vim.api.nvim_set_keymap( 'n', ',r', ':Neotree reveal_file=% reveal_force_cwd<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap( 'n', ',s', ':Neotree reveal_file=% reveal_force_cwd<cr>', { noremap = true, silent = true })
+vim.keymap.set( 'n', '<leader>r', ':Neotree reveal_file=% reveal_force_cwd<cr>', { noremap = true, silent = true })
+vim.keymap.set( 'n', '<leader>s', ':Neotree reveal_file=% reveal_force_cwd<cr>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap( 'n', ',s', ':Neotree toggle<cr>', { noremap = true, silent = true })
+--
+vim.keymap.set( 'n', '<leader>w', '<cmd>write<cr>', { desc = "Save file" })
+vim.keymap.set( 'n', '<leader>q', '<cmd>quitall<cr>', { desc = "Exit vim" })
 
 -- Shortcut `` to jump back to last buffer
 vim.api.nvim_set_keymap( 'n', '``', '<C-^>', { noremap = true, silent = true })
 
 -- Save 1000s of hours by making ; a shortcut to :
-vim.api.nvim_set_keymap( 'n', ';', ':', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap( 'n', ';', ':', { noremap = true, silent = true })
 
 -- Allow mouse to be used in all modes (default is "nvi")
 vim.opt.mouse = 'a'
@@ -54,8 +61,9 @@ require('telescope').setup({
 })
 
 -- Custom keymaps for toggling telescope
-vim.keymap.set('n', ',t', telescope_builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', ',f', telescope_builtin.oldfiles, { desc = 'Telescope old files' })
+vim.keymap.set('n', '<leader>t', telescope_builtin.find_files, { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>f', telescope_builtin.oldfiles, { desc = 'Telescope old files' })
+vim.keymap.set('n', '<leader>d', telescope_builtin.lsp_workspace_symbols, { desc = 'Telescope lsp workspace symbols' })
 
 -- There is only 1 correct config for tabs, and this is it
 vim.opt.tabstop = 2
@@ -75,18 +83,24 @@ vim.lsp.config('bashls', {
   }
 })
 
-vim.opt.autochdir = true
+-- Automatically switch the vim working directory when we open a new file
+-- vim.opt.autochdir = true
 
+-- Show LSP errors
 vim.diagnostic.config({ virtual_lines = true })
 
+-- Setup autocomplete
 require('mini.completion').setup()
 require('mini.snippets').setup()
 require('mini.icons').setup()
 
 require("neo-tree").setup({
   filesystem = {
-    bind_to_cwd = true,
+    -- Make "nvim ." work better
     hijack_netrw_behavior = "open_current",
+
+    -- Ensure the sidebar's working directory is the same as the current file
+    bind_to_cwd = true,
     cwd_target = {
       sidebar = "tab",
       current = "window"
