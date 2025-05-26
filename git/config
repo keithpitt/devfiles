@@ -18,3 +18,5 @@
 [commit]
     # Show a diff when you open go to commit in a text editor
     verbose = true
+[help]
+	autocorrect = immediate
