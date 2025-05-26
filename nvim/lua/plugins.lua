@@ -77,5 +77,10 @@ return {
   -- Better autochdir
   {
     'airblade/vim-rooter',
-  }
+  },
+
+  -- Sync terminal background color with nvim
+  {
+    'typicode/bg.nvim',
+  },
 }
