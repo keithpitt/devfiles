@@ -76,6 +76,10 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
+-- Show tabs
+vim.opt.list = true
+vim.opt.listchars = 'tab:>-'
+
 -- By default ignore case in search, but if there's a capital (smartcase) then
 -- treat it properly
 vim.opt.ignorecase = true
