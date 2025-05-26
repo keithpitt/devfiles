@@ -39,6 +39,12 @@ return {
     opts = { }
   },
 
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000
+  },
+
   -- Kinda like ctrl-p
   {
     'nvim-telescope/telescope.nvim',

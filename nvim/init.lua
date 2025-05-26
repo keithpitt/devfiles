@@ -13,20 +13,35 @@ require("config.lazy")
 --   enable = true,
 -- })
 --
-require('jellybeans').setup({
-  transparent = true,
-  italics = false,
+-- require('jellybeans').setup({
+--   transparent = true,
+--   italics = false,
+-- })
+
+require("catppuccin").setup({
+  transparent_background = true,
+  no_italic = true,
+  show_end_of_buffer = true
 })
 
-vim.cmd.colorscheme('jellybeans')
+vim.cmd.colorscheme('catppuccin-mocha')
+
+-- Shortcut to either switch to the current file in the sidebar if we're in the editor, of if we're in neotree, the same shortcut will switch back to the editor
+vim.keymap.set('n', '<leader>r', function()
+  local bufname = vim.api.nvim_buf_get_name(0)
+  if string.match(bufname, 'neo%-tree') then
+    vim.cmd('wincmd w')
+  else
+    vim.cmd('Neotree reveal_file=% reveal_force_cwd')
+  end
+end, { noremap = true, silent = true })
 
 -- Custom keymaps for opening/closing directory view
-vim.keymap.set( 'n', '<leader>r', ':Neotree reveal_file=% reveal_force_cwd<cr>', { noremap = true, silent = true })
--- vim.keymap.set( 'n', '<leader>s', ':Neotree reveal_file=% reveal_force_cwd<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap( 'n', ',s', ':Neotree toggle<cr>', { noremap = true, silent = true })
---
+
 vim.keymap.set( 'n', '<leader>w', '<cmd>write<cr>', { desc = "Save file" })
 vim.keymap.set( 'n', '<leader>q', '<cmd>quitall<cr>', { desc = "Exit vim" })
+vim.keymap.set( 'n', '<leader>wq', ':wq<cr>', { desc = "Exit vim" })
 
 vim.keymap.set( 'n', '\\[', '<cmd>tabprevious<cr>', { desc = "Previous tab" })
 vim.keymap.set( 'n', '\\]', '<cmd>tabnext<cr>', { desc = "Next tab" })
