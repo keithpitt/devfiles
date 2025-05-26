@@ -6,9 +6,17 @@ case "$1" in
 
   install)
     os::install "neovim"
+    ;;
+
+  lsps)
     os::install "shellcheck"
+    os::sh npm i -g bash-language-server
+
     os::install "lua-language-server"
-    # npm i -g bash-language-server
+
+    os::sh npm install -g vim-language-server
+
+    os::sh gem install ruby-lsp
     ;;
 
   configure)
