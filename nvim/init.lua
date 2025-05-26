@@ -118,7 +118,13 @@ require('mini.snippets').setup()
 require('mini.icons').setup()
 
 require("neo-tree").setup({
+  window = {
+    width = 30,
+  },
   filesystem = {
+    -- If we've closed our last buffer, then our work here is done
+    close_if_last_window = true,
+
     -- Make "nvim ." work better
     hijack_netrw_behavior = "open_current",
 
