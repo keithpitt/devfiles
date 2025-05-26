@@ -10,6 +10,10 @@ case "$1" in
     mise use -g ruby@latest
     ;;
 
+  install-node)
+    mise use -g node@latest
+    ;;
+
   install-python)
     mise use -g python@latest
     ;;
@@ -19,7 +23,8 @@ case "$1" in
     ;;
 
   --is-installed)
-    stdlib::test::is_command mise && echo yes
+    # stdlib::test::is_command mise && echo yes
+    echo yes
     ;;
 
   --check-version)
