@@ -1,1 +1,1 @@
-cmd - 1 : PROFILE=quick kitten quick-access-terminal
+cmd - 1 : cd $HOME && PROFILE=quick kitten quick-access-terminal
