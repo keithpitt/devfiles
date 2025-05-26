@@ -12,6 +12,11 @@ require("config.lazy")
 --   use_devicons = true,
 --   enable = true,
 -- })
+--
+require('jellybeans').setup({
+  transparent = true,
+  italics = false,
+})
 
 vim.cmd.colorscheme('jellybeans')
 

@@ -36,10 +36,7 @@ return {
     "wtfox/jellybeans.nvim",
     lazy = false,
     priority = 1000,
-    opts = {
-      transparent = true,
-      italics = false,
-    }
+    opts = { }
   },
 
   -- Kinda like ctrl-p
