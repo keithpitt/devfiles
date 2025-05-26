@@ -10,13 +10,7 @@ case "$1" in
     ;;
 
   configure)
-    os::linkfile "kitty/kitty.conf" "$KITTY_CONFIG_PATH/kitty.conf"
-    os::linkfile "kitty/themes" "$KITTY_CONFIG_PATH/themes"
-    os::linkfile "kitty/kitty.app.icns" "$KITTY_CONFIG_PATH/kitty.app.icns"
-    os::linkfile "kitty/quick-access-terminal.conf" "$KITTY_CONFIG_PATH/quick-access-terminal.conf"
-    os::linkfile "kitty/duckbones.conf" "$KITTY_CONFIG_PATH/duckbones.conf"
-    os::linkfile "kitty/catppuccin-mocha.conf" "$KITTY_CONFIG_PATH/catppuccin-mocha.conf"
-    os::linkfile "kitty/theme_chooser.sh" "$KITTY_CONFIG_PATH/theme_chooser.sh"
+    os::linkfile "kitty" "$KITTY_CONFIG_PATH"
     ;;
 
   reload)

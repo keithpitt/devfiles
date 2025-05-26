@@ -1,1 +1,1 @@
-cmd - 1 : QUICK_ACCESS=true kitten quick-access-terminal --config NONE
+cmd - 1 : PROFILE=quick kitten quick-access-terminal
