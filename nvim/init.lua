@@ -318,6 +318,15 @@ require("neo-tree").setup({
       sidebar = "tab",
       current = "window"
     },
+
+    filtered_items = {
+      visible = true,
+      -- hide_dotfiles = false,
+      never_show = {
+        ".DS_Store",
+        "thumbs.db"
+      }
+    }
   }
 })
 
