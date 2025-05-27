@@ -127,6 +127,7 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+
 ------------------------------------------------------------
 -- Timeout settings for key mappings
 ------------------------------------------------------------
@@ -226,13 +227,22 @@ require('telescope').setup({
       -- Hide previewer when picker starts
       hide_on_startup = true
     }
+  },
+  extensions = {
+    recent_files = {
+      ignore_patterns = { "/tmp/", ".git" },
+      theme = "dropdown"
+    }
   }
 })
+
+require('telescope').load_extension("recent_files")
+
 
 -- Custom keymaps for toggling telescope
 -- vim.keymap.set('n', '<leader>f', ':Telescope frecency workspace=CWD <cr>', { desc = 'Telescope find files', silent = true, noremap = true })
 vim.keymap.set('n', '<leader>f', function()
-  require('telescope').extensions['recent-files'].recent_files({})
+  require('telescope').extensions.recent_files.pick({ only_cwd = true })
 end, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>l', telescope_builtin.oldfiles, { desc = 'Telescope old files', silent = true })
 vim.keymap.set('n', '<leader>d', telescope_builtin.lsp_workspace_symbols, { desc = 'Telescope lsp workspace symbols', silent = true })
@@ -339,10 +349,60 @@ transparent.clear_prefix('NeoTree')
 transparent.setup()
 
 
-vim.api.nvim_create_autocmd('VimEnter',{
-  callback=function()
-    if vim.fn.argc() == 0 then
-      require('telescope').extensions['recent-files'].recent_files({})
-    end
-  end
-})
+-- vim.api.nvim_create_autocmd('VimEnter',{
+--   callback=function()
+--     if vim.fn.argc() == 0 then
+--       require('telescope').extensions['recent-files'].recent_files(require('telescope.themes').get_dropdown({}))
+--     end
+--   end
+-- })
+--
+local dashboard_custom_header = [[
+███╗   ███╗ █████╗  ██████╗ ██╗ ██████╗██╗  ██╗███████╗██╗████████╗██╗  ██╗
+████╗ ████║██╔══██╗██╔════╝ ██║██╔════╝██║ ██╔╝██╔════╝██║╚══██╔══╝██║  ██║
+██╔████╔██║███████║██║  ███╗██║██║     █████╔╝ █████╗  ██║   ██║   ███████║
+██║╚██╔╝██║██╔══██║██║   ██║██║██║     ██╔═██╗ ██╔══╝  ██║   ██║   ██╔══██║
+██║ ╚═╝ ██║██║  ██║╚██████╔╝██║╚██████╗██║  ██╗███████╗██║   ██║   ██║  ██║
+╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝   ╚═╝  ╚═╝
+]]
+
+require('dashboard').setup({
+    theme = 'hyper',
+    hide = {
+      statusline = true,
+      tabline = true,
+      winbar = true
+    },
+    change_to_vcs_root = true,
+    config = {
+      header = vim.split(dashboard_custom_header, "\n"),
+      project = {
+        action = function(path)
+          require('telescope').extensions.recent_files.pick({ cwd = path, only_cwd = true })
+        end
+      },
+      shortcut = {
+        { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+        -- {
+        --   icon = ' ',
+        --   icon_hl = '@variable',
+        --   desc = 'Files',
+        --   group = 'Label',
+        --   action = 'Telescope recent_files',
+        --   key = 'f',
+        -- },
+        -- {
+        --   desc = ' Apps',
+        --   group = 'DiagnosticHint',
+        --   action = 'Telescope app',
+        --   key = 'a',
+        -- },
+        -- {
+        --   desc = ' dotfiles',
+        --   group = 'Number',
+        --   action = 'Telescope dotfiles',
+        --   key = 'd',
+        -- },
+      },
+    },
+  })

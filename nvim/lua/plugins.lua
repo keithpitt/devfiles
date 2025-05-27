@@ -52,10 +52,13 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
-      'mollerhoj/telescope-recent-files.nvim',
+      {
+        'smartpde/telescope-recent-files',
+        commit = 'eb190c0baded1cbfa9d8767c817b054377683163'
+      }
     },
     config = function()
-      require("telescope").load_extension("recent-files")
+      require("telescope").load_extension("recent_files")
     end
   },
 
@@ -93,4 +96,10 @@ return {
   {
     'typicode/bg.nvim',
   },
+
+  {
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    dependencies = { {'nvim-tree/nvim-web-devicons'}}
+  }
 }
