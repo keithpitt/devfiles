@@ -7,16 +7,15 @@ case "$1" in
   install)
     brew install koekeishiya/formulae/skhd
     skhd --install-service
-    skhd --start-service
     ;;
 
   configure)
     os::linkfile "skhd/skhdrc" "$SKHD_CONFIG_PATH/skhdrc"
-    skhd -r
+    skhd -r 2> /dev/null || skhd --start-service
     ;;
 
   --is-installed)
-    stdlib::test::is_command rg && echo yes
+    stdlib::test::is_command skhd && echo yes
     ;;
 
   --check-version)

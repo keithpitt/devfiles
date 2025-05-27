@@ -6,7 +6,7 @@ case "$1" in
 
   setup)
     os::install "kitty"
-    devfile::run configure
+    @run configure
     ;;
 
   configure)
