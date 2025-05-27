@@ -406,3 +406,20 @@ require('dashboard').setup({
       },
     },
   })
+
+vim.api.nvim_create_augroup("Dashboard_au", { clear = true })
+vim.api.nvim_create_autocmd("Filetype", {
+  group = "Dashboard_au",
+  pattern = "dashboard",
+  callback = function()
+    vim.opt_local.ruler = false
+    vim.opt_local.fillchars:append({ eob = " " })
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufLeave", {
+  group = "Dashboard_au",
+  callback = function()
+    vim.opt_local.ruler = true
+  end,
+})
