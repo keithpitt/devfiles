@@ -30,7 +30,7 @@ case "$1" in
 
   shellenv)
     echo 'export EDITOR="nvim"'
-    echo "alias v='nvim .'"
+    echo "alias v='nvim'"
     ;;
 
   # --check-version)

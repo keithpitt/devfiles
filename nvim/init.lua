@@ -230,7 +230,10 @@ require('telescope').setup({
 })
 
 -- Custom keymaps for toggling telescope
-vim.keymap.set('n', '<leader>f', ':Telescope frecency workspace=CWD <cr>', { desc = 'Telescope find files', silent = true })
+-- vim.keymap.set('n', '<leader>f', ':Telescope frecency workspace=CWD <cr>', { desc = 'Telescope find files', silent = true, noremap = true })
+vim.keymap.set('n', '<leader>f', function()
+  require('telescope').extensions['recent-files'].recent_files({})
+end, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>l', telescope_builtin.oldfiles, { desc = 'Telescope old files', silent = true })
 vim.keymap.set('n', '<leader>d', telescope_builtin.lsp_workspace_symbols, { desc = 'Telescope lsp workspace symbols', silent = true })
 
@@ -305,7 +308,7 @@ require("neo-tree").setup({
 
   -- A more tighter window
   window = {
-    width = 30,
+    width = 25,
   },
 
   filesystem = {
@@ -334,3 +337,12 @@ require("neo-tree").setup({
 local transparent = require("transparent")
 transparent.clear_prefix('NeoTree')
 transparent.setup()
+
+
+vim.api.nvim_create_autocmd('VimEnter',{
+  callback=function()
+    if vim.fn.argc() == 0 then
+      require('telescope').extensions['recent-files'].recent_files({})
+    end
+  end
+})

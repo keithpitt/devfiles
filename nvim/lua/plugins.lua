@@ -52,7 +52,11 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-treesitter/nvim-treesitter',
-    }
+      'mollerhoj/telescope-recent-files.nvim',
+    },
+    config = function()
+      require("telescope").load_extension("recent-files")
+    end
   },
 
   {
