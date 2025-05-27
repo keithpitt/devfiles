@@ -1,3 +1,5 @@
+-- https://github.com/drakeaxelrod/nvim/blob/f34a9fe852162147ca64d0f52a4003459d4d0329/lua/core/opts.lua
+
 -- DISABLE --
 -- We don't need any of this stuff
 vim.g.loaded_gzip = 1
@@ -261,6 +263,7 @@ vim.lsp.enable('lua_ls')
 -- Show LSP errors
 vim.diagnostic.config({ virtual_lines = true })
 
+-- https://github.com/echasnovski/mini.completion/tree/main
 local mini_completion = require('mini.completion')
 
 local kind_priority = { Text = -1, Snippet = 99 }
