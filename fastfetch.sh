@@ -3,6 +3,7 @@
 case "$1" in
 
   setup)
+    # os
     os::install "fastfetch"
     ;;
 

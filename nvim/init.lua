@@ -20,7 +20,10 @@ vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
 ----
 ---
---- fi
+--- fil asdf asdfasdf asdfasdf asdfasdf asdfas
+
+--- sadfasdfasd sadfasdf asdfasdfas dfasdfasdf asdfasdfasdf
+--- asdf asdfasdf asdf asadf asdfasdf asdfasdfa sdfasdf
 
 ------------------------------------------------------------
 -- Disable Python 2 provider
@@ -102,6 +105,9 @@ vim.opt.smartcase = true
 -- Keep signcolumn on by default (signs are icons/color things you can put on the left hand side of the editor for wanrings and stuff)
 vim.o.signcolumn = 'yes'
 
+-- Rounded boders everywhere
+vim.o.winborder = 'rounded'
+
 -- Decrease update time
 vim.o.updatetime = 250
 
@@ -122,6 +128,19 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
+------------------------------------------------------------
+-- Auto completion
+------------------------------------------------------------
+
+-- Completion options
+vim.opt.completeopt = { "menu", "menuone", "noselect", "nosort" }
+
+-- Allow cursor movement across line ends
+vim.opt.whichwrap:append("<,>,[,],~")
+
+------------------------------------------------------------
+-- Auto format
+------------------------------------------------------------
 vim.opt.formatoptions:append("j")  -- Join comments when appropriate
 vim.opt.formatoptions:append("c")  -- Auto-wrap comments
 vim.opt.formatoptions:append("r")  -- Auto-insert comment leader on Enter
@@ -129,6 +148,8 @@ vim.opt.formatoptions:append("o")  -- Auto-insert comment leader on o/O
 vim.opt.formatoptions:append("q")  -- Allow formatting with gq
 
 require("config.lazy")
+
+
 -- require("config.netrw")
 
 -- require("transparent").setup({
@@ -142,7 +163,7 @@ require("config.lazy")
 -- })
 
 require("catppuccin").setup({
-  transparent_background = true,
+  -- transparent_background = true,
   no_italic = true,
   show_end_of_buffer = true
 })
@@ -169,6 +190,8 @@ vim.keymap.set( 'n', '<leader>wq', ':wq<cr>', { desc = "Exit vim" })
 vim.keymap.set( 'n', '\\[', '<cmd>tabprevious<cr>', { desc = "Previous tab" })
 vim.keymap.set( 'n', '\\]', '<cmd>tabnext<cr>', { desc = "Next tab" })
 vim.keymap.set( 'n', '\\n', '<cmd>tabnew<cr>', { desc = "New tab" })
+
+vim.keymap.set('n', '<esc>', ":noh<cr>", { desc = "Remove search highlights in normal mode" })
 
 -- Shortcut `` to jump back to last buffer
 vim.api.nvim_set_keymap( 'n', '``', '<C-^>', { noremap = true, silent = true })
@@ -230,26 +253,51 @@ vim.lsp.enable('lua_ls')
 -- Show LSP errors
 vim.diagnostic.config({ virtual_lines = true })
 
--- Setup autocomplete
-require('mini.completion').setup()
+local mini_completion = require('mini.completion')
+
+local kind_priority = { Text = -1, Snippet = 99 }
+local opts = { filtersort = 'fuzzy', kind_priority = kind_priority }
 
 local imap_expr = function(lhs, rhs)
   vim.keymap.set('i', lhs, rhs, { expr = true })
 end
+
 imap_expr('<Tab>',   [[pumvisible() ? "\<C-n>" : "\<Tab>"]])
 imap_expr('<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
 
-require('mini.snippets').setup()
-require('mini.icons').setup()
+mini_completion.setup({
+  delay = { completion = 100, info = 0, signature = 0 },
+
+  fallback_action = '',
+
+  lsp_completion = {
+    --source_func = 'omnifunc',
+    --auto_setup = false,
+    process_items = function(items, base)
+      return mini_completion.default_process_items(items, base, opts)
+    end,
+  }
+})
+
+local snippets = require('mini.snippets')
+snippets.start_lsp_server()
+snippets.setup()
+
+local icons = require('mini.icons')
+icons.mock_nvim_web_devicons()
+icons.tweak_lsp_kind()
+icons.setup()
 
 require("neo-tree").setup({
+  -- If we've closed our last buffer, then our work here is done
+  close_if_last_window = true,
+
+  -- A more tighter window
   window = {
     width = 30,
   },
-  filesystem = {
-    -- If we've closed our last buffer, then our work here is done
-    close_if_last_window = true,
 
+  filesystem = {
     -- Make "nvim ." work better
     hijack_netrw_behavior = "open_current",
 
@@ -261,3 +309,8 @@ require("neo-tree").setup({
     },
   }
 })
+
+
+local transparent = require("transparent")
+transparent.clear_prefix('NeoTree')
+transparent.setup()
