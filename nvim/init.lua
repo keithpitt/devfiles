@@ -111,9 +111,6 @@ vim.o.winborder = 'rounded'
 -- Decrease update time
 vim.o.updatetime = 250
 
--- Decrease mapped sequence wait time (time in milliseconds to wait for a mapped sequence to complete)
-vim.o.timeoutlen = 300
-
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
 
@@ -127,6 +124,14 @@ vim.o.scrolloff = 10
 -- instead raise a dialog asking if you wish to save the current file(s)
 -- See `:help 'confirm'`
 vim.o.confirm = true
+
+------------------------------------------------------------
+-- Timeout settings for key mappings
+------------------------------------------------------------
+vim.opt.timeout = true
+vim.opt.ttimeout = true
+vim.opt.timeoutlen = 300  -- Wait time in ms for key sequences
+vim.opt.ttimeoutlen = 10  -- Time in ms for key code sequence
 
 ------------------------------------------------------------
 -- Auto completion
@@ -157,18 +162,22 @@ require("config.lazy")
 --   enable = true,
 -- })
 --
--- require('jellybeans').setup({
---   transparent = true,
---   italics = false,
--- })
+require('jellybeans').setup({
+  italics = false,
+  -- on_colors = function(c)
+  --   c.foreground = "#ffffff"
+  -- end,
 
-require("catppuccin").setup({
-  -- transparent_background = true,
-  no_italic = true,
-  show_end_of_buffer = true
 })
+vim.cmd.colorscheme('jellybeans')
 
-vim.cmd.colorscheme('catppuccin-mocha')
+-- require("catppuccin").setup({
+--   -- transparent_background = true,
+--   no_italic = true,
+--   show_end_of_buffer = true
+-- })
+--
+-- vim.cmd.colorscheme('catppuccin-mocha')
 
 -- Shortcut to either switch to the current file in the sidebar if we're in the editor, of if we're in neotree, the same shortcut will switch back to the editor
 vim.keymap.set('n', '<leader>r', function()
@@ -183,21 +192,20 @@ end, { noremap = true, silent = true })
 -- Custom keymaps for opening/closing directory view
 vim.api.nvim_set_keymap( 'n', '<leader>s', ':Neotree toggle<cr>', { noremap = true, silent = true })
 
-vim.keymap.set( 'n', '<leader>w', '<cmd>write<cr>', { desc = "Save file" })
-vim.keymap.set( 'n', '<leader>q', '<cmd>quit<cr>', { desc = "Exit vim" })
-vim.keymap.set( 'n', '<leader>wq', ':wq<cr>', { desc = "Exit vim" })
 
-vim.keymap.set( 'n', '\\[', '<cmd>tabprevious<cr>', { desc = "Previous tab" })
-vim.keymap.set( 'n', '\\]', '<cmd>tabnext<cr>', { desc = "Next tab" })
-vim.keymap.set( 'n', '\\n', '<cmd>tabnew<cr>', { desc = "New tab" })
+-- vim.keymap.set( 'n', ';', ':', { desc = "Exit vim" })
 
-vim.keymap.set('n', '<esc>', ":noh<cr>", { desc = "Remove search highlights in normal mode" })
+vim.keymap.set( 'n', '\\[', '<cmd>tabprevious<cr>', { desc = "Previous tab", silent = true })
+vim.keymap.set( 'n', '\\]', '<cmd>tabnext<cr>', { desc = "Next tab", silent = true })
+vim.keymap.set( 'n', '\\n', '<cmd>tabnew<cr>', { desc = "New tab", silent = true })
+
+vim.keymap.set('n', '<esc>', ":noh<cr>", { desc = "Remove search highlights in normal mode", silent = true })
 
 -- Shortcut `` to jump back to last buffer
 vim.api.nvim_set_keymap( 'n', '``', '<C-^>', { noremap = true, silent = true })
 
 -- Save 1000s of hours by making ; a shortcut to :
--- vim.api.nvim_set_keymap( 'n', ';', ':', { noremap = true, silent = true })
+vim.api.nvim_set_keymap( 'n', ';', ':', { noremap = true, silent = true })
 
 
 local telescope_actions = require("telescope.actions")
@@ -220,9 +228,9 @@ require('telescope').setup({
 })
 
 -- Custom keymaps for toggling telescope
-vim.keymap.set('n', '<leader>f', ':Telescope frecency workspace=CWD <cr>', { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>l', telescope_builtin.oldfiles, { desc = 'Telescope old files' })
-vim.keymap.set('n', '<leader>d', telescope_builtin.lsp_workspace_symbols, { desc = 'Telescope lsp workspace symbols' })
+vim.keymap.set('n', '<leader>f', ':Telescope frecency workspace=CWD <cr>', { desc = 'Telescope find files', silent = true })
+vim.keymap.set('n', '<leader>l', telescope_builtin.oldfiles, { desc = 'Telescope old files', silent = true })
+vim.keymap.set('n', '<leader>d', telescope_builtin.lsp_workspace_symbols, { desc = 'Telescope lsp workspace symbols', silent = true })
 
 
 vim.lsp.enable('bashls')

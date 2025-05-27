@@ -36,9 +36,9 @@ case "$1" in
     @run reload-plugins
     ;;
 
-  shellenv)
-    echo 'export EDITOR="vim"'
-    ;;
+  # shellenv)
+  #   echo 'export EDITOR="vim"'
+  #   ;;
 
   --is-installed)
     stdlib::test::is_command vim && echo yes
