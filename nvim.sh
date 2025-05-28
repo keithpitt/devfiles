@@ -28,10 +28,6 @@ case "$1" in
     stdlib::test::is_command nvim && echo yes
     ;;
 
-  shellenv)
-    echo 'export EDITOR="nvim"'
-    echo "alias v='nvim'"
-    ;;
 
   # --check-version)
   #   # This feels like it could be easier...
