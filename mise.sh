@@ -2,8 +2,16 @@
 
 case "$1" in
 
+  logo)
+    devicon "mise"
+    ;;
+
   setup)
-    curl https://mise.run | sh
+    os::sh curl https://mise.run | sh
+    ;;
+
+  install-go)
+    mise use -g go@latest
     ;;
 
   install-ruby)
