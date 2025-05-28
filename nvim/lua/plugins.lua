@@ -10,7 +10,12 @@ return {
   { 'jghauser/mkdir.nvim' },
 
   -- Figure out what the current indentation setup is automatically
-  { 'tpope/vim-sleuth' },
+  {
+    'nmac427/guess-indent.nvim',
+    config = function()
+      require('guess-indent').setup()
+    end
+  },
 
   -- Searching across all the files
   { 'duane9/nvim-rg' },
