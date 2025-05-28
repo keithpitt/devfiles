@@ -273,8 +273,59 @@ vim.lsp.enable('lua_ls')
 -- fil
 -- vim.opt.autochdir = true
 
+-- It's good practice to namespace custom handlers to avoid collisions
+-- vim.diagnostic.handlers["my/notify"] = {
+--   show = function(namespace, bufnr, diagnostics, opts)
+--     -- In our example, the opts table has a "log_level" option
+--     local level = opts["my/notify"].log_level
+--     local name = vim.diagnostic.get_namespace(namespace).name
+--     local msg = string.format("%d diagnostics in buffer %d from %s",
+--                               #diagnostics,
+--                               bufnr,
+--                               name)
+--     vim.notify(msg, level)
+--   end,
+-- }
+
 -- Show LSP errors
-vim.diagnostic.config({ virtual_lines = true })
+-- vim.diagnostic.config({ virtual_lines = true })
+
+-- vim.diagnostic.config({
+--   ["my/notify"] = {
+--     log_level = vim.log.levels.INFO,
+--     -- This handler will only receive "error" diagnostics.
+--     severity = vim.diagnostic.severity.ERROR,
+--   }
+-- })
+--
+-- vim.diagnostic.config({ float = { border = "single" } })
+
+vim.diagnostic.config {
+  severity_sort = true,
+  float = { border = 'rounded', source = 'if_many' },
+  underline = { severity = vim.diagnostic.severity.ERROR },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '󰅚 ',
+      [vim.diagnostic.severity.WARN] = '󰀪 ',
+      [vim.diagnostic.severity.INFO] = '󰋽 ',
+      [vim.diagnostic.severity.HINT] = '󰌶 ',
+    },
+  },
+  virtual_text = {
+    source = 'if_many',
+    spacing = 2,
+    format = function(diagnostic)
+      local diagnostic_message = {
+        [vim.diagnostic.severity.ERROR] = diagnostic.message,
+        [vim.diagnostic.severity.WARN] = diagnostic.message,
+        [vim.diagnostic.severity.INFO] = diagnostic.message,
+        [vim.diagnostic.severity.HINT] = diagnostic.message,
+      }
+      return diagnostic_message[diagnostic.severity]
+    end,
+  },
+}
 
 -- https://github.com/echasnovski/mini.completion/tree/main
 local mini_completion = require('mini.completion')
@@ -422,4 +473,23 @@ vim.api.nvim_create_autocmd("BufLeave", {
   callback = function()
     vim.opt_local.ruler = true
   end,
+})
+
+require("noice").setup({
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+    },
+  },
+  -- you can enable a preset for easier configuration
+  presets = {
+    bottom_search = true, -- use a classic bottom cmdline for search
+    command_palette = true, -- position the cmdline and popupmenu together
+    long_message_to_split = true, -- long messages will be sent to a split
+    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    lsp_doc_border = false, -- add a border to hover docs and signature help
+  },
 })
