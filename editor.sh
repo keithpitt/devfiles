@@ -4,7 +4,7 @@ case "$1" in
 
   shellenv)
     echo 'export EDITOR="nvim"'
-    echo "export -f edit() { \"\$EDITOR\" \"\$@\"; }"
+    echo "edit() { \"\$EDITOR\" \"\$@\"; }"
     ;;
 
   --is-installed)
