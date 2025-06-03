@@ -30,7 +30,7 @@ theme = "jellybeans"
 # off
 resize-overlay = never
 
-keybind = global:cmd+grave_accent=toggle_quick_terminal
+# keybind = global:cmd+grave_accent=toggle_quick_terminal
 quick-terminal-animation-duration = 0
 quick-terminal-position = top
 
