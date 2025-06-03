@@ -108,7 +108,7 @@ shell::prompt::setup() {
 
 
   local ps1_prompt=""
-  shell::prompt::render -v "ps1_prompt" "\$(dynamic_prompt)fg.dim{%s} fg.dim{%s} " "\w" "$"
+  shell::prompt::render -v "ps1_prompt" " \$(dynamic_prompt)fg.dim{%s} fg.dim{%s} " "\w" "$"
   export PS1="$ps1_prompt"
 }
 
