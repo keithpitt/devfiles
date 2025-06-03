@@ -2,6 +2,10 @@
 
 case "$1" in
 
+  configure)
+    os::linkfile "bin/download" "$HOME/.local/bin/download"
+    ;;
+
   shellenv)
     echo '
     export XDG_CONFIG_HOME="$HOME/.config"

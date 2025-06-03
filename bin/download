@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+download() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: download <URL>"
+    return 1
+  fi
+
+  if command -v wget >/dev/null 2>&1; then
+    wget "$1"
+  elif command -v curl >/dev/null 2>&1; then
+    curl -LO "$1"
+  else
+    echo "Error: Neither wget nor curl is available"
+    return 1
+  fi
+}
+
+download "$@"
