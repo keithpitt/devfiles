@@ -2,6 +2,10 @@
 
 case "$1" in
 
+  logo)
+    devicon "docker"
+    ;;
+
   setup)
     os::install "docker"
     ;;
