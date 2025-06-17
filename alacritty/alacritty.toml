@@ -1,0 +1,8 @@
+[window]
+padding = { x = 10, y = 25 }
+dynamic_padding = true
+decorations = "Transparent"
+
+[font]
+normal = { family = "Monaco", style = "Regular" }
+size = 15
