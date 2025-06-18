@@ -12,6 +12,12 @@ case "$1" in
   configure)
     os::linkfile "git/config" "$GIT_CONFIG_PATH/config"
     os::linkfile "git/ignore" "$GIT_CONFIG_PATH/ignore"
+
+    if [ ! -f "$GIT_CONFIG_PATH/user" ]; then
+      echo "please run: devmachine git setuser"
+      echo "please run: devmachine git setuser" > "$GIT_CONFIG_PATH/user"
+    fi
+
     ;;
 
   edit-config)
@@ -21,6 +27,20 @@ case "$1" in
   edit-ignore)
     "$EDITOR" "$GIT_CONFIG_PATH/ignore"
     ;;
+
+  setuser)
+    read -r -p "full name: " name
+    read -r -p "email: " email
+
+    rm "$GIT_CONFIG_PATH/user"
+    echo "[user]" >> "$GIT_CONFIG_PATH/user"
+    echo "  email = $email" >> "$GIT_CONFIG_PATH/user"
+    echo "  name = $name" >> "$GIT_CONFIG_PATH/user"
+
+    echo "Saved to $GIT_CONFIG_PATH/user"
+    cat "$GIT_CONFIG_PATH/user"
+    ;;
+
 
   --is-installed)
     stdlib::test::is_command git && echo yes

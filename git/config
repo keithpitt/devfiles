@@ -11,12 +11,22 @@
 [merge]
     conflictstyle = zdiff3
 
-[user]
-    email = git@keithpitt.email
-    name = Keith Pitt
+[include]
+    path = ~/.config/git/user
 
 [commit]
     # Show a diff when you open go to commit in a text editor
     verbose = true
+
 [help]
-	autocorrect = immediate
+    autocorrect = immediate
+
+[credential "https://github.com"]
+    helper =
+    helper = !/opt/homebrew/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+    helper =
+    helper = !/opt/homebrew/bin/gh auth git-credential
+[user]
+	name = FIRST_NAME LAST_NAME
