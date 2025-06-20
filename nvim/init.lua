@@ -64,9 +64,9 @@ vim.opt.laststatus = 0
 
 -- Sync clipboard between OS and Neovim.
 -- Schedule the setting after `UiEnter` because it can increase startup-time.
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
+-- vim.schedule(function()
+--   vim.o.clipboard = 'unnamedplus'
+-- end)
 
 -- Every wrapped line will continue visually indented (same amount of space as
 -- the beginning of that line), thus preserving horizontal blocks of text.
@@ -76,23 +76,23 @@ vim.o.breakindent = true
 -- File management settings
 ------------------------------------------------------------
 
-vim.opt.backup = false -- Disable backup files
+vim.opt.backup = false      -- Disable backup files
 vim.opt.writebackup = false -- Enable undo files
-vim.opt.undofile = true -- Disable swap files
-vim.opt.swapfile = false -- Command history length
-vim.opt.history = 2000 --- Number of commands to remember
-vim.opt.autoread = true -- Auto-read files that have been changed outside
+vim.opt.undofile = true     -- Disable swap files
+vim.opt.swapfile = false    -- Command history length
+vim.opt.history = 2000      --- Number of commands to remember
+vim.opt.autoread = true     -- Auto-read files that have been changed outside
 
 ------------------------------------------------------------
 -- Indentation and formatting
 ------------------------------------------------------------
-vim.opt.smarttab = true  -- Smart tabbing based on shiftwidth
-vim.opt.shiftround = true  -- Round indentation to the nearest shiftwidth
-vim.opt.textwidth = 80  -- Maximum text width before line breaks
+vim.opt.smarttab = true   -- Smart tabbing based on shiftwidth
+vim.opt.shiftround = true -- Round indentation to the nearest shiftwidth
+vim.opt.textwidth = 80    -- Maximum text width before line breaks
 vim.opt.expandtab = true  -- Convert tabs to spaces
-vim.opt.autoindent = true  -- Auto-indent new lines
-vim.opt.tabstop = 2  -- Number of spaces per tab
-vim.opt.shiftwidth = 2  -- Number of spaces per indentation level
+vim.opt.autoindent = true -- Auto-indent new lines
+vim.opt.tabstop = 2       -- Number of spaces per tab
+vim.opt.shiftwidth = 2    -- Number of spaces per indentation level
 vim.opt.softtabstop = -1  -- Adjust tab width during editing
 
 -- Show tabs and other whitespace
@@ -133,8 +133,8 @@ vim.o.confirm = true
 ------------------------------------------------------------
 vim.opt.timeout = true
 vim.opt.ttimeout = true
-vim.opt.timeoutlen = 300  -- Wait time in ms for key sequences
-vim.opt.ttimeoutlen = 10  -- Time in ms for key code sequence
+vim.opt.timeoutlen = 300 -- Wait time in ms for key sequences
+vim.opt.ttimeoutlen = 10 -- Time in ms for key code sequence
 
 ------------------------------------------------------------
 -- Auto completion
@@ -149,13 +149,51 @@ vim.opt.whichwrap:append("<,>,[,],~")
 ------------------------------------------------------------
 -- Auto format
 ------------------------------------------------------------
-vim.opt.formatoptions:append("j")  -- Join comments when appropriate
-vim.opt.formatoptions:append("c")  -- Auto-wrap comments
-vim.opt.formatoptions:append("r")  -- Auto-insert comment leader on Enter
-vim.opt.formatoptions:append("o")  -- Auto-insert comment leader on o/O
-vim.opt.formatoptions:append("q")  -- Allow formatting with gq
+vim.opt.formatoptions:append("j") -- Join comments when appropriate
+vim.opt.formatoptions:append("c") -- Auto-wrap comments
+vim.opt.formatoptions:append("r") -- Auto-insert comment leader on Enter
+vim.opt.formatoptions:append("o") -- Auto-insert comment leader on o/O
+vim.opt.formatoptions:append("q") -- Allow formatting with gq
 
 require("config.lazy")
+
+require("lualine").setup()
+
+require("nvim-treesitter.configs").setup({
+  ensure_installed = {
+    "typescript",
+    "python",
+    "rust",
+    "go",
+    -- etc!
+  },
+  sync_install = false,
+  auto_install = true,
+  highlight = { enable = true, },
+})
+
+-- some stuff so code folding uses treesitter instead of older methods
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevel = 99
+
+
+require("conform").setup({
+  default_format_opts = { lsp_format = "fallback" },
+  format_on_save = {
+    -- I recommend these options. See :help conform.format for details.
+    lsp_format = "fallback",
+    timeout_ms = 500,
+  },
+  formatters_by_ft = {
+    typescript = { "prettier" },
+    typescriptreact = { "prettier" },
+    json = { "prettier" },
+    jsonc = { "prettier" },
+    javascript = { "prettier" },
+    -- etc
+  },
+})
 
 
 -- require("config.netrw")
@@ -193,22 +231,22 @@ vim.keymap.set('n', '<leader>r', function()
 end, { noremap = true, silent = true })
 
 -- Custom keymaps for opening/closing directory view
-vim.api.nvim_set_keymap( 'n', '<leader>s', ':Neotree toggle<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>s', ':Neotree toggle<cr>', { noremap = true, silent = true })
 
 
 -- vim.keymap.set( 'n', ';', ':', { desc = "Exit vim" })
 
-vim.keymap.set( 'n', '\\[', '<cmd>tabprevious<cr>', { desc = "Previous tab", silent = true })
-vim.keymap.set( 'n', '\\]', '<cmd>tabnext<cr>', { desc = "Next tab", silent = true })
-vim.keymap.set( 'n', '\\n', '<cmd>tabnew<cr>', { desc = "New tab", silent = true })
+vim.keymap.set('n', '\\[', '<cmd>tabprevious<cr>', { desc = "Previous tab", silent = true })
+vim.keymap.set('n', '\\]', '<cmd>tabnext<cr>', { desc = "Next tab", silent = true })
+vim.keymap.set('n', '\\n', '<cmd>tabnew<cr>', { desc = "New tab", silent = true })
 
 vim.keymap.set('n', '<esc>', ":noh<cr>", { desc = "Remove search highlights in normal mode", silent = true })
 
 -- Shortcut `` to jump back to last buffer
-vim.api.nvim_set_keymap( 'n', '``', '<C-^>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '``', '<C-^>', { noremap = true, silent = true })
 
 -- Save 1000s of hours by making ; a shortcut to :
-vim.api.nvim_set_keymap( 'n', ';', ':', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', ';', ':', { noremap = true, silent = true })
 
 
 local telescope_actions = require("telescope.actions")
@@ -245,8 +283,10 @@ vim.keymap.set('n', '<leader>f', function()
   require('telescope').extensions.recent_files.pick({ only_cwd = true })
 end, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>l', telescope_builtin.oldfiles, { desc = 'Telescope old files', silent = true })
-vim.keymap.set('n', '<leader>d', telescope_builtin.lsp_workspace_symbols, { desc = 'Telescope lsp workspace symbols', silent = true })
+vim.keymap.set('n', '<leader>d', telescope_builtin.lsp_workspace_symbols,
+  { desc = 'Telescope lsp workspace symbols', silent = true })
 
+vim.lsp.enable('jsonls')
 
 vim.lsp.enable('bashls')
 vim.lsp.config('bashls', {
@@ -256,6 +296,7 @@ vim.lsp.config('bashls', {
 })
 
 vim.lsp.enable('vimls')
+
 vim.lsp.config('lua_ls', {
   settings = {
     Lua = {
@@ -266,8 +307,13 @@ vim.lsp.config('lua_ls', {
     },
   }
 })
-
 vim.lsp.enable('lua_ls')
+
+vim.lsp.enable('gopls')
+
+vim.lsp.enable('typescript-language-sever')
+
+vim.lsp.enable('astro')
 
 -- Automatically switch the vim working directory when we open a new file
 -- fil
@@ -327,41 +373,43 @@ vim.diagnostic.config {
   },
 }
 
+vim.lsp.inlay_hint.enable(true)
+
 -- https://github.com/echasnovski/mini.completion/tree/main
-local mini_completion = require('mini.completion')
+-- local mini_completion = require('mini.completion')
 
-local kind_priority = { Text = -1, Snippet = 99 }
-local opts = { filtersort = 'fuzzy', kind_priority = kind_priority }
+-- local kind_priority = { Text = -1, Snippet = 99 }
+-- local opts = { filtersort = 'fuzzy', kind_priority = kind_priority }
+--
+-- local imap_expr = function(lhs, rhs)
+--   vim.keymap.set('i', lhs, rhs, { expr = true })
+-- end
+--
+-- imap_expr('<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]])
+-- imap_expr('<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
+--
+-- mini_completion.setup({
+--   delay = { completion = 100, info = 0, signature = 0 },
+--
+--   fallback_action = '',
+--
+--   lsp_completion = {
+--     --source_func = 'omnifunc',
+--     --auto_setup = false,
+--     process_items = function(items, base)
+--       return mini_completion.default_process_items(items, base, opts)
+--     end,
+--   }
+-- })
 
-local imap_expr = function(lhs, rhs)
-  vim.keymap.set('i', lhs, rhs, { expr = true })
-end
+-- local snippets = require('mini.snippets')
+-- snippets.start_lsp_server()
+-- snippets.setup()
 
-imap_expr('<Tab>',   [[pumvisible() ? "\<C-n>" : "\<Tab>"]])
-imap_expr('<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
-
-mini_completion.setup({
-  delay = { completion = 100, info = 0, signature = 0 },
-
-  fallback_action = '',
-
-  lsp_completion = {
-    --source_func = 'omnifunc',
-    --auto_setup = false,
-    process_items = function(items, base)
-      return mini_completion.default_process_items(items, base, opts)
-    end,
-  }
-})
-
-local snippets = require('mini.snippets')
-snippets.start_lsp_server()
-snippets.setup()
-
-local icons = require('mini.icons')
-icons.mock_nvim_web_devicons()
-icons.tweak_lsp_kind()
-icons.setup()
+-- local icons = require('mini.icons')
+-- icons.mock_nvim_web_devicons()
+-- icons.tweak_lsp_kind()
+-- icons.setup()
 
 require("neo-tree").setup({
   -- If we've closed our last buffer, then our work here is done
@@ -418,45 +466,45 @@ local dashboard_custom_header = [[
 ]]
 
 require('dashboard').setup({
-    theme = 'hyper',
-    hide = {
-      statusline = true,
-      tabline = true,
-      winbar = true
+  theme = 'hyper',
+  hide = {
+    statusline = true,
+    tabline = true,
+    winbar = true
+  },
+  change_to_vcs_root = true,
+  config = {
+    header = vim.split(dashboard_custom_header, "\n"),
+    project = {
+      action = function(path)
+        require('telescope').extensions.recent_files.pick({ cwd = path, only_cwd = true })
+      end
     },
-    change_to_vcs_root = true,
-    config = {
-      header = vim.split(dashboard_custom_header, "\n"),
-      project = {
-        action = function(path)
-          require('telescope').extensions.recent_files.pick({ cwd = path, only_cwd = true })
-        end
-      },
-      shortcut = {
-        { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
-        -- {
-        --   icon = ' ',
-        --   icon_hl = '@variable',
-        --   desc = 'Files',
-        --   group = 'Label',
-        --   action = 'Telescope recent_files',
-        --   key = 'f',
-        -- },
-        -- {
-        --   desc = ' Apps',
-        --   group = 'DiagnosticHint',
-        --   action = 'Telescope app',
-        --   key = 'a',
-        -- },
-        -- {
-        --   desc = ' dotfiles',
-        --   group = 'Number',
-        --   action = 'Telescope dotfiles',
-        --   key = 'd',
-        -- },
-      },
+    shortcut = {
+      { desc = '󰊳 Update', group = '@property', action = 'Lazy update', key = 'u' },
+      -- {
+      --   icon = ' ',
+      --   icon_hl = '@variable',
+      --   desc = 'Files',
+      --   group = 'Label',
+      --   action = 'Telescope recent_files',
+      --   key = 'f',
+      -- },
+      -- {
+      --   desc = ' Apps',
+      --   group = 'DiagnosticHint',
+      --   action = 'Telescope app',
+      --   key = 'a',
+      -- },
+      -- {
+      --   desc = ' dotfiles',
+      --   group = 'Number',
+      --   action = 'Telescope dotfiles',
+      --   key = 'd',
+      -- },
     },
-  })
+  },
+})
 
 vim.api.nvim_create_augroup("Dashboard_au", { clear = true })
 vim.api.nvim_create_autocmd("Filetype", {
@@ -474,3 +522,5 @@ vim.api.nvim_create_autocmd("BufLeave", {
     vim.opt_local.ruler = true
   end,
 })
+
+-- require("tree-sitter-astro")

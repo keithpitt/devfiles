@@ -9,6 +9,8 @@ case "$1" in
     ;;
 
   lsps)
+    os::sh npm install -g prettier
+
     os::install "shellcheck"
     os::sh npm i -g bash-language-server
 
@@ -16,7 +18,16 @@ case "$1" in
 
     os::sh npm install -g vim-language-server
 
+    os::sh npm install -g typescript-language-server typescript
+    os::sh npm install -g @astrojs/language-server
+    os::sh npm install -g prettier-plugin-astro
+
+
     os::sh gem install ruby-lsp
+
+    os::sh go install golang.org/x/tools/gopls@latest
+
+    os::sh npm install -g vscode-langservers-extracted
     ;;
 
   configure)
