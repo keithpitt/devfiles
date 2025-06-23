@@ -5,11 +5,15 @@ else
 fi
 
 TEMP_FILE="$(mktemp)"
-echo "$TEMP_FILE"
 echo "$TEXT" >> "$TEMP_FILE"
 
 FIGLET_FONTDIR="${FIGLET_FONTDIR:-/opt/homebrew/share/figlet/fonts}"
 
 FONT=$(find "$FIGLET_FONTDIR" -type f | sed 's/.flf//' | sed 's/.flc//' | sed "s~^$FIGLET_FONTDIR~~" | sed "s~^/~~" | fzf --preview="cat \"$TEMP_FILE\" | figlet -f {} -w $(tput cols)" --preview-window="up,80%")
+
+echo
+echo "$ figlet -f $FONT $TEXT"
+echo
+
 
 cat "$TEMP_FILE" | figlet -f $FONT
