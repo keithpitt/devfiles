@@ -32,7 +32,34 @@ return {
     end,
   },
 
-  { "nvim-lualine/lualine.nvim" }, -- status line
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      options = {
+        disabled_filetypes = { "neo-tree", "trouble" },
+        ignore_focus = { "neo-tree", "trouble", "telescope" },
+      },
+      sections = {
+        lualine_a = {
+          {
+            "lsp_status",
+            icon = "", -- f013
+            symbols = {
+              -- Standard unicode symbols to cycle through for LSP progress:
+              spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+              -- Standard unicode symbol for when LSP is done:
+              done = "✓",
+              -- Delimiter inserted between LSP names:
+              separator = " ",
+            },
+            -- List of LSP names to ignore (e.g., `null-ls`):
+            ignore_lsp = {},
+          },
+        },
+      },
+    },
+  },
 
   -- Nicer looking netrw with icons
   -- { 'nvim-tree/nvim-web-devicons', opts = {} },
@@ -69,6 +96,37 @@ return {
     },
     -- neo-tree will lazily load itself
     lazy = false,
+
+    opts = {
+      -- If we've closed our last buffer, then our work here is done
+      close_if_last_window = true,
+
+      -- A more tighter window
+      -- window = {
+      -- width = "fit_content",
+      -- },
+
+      filesystem = {
+        -- Make "nvim ." work better
+        hijack_netrw_behavior = "open_current",
+
+        -- Ensure the sidebar's working directory is the same as the current file
+        bind_to_cwd = true,
+        cwd_target = {
+          sidebar = "tab",
+          current = "window",
+        },
+
+        filtered_items = {
+          visible = true,
+          -- hide_dotfiles = false,
+          never_show = {
+            ".DS_Store",
+            "thumbs.db",
+          },
+        },
+      },
+    },
   },
 
   -- Best theme ever
@@ -76,7 +134,9 @@ return {
     "wtfox/jellybeans.nvim",
     lazy = false,
     priority = 1000,
-    opts = {},
+    opts = {
+      italics = false,
+    },
   },
 
   {
@@ -114,44 +174,6 @@ return {
   {
     "mcauley-penney/tidy.nvim",
     config = true,
-  },
-
-  -- LSPs
-  {
-    "mason-org/mason-lspconfig.nvim",
-    opts = {
-      ensure_installed = {
-        "jsonls",
-        "bashls",
-        "vimls",
-        "lua_ls",
-        "gopls",
-        "ts_ls",
-        "astro",
-        "tailwindcss",
-      },
-    },
-    dependencies = {
-      {
-        "mason-org/mason.nvim",
-        opts = {},
-      },
-      {
-        "neovim/nvim-lspconfig",
-        config = function()
-          vim.lsp.config("lua_ls", {
-            settings = {
-              Lua = {
-                diagnostics = {
-                  -- Get the language server to recognize the `vim` global
-                  globals = { "vim" },
-                },
-              },
-            },
-          })
-        end,
-      },
-    },
   },
 
   -- Some LSPs don't support formatting, this fills the gaps
@@ -299,6 +321,8 @@ return {
       -- If you use nix, you can build from source using latest nightly rust with:
       -- build = 'nix run .#build-plugin',
 
+      ---@module 'blink.cmp'
+      ---@type blink.cmp.Config
       opts = {
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
         -- 'super-tab' for mappings similar to vscode (tab to accept)

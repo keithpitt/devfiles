@@ -156,8 +156,6 @@ vim.opt.formatoptions:append("q") -- Allow formatting with gq
 
 require("config.lazy")
 
-require("lualine").setup()
-
 -- some stuff so code folding uses treesitter instead of older methods
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -182,28 +180,7 @@ require("conform").setup({
   },
 })
 
--- require("config.netrw")
-
--- require("transparent").setup({
---   use_devicons = true,
---   enable = true,
--- })
---
-require("jellybeans").setup({
-  italics = false,
-  -- on_colors = function(c)
-  --   c.foreground = "#ffffff"
-  -- end,
-})
 vim.cmd.colorscheme("jellybeans")
-
--- require("catppuccin").setup({
---   -- transparent_background = true,
---   no_italic = true,
---   show_end_of_buffer = true
--- })
---
--- vim.cmd.colorscheme('catppuccin-mocha')
 
 -- Shortcut to either switch to the current file in the sidebar if we're in the editor, of if we're in neotree, the same shortcut will switch back to the editor
 vim.keymap.set("n", "<leader>r", function()
@@ -403,36 +380,7 @@ vim.lsp.inlay_hint.enable(true)
 -- icons.tweak_lsp_kind()
 -- icons.setup()
 
-require("neo-tree").setup({
-  -- If we've closed our last buffer, then our work here is done
-  close_if_last_window = true,
-
-  -- A more tighter window
-  window = {
-    width = 25,
-  },
-
-  filesystem = {
-    -- Make "nvim ." work better
-    hijack_netrw_behavior = "open_current",
-
-    -- Ensure the sidebar's working directory is the same as the current file
-    bind_to_cwd = true,
-    cwd_target = {
-      sidebar = "tab",
-      current = "window",
-    },
-
-    filtered_items = {
-      visible = true,
-      -- hide_dotfiles = false,
-      never_show = {
-        ".DS_Store",
-        "thumbs.db",
-      },
-    },
-  },
-})
+-- require("neo-tree").setup()
 
 -- local transparent = require("transparent")
 -- transparent.clear_prefix('NeoTree')
