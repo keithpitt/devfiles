@@ -1,5 +1,36 @@
 return {
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  {
+    "nvim-treesitter/nvim-treesitter",
+
+    dependencies = {
+      "virchau13/tree-sitter-astro",
+    },
+
+    build = ":TSUpdate",
+
+    opts = {
+      ensure_installed = {
+        "typescript",
+        "python",
+        "rust",
+        "go",
+        "ruby",
+        "bash",
+      },
+      sync_install = false,
+      auto_install = true,
+      highlight = {
+        enable = true,
+      },
+      indent = {
+        enable = true,
+      },
+    },
+
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
 
   { "nvim-lualine/lualine.nvim" }, -- status line
 
@@ -69,11 +100,6 @@ return {
     config = function()
       require("telescope").load_extension("recent_files")
     end,
-  },
-
-  {
-    "virchau13/tree-sitter-astro",
-    version = "*",
   },
 
   {

@@ -158,19 +158,6 @@ require("config.lazy")
 
 require("lualine").setup()
 
-require("nvim-treesitter.configs").setup({
-  ensure_installed = {
-    "typescript",
-    "python",
-    "rust",
-    "go",
-    -- etc!
-  },
-  sync_install = false,
-  auto_install = true,
-  highlight = { enable = true },
-})
-
 -- some stuff so code folding uses treesitter instead of older methods
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
