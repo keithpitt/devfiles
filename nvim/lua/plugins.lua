@@ -1,9 +1,6 @@
 return {
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
-  -- Some LSPs don't support formatting, this fills the gaps
-  { "stevearc/conform.nvim" },
-
   { "nvim-lualine/lualine.nvim" }, -- status line
 
   -- Nicer looking netrw with icons
@@ -93,10 +90,46 @@ return {
     config = true,
   },
 
-  -- LSP auto configs
+  -- LSPs
   {
-    "neovim/nvim-lspconfig",
+    "mason-org/mason-lspconfig.nvim",
+    opts = {
+      ensure_installed = {
+        "jsonls",
+        "bashls",
+        "vimls",
+        "lua_ls",
+        "gopls",
+        "ts_ls",
+        "astro",
+        "tailwindcss",
+      },
+    },
+    dependencies = {
+      {
+        "mason-org/mason.nvim",
+        opts = {},
+      },
+      {
+        "neovim/nvim-lspconfig",
+        config = function()
+          vim.lsp.config("lua_ls", {
+            settings = {
+              Lua = {
+                diagnostics = {
+                  -- Get the language server to recognize the `vim` global
+                  globals = { "vim" },
+                },
+              },
+            },
+          })
+        end,
+      },
+    },
   },
+
+  -- Some LSPs don't support formatting, this fills the gaps
+  { "stevearc/conform.nvim" },
 
   -- Bunch of random cool extras
   {

@@ -285,36 +285,36 @@ vim.keymap.set(
   { desc = "Telescope lsp workspace symbols", silent = true }
 )
 
-vim.lsp.enable("jsonls")
-
-vim.lsp.enable("bashls")
-vim.lsp.config("bashls", {
-  settings = {
-    includeAllWorkspaceSymbols = true,
-  },
-})
-
-vim.lsp.enable("vimls")
-
-vim.lsp.config("lua_ls", {
-  settings = {
-    Lua = {
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { "vim" },
-      },
-    },
-  },
-})
-vim.lsp.enable("lua_ls")
-
-vim.lsp.enable("gopls")
-
-vim.lsp.enable("ts_ls")
-
-vim.lsp.enable("astro")
-
-vim.lsp.enable("tailwindcss")
+-- vim.lsp.enable("jsonls")
+--
+-- vim.lsp.enable("bashls")
+-- vim.lsp.config("bashls", {
+--   settings = {
+--     includeAllWorkspaceSymbols = true,
+--   },
+-- })
+--
+-- vim.lsp.enable("vimls")
+--
+-- vim.lsp.config("lua_ls", {
+--   settings = {
+--     Lua = {
+--       diagnostics = {
+--         -- Get the language server to recognize the `vim` global
+--         globals = { "vim" },
+--       },
+--     },
+--   },
+-- })
+-- vim.lsp.enable("lua_ls")
+--
+-- vim.lsp.enable("gopls")
+--
+-- vim.lsp.enable("ts_ls")
+--
+-- vim.lsp.enable("astro")
+--
+-- vim.lsp.enable("tailwindcss")
 
 -- Automatically switch the vim working directory when we open a new file
 -- fil
