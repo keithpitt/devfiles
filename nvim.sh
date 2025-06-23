@@ -30,6 +30,8 @@ case "$1" in
     os::sh go install golang.org/x/tools/gopls@latest
 
     os::sh npm install -g vscode-langservers-extracted
+
+    os::install stylua
     ;;
 
   configure)

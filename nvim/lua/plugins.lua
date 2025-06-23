@@ -2,7 +2,7 @@ return {
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
   -- Some LSPs don't support formatting, this fills the gaps
-  { 'stevearc/conform.nvim' },
+  { "stevearc/conform.nvim" },
 
   { "nvim-lualine/lualine.nvim" }, -- status line
 
@@ -11,10 +11,10 @@ return {
   -- { 'prichrd/netrw.nvim', opts = {} },
 
   -- Force background of vim to be transparent
-  { 'xiyaowong/transparent.nvim',      opts = {} },
+  { "xiyaowong/transparent.nvim", opts = {} },
 
   -- Automatically make folders if they don't exist
-  { 'jghauser/mkdir.nvim' },
+  { "jghauser/mkdir.nvim" },
 
   -- Figure out what the current indentation setup is automatically
   -- {
@@ -25,7 +25,7 @@ return {
   -- },
 
   -- Searching across all the files
-  { 'duane9/nvim-rg' },
+  { "duane9/nvim-rg" },
 
   -- Replacement for netrw
   {
@@ -48,30 +48,30 @@ return {
     "wtfox/jellybeans.nvim",
     lazy = false,
     priority = 1000,
-    opts = {}
+    opts = {},
   },
 
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 1000
+    priority = 1000,
   },
 
   -- Kinda like ctrl-p
   {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
     dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-treesitter/nvim-treesitter',
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
       {
-        'smartpde/telescope-recent-files',
-        commit = 'eb190c0baded1cbfa9d8767c817b054377683163'
-      }
+        "smartpde/telescope-recent-files",
+        commit = "eb190c0baded1cbfa9d8767c817b054377683163",
+      },
     },
     config = function()
       require("telescope").load_extension("recent_files")
-    end
+    end,
   },
 
   {
@@ -83,50 +83,50 @@ return {
     "nvim-telescope/telescope-frecency.nvim",
     version = "*",
     config = function()
-      require("telescope").load_extension "frecency"
+      require("telescope").load_extension("frecency")
     end,
   },
 
   -- Removes trailing white space and empty lines at EOF on save
   {
-    'mcauley-penney/tidy.nvim',
+    "mcauley-penney/tidy.nvim",
     config = true,
   },
 
   -- LSP auto configs
   {
-    'neovim/nvim-lspconfig',
+    "neovim/nvim-lspconfig",
   },
 
   -- Bunch of random cool extras
   {
-    'echasnovski/mini.nvim',
-    version = '*'
+    "echasnovski/mini.nvim",
+    version = "*",
   },
 
   -- Better autochdir
   {
-    'airblade/vim-rooter',
+    "airblade/vim-rooter",
   },
 
   -- Sync terminal background color with nvim
   {
-    'typicode/bg.nvim',
+    "typicode/bg.nvim",
   },
 
   {
-    'nvimdev/dashboard-nvim',
-    event = 'VimEnter',
-    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
   },
 
   {
-    'folke/snacks.nvim',
+    "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
     opts = {
       notifier = { enabled = true },
-    }
+    },
   },
   {
     "folke/trouble.nvim",
@@ -225,19 +225,21 @@ return {
   -- https://cmp.saghen.dev/configuration/keymap.html#default
   {
     {
-      'saghen/blink.cmp',
+      "saghen/blink.cmp",
       -- optional: provides snippets for the snippet source
-      dependencies = { 'rafamadriz/friendly-snippets' },
+      dependencies = {
+        "rafamadriz/friendly-snippets",
+        "onsails/lspkind.nvim",
+        "nvim-tree/nvim-web-devicons",
+      },
 
       -- use a release tag to download pre-built binaries
-      version = '1.*',
+      version = "1.*",
       -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
       -- build = 'cargo build --release',
       -- If you use nix, you can build from source using latest nightly rust with:
       -- build = 'nix run .#build-plugin',
 
-      ---@module 'blink.cmp'
-      ---@type blink.cmp.Config
       opts = {
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
         -- 'super-tab' for mappings similar to vscode (tab to accept)
@@ -251,21 +253,64 @@ return {
         -- C-k: Toggle signature help (if signature.enabled = true)
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        keymap = { preset = 'default' },
+        keymap = {
+          preset = "enter",
+          ["<Tab>"] = { "select_and_accept" },
+        },
 
         appearance = {
           -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
           -- Adjusts spacing to ensure icons are aligned
-          nerd_font_variant = 'mono'
+          nerd_font_variant = "mono",
         },
 
-        -- (Default) Only show the documentation popup when manually triggered
-        completion = { documentation = { auto_show = false } },
+        completion = {
+          documentation = {
+            auto_show = true,
+          },
+
+          trigger = {
+            show_on_keyword = true,
+            show_in_snippet = false,
+          },
+
+          kind_icon = {
+            text = function(ctx)
+              local icon = ctx.kind_icon
+              if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+                if dev_icon then
+                  icon = dev_icon
+                end
+              else
+                icon = require("lspkind").symbolic(ctx.kind, {
+                  mode = "symbol",
+                })
+              end
+
+              return icon .. ctx.icon_gap
+            end,
+
+            -- Optionally, use the highlight groups from nvim-web-devicons
+            -- You can also add the same function for `kind.highlight` if you want to
+            -- keep the highlight groups in sync with the icons.
+            highlight = function(ctx)
+              local hl = ctx.kind_hl
+              if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+                if dev_icon then
+                  hl = dev_hl
+                end
+              end
+              return hl
+            end,
+          },
+        },
 
         -- Default list of enabled providers defined so that you can extend it
         -- elsewhere in your config, without redefining it, due to `opts_extend`
         sources = {
-          default = { 'lsp', 'path', 'snippets', 'buffer' },
+          default = { "lsp", "path", "snippets", "buffer" },
         },
 
         -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -273,9 +318,9 @@ return {
         -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
         --
         -- See the fuzzy documentation for more information
-        fuzzy = { implementation = "prefer_rust_with_warning" }
+        fuzzy = { implementation = "prefer_rust_with_warning" },
       },
-      opts_extend = { "sources.default" }
-    }
+      opts_extend = { "sources.default" },
+    },
   },
 }
