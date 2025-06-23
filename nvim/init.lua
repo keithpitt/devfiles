@@ -232,6 +232,10 @@ vim.api.nvim_set_keymap("n", "``", "<C-^>", { noremap = true, silent = true })
 -- Save 1000s of hours by making ; a shortcut to :
 vim.api.nvim_set_keymap("n", ";", ":", { noremap = true, silent = true })
 
+-- Inspired from:
+-- http://vim.wikia.com/wiki/Easy_edit_of_files_in_the_same_directory
+vim.api.nvim_set_keymap("n", "<leader>e", '":e " .. expand("%:p:h") .. "/"', { noremap = true, expr = true })
+
 local telescope_actions = require("telescope.actions")
 local telescope_builtin = require("telescope.builtin")
 
