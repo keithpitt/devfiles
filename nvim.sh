@@ -20,8 +20,10 @@ case "$1" in
 
     os::sh npm install -g typescript-language-server typescript
     os::sh npm install -g @astrojs/language-server
+    os::install "prettierd"
     os::sh npm install -g prettier-plugin-astro
-
+    os::sh npm install -g prettier-plugin-toml
+    os::os npm install -g @tailwindcss/language-server
 
     os::sh gem install ruby-lsp
 

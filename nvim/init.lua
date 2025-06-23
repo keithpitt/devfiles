@@ -186,11 +186,12 @@ require("conform").setup({
     timeout_ms = 500,
   },
   formatters_by_ft = {
-    typescript = { "prettier" },
-    typescriptreact = { "prettier" },
-    json = { "prettier" },
-    jsonc = { "prettier" },
-    javascript = { "prettier" },
+    typescript = { "prettierd" },
+    typescriptreact = { "prettierd" },
+    json = { "prettiedr" },
+    jsonc = { "prettierd" },
+    javascript = { "prettierd" },
+    toml = { "prettierd" },
     -- etc
   },
 })
@@ -314,6 +315,8 @@ vim.lsp.enable('gopls')
 vim.lsp.enable('typescript-language-sever')
 
 vim.lsp.enable('astro')
+
+vim.lsp.enable('tailwindcss')
 
 -- Automatically switch the vim working directory when we open a new file
 -- fil
