@@ -8,6 +8,18 @@ case "$1" in
     os::install "neovim"
     ;;
 
+  shellenv)
+    old_vim_path="$(brew --prefix)/bin/vim"
+    echo "
+    alias _vim='$old_vim_path'
+    alias vi='nvim'
+    alias vim='nvim'
+    alias view='nvim -R'
+    alias vimdiff='nvim -d'
+    alias e='nvim'
+    "
+    ;;
+
   lsps)
     os::sh npm install -g prettier
 
