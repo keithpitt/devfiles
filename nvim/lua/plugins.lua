@@ -110,6 +110,14 @@ return {
         -- Make "nvim ." work better
         hijack_netrw_behavior = "open_current",
 
+        -- Use telescope for search
+        window = {
+          mappings = {
+            -- disable fuzzy finder
+            ["/"] = "noop",
+          },
+        },
+
         -- Ensure the sidebar's working directory is the same as the current file
         bind_to_cwd = true,
         cwd_target = {
