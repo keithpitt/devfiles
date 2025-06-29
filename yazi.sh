@@ -2,16 +2,12 @@
 
 case "$1" in
 
-  setup)
-    os::install "yazi"
-    ;;
+setup)
+  os::install "yazi"
+  ;;
 
-  --is-installed)
-    stdlib::test::is_command yazi && echo yes
-    ;;
-
-  --check-version)
-    yazi --version | cut -d ' ' -f 2
-    ;;
+--is-installed)
+  stdlib::test::is_command yazi && echo yes
+  ;;
 
 esac

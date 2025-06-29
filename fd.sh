@@ -2,16 +2,12 @@
 
 case "$1" in
 
-  setup)
-    os::install "fd"
-    ;;
+setup)
+  os::install "fd"
+  ;;
 
-  --is-installed)
-    stdlib::test::is_command fd && echo yes
-    ;;
-
-  --check-version)
-    fd --version | cut -d ' ' -f 2
-    ;;
+--is-installed)
+  stdlib::test::is_command fd && echo yes
+  ;;
 
 esac

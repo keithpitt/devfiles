@@ -2,16 +2,12 @@
 
 case "$1" in
 
-  setup)
-    os::install "ripgrep"
-    ;;
+setup)
+  os::install "ripgrep"
+  ;;
 
-  --is-installed)
-    stdlib::test::is_command rg && echo yes
-    ;;
-
-  --check-version)
-    rg --version | cut -d ' ' -f 2
-    ;;
+--is-installed)
+  stdlib::test::is_command rg && echo yes
+  ;;
 
 esac

@@ -28,16 +28,12 @@
 
 case "$1" in
 
-  setup)
-    os::install "most"
-    ;;
+setup)
+  os::install "most"
+  ;;
 
-  --is-installed)
-    stdlib::test::is_command most && echo yes
-    ;;
-
-  --check-version)
-    most --version | cut -d ' ' -f 2
-    ;;
+--is-installed)
+  stdlib::test::is_command most && echo yes
+  ;;
 
 esac

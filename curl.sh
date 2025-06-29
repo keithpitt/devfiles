@@ -2,16 +2,12 @@
 
 case "$1" in
 
-  setup)
-    os::install "curl"
-    ;;
+setup)
+  os::install "curl"
+  ;;
 
-  --is-installed)
-    stdlib::test::is_command curl && echo yes
-    ;;
-
-  --check-version)
-    curl --version | head -1 | cut -d ' ' -f 2
-    ;;
+--is-installed)
+  stdlib::test::is_command curl && echo yes
+  ;;
 
 esac

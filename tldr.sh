@@ -4,16 +4,12 @@
 
 case "$1" in
 
-  setup)
-    os::install "tldc"
-    ;;
+setup)
+  os::install "tldc"
+  ;;
 
-  --is-installed)
-    stdlib::test::is_command tldc && echo yes
-    ;;
-
-  --check-version)
-    tldc --version | cut -d ' ' -f 2
-    ;;
+--is-installed)
+  stdlib::test::is_command tldc && echo yes
+  ;;
 
 esac

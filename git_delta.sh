@@ -2,16 +2,12 @@
 
 case "$1" in
 
-  setup)
-    os::install "git-delta"
-    ;;
+setup)
+  os::install "git-delta"
+  ;;
 
-  --is-installed)
-    stdlib::test::is_command delta && echo yes
-    ;;
-
-  --check-version)
-    delta --version | cut -d ' ' -f 2
-    ;;
+--is-installed)
+  stdlib::test::is_command delta && echo yes
+  ;;
 
 esac

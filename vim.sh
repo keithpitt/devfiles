@@ -4,53 +4,44 @@ VIM_CONFIG_PATH="${VIM_CONFIG_PATH:-$HOME/.config/vim}"
 
 case "$1" in
 
-  logo)
-    devicon "vim"
-    ;;
+logo)
+  devicon "vim"
+  ;;
 
-  setup)
-    @run install
-    @run configure
-    @run reload-plugins
-    ;;
+setup)
+  @run install
+  @run configure
+  @run reload-plugins
+  ;;
 
-  install)
-    os::install "vim"
-    ;;
+install)
+  os::install "vim"
+  ;;
 
-  configure)
-    os::softdelete "~/.vimrc"
-    os::softdelete "~/.vim"
-    os::linkfile "vim/autoload/plug.vim" "$VIM_CONFIG_PATH/autoload/plug.vim"
-    os::linkfile "vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
-    os::linkfile "vim/vimrc-netrw" "$VIM_CONFIG_PATH/vimrc-netrw"
-    @run reload-plugins
-    ;;
+configure)
+  os::softdelete "~/.vimrc"
+  os::softdelete "~/.vim"
+  os::linkfile "vim/autoload/plug.vim" "$VIM_CONFIG_PATH/autoload/plug.vim"
+  os::linkfile "vim/vimrc" "$VIM_CONFIG_PATH/vimrc"
+  os::linkfile "vim/vimrc-netrw" "$VIM_CONFIG_PATH/vimrc-netrw"
+  @run reload-plugins
+  ;;
 
-  reload-plugins)
-    vim +PlugInstall +qall
-    ;;
+reload-plugins)
+  vim +PlugInstall +qall
+  ;;
 
-  edit-config)
-    "$EDITOR" "$VIM_CONFIG_PATH/vimrc"
-    @run reload-plugins
-    ;;
+edit-config)
+  "$EDITOR" "$VIM_CONFIG_PATH/vimrc"
+  @run reload-plugins
+  ;;
 
-  # shellenv)
-  #   echo 'export EDITOR="vim"'
-  #   ;;
+# shellenv)
+#   echo 'export EDITOR="vim"'
+#   ;;
 
-  --is-installed)
-    stdlib::test::is_command vim && echo yes
-    ;;
-
-  --check-version)
-    # This feels like it could be easier...
-    vim --version |
-      head -n 1 |
-      sed -r 's:[^0-9\. ]*::g' |
-      tr -s ' ' |
-      cut -d ' ' -f 2
-    ;;
+--is-installed)
+  stdlib::test::is_command vim && echo yes
+  ;;
 
 esac

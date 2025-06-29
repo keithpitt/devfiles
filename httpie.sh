@@ -2,16 +2,12 @@
 
 case "$1" in
 
-  setup)
-    os::install "httpie"
-    ;;
+setup)
+  os::install "httpie"
+  ;;
 
-  --is-installed)
-    stdlib::test::is_command httpie && echo yes
-    ;;
-
-  --check-version)
-    httpie --version
-    ;;
+--is-installed)
+  stdlib::test::is_command httpie && echo yes
+  ;;
 
 esac
