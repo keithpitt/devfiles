@@ -37,3 +37,4 @@ macos-non-native-fullscreen = true
 macos-titlebar-style = transparent
 
 # command = /opt/homebrew/bin/bash -q
+keybind = shift+enter=text:\n
