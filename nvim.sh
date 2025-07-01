@@ -1,5 +1,13 @@
 #!/usr/bin/env devmachine
 
+# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+# ┃ ▄𜺣▗▖             ▗▖      ┃
+# ┃ █𜴦𜷥▌𜷡𜶷𜷗▖𜷡𜴆𜶙▖▆ 𜶖𜵈 𜶙𜵈 ▆𜶠𜶨▖ ┃
+# ┃ █ ▐▌𜶫▂𜷋𜴉𜶫▂𜷕𜴍𜴦𜶻𜵫▘ 𜷕𜷀 █𜴡▐▌ ┃
+# ┃                          ┃
+# ┃ https://neovim.io/       ┃
+# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
 NVIM_CONFIG_PATH="${NVIM_CONFIG_PATH:-$HOME/.config/nvim}"
 
 case "$1" in
