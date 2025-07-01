@@ -17,6 +17,7 @@ shellenv)
     alias view='nvim -R'
     alias vimdiff='nvim -d'
     alias e='nvim'
+    export MANPAGER='nvim --cmd \"set termguicolors\" --cmd \"syntax on\" --cmd \"colorscheme retrobox\" --clean +Man!'
     "
   ;;
 

@@ -16,7 +16,7 @@ configure)
 
 shellenv)
   echo 'export BAT_THEME="ansi"'
-  batman --export-env # batman is part of bat-extras
+  # batman --export-env # batman is part of bat-extras
   ;;
 
 --is-installed)
