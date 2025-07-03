@@ -17,7 +17,7 @@ case "$1" in
     ;;
 
   --is-installed)
-    stdlib::test::is_command gdircolors && echo yes
+    stdlib_test_is_command gdircolors && echo yes
     ;;
 
 esac

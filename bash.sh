@@ -3,7 +3,7 @@
 case "$1" in
 
 logo)
-  stdlib::image::print "bash/logo.png" 20 10
+  stdlib_image_print "bash/logo.png" 20 10
   ;;
 
 setup)
@@ -31,7 +31,7 @@ motd)
   ;;
 
 --is-installed)
-  stdlib::test::is_command bash && echo yes
+  stdlib_test_is_command bash && echo yes
   ;;
 
 esac

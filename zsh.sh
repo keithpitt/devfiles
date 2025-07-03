@@ -30,6 +30,6 @@ motd)
   ;;
 
 --is-installed)
-  stdlib::test::is_command zsh && echo yes
+  stdlib_test_is_command zsh && echo yes
   ;;
 esac

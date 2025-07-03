@@ -11,7 +11,7 @@ shellenv)
   ;;
 
 --is-installed)
-  stdlib::test::is_command zoxide && echo yes
+  stdlib_test_is_command zoxide && echo yes
   ;;
 
 esac

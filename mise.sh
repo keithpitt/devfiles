@@ -31,7 +31,7 @@ shellenv)
   ;;
 
 --is-installed)
-  # stdlib::test::is_command mise && echo yes
+  # stdlib_test_is_command mise && echo yes
   echo yes
   ;;
 

@@ -41,7 +41,7 @@ edit-config)
 #   ;;
 
 --is-installed)
-  stdlib::test::is_command vim && echo yes
+  stdlib_test_is_command vim && echo yes
   ;;
 
 esac

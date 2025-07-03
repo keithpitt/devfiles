@@ -20,7 +20,7 @@ shellenv)
   ;;
 
 --is-installed)
-  stdlib::test::is_command bat && echo yes
+  stdlib_test_is_command bat && echo yes
   ;;
 
 esac

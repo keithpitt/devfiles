@@ -14,7 +14,7 @@ configure)
   ;;
 
 --is-installed)
-  stdlib::test::is_dir "/Applications/Alacritty.app" && echo yes
+  stdlib_test_is_dir "/Applications/Alacritty.app" && echo yes
   ;;
 
 esac

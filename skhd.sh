@@ -15,7 +15,7 @@ configure)
   ;;
 
 --is-installed)
-  stdlib::test::is_command skhd && echo yes
+  stdlib_test_is_command skhd && echo yes
   ;;
 
 esac

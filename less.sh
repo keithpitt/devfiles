@@ -19,7 +19,7 @@ shellenv)
   ;;
 
 --is-installed)
-  stdlib::test::is_command less && echo yes
+  stdlib_test_is_command less && echo yes
   ;;
 
 esac

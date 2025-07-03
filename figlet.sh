@@ -37,7 +37,7 @@ case "$1" in
     ;;
 
   --is-installed)
-    stdlib::test::is_command figlet && echo yes
+    stdlib_test_is_command figlet && echo yes
     ;;
 
 esac

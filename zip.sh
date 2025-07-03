@@ -7,7 +7,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib::test::is_command zip && echo yes
+  stdlib_test_is_command zip && echo yes
   ;;
 
 esac

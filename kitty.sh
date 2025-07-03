@@ -26,7 +26,7 @@ config)
   ;;
 
 --is-installed)
-  stdlib::test::is_command kitty && echo yes
+  stdlib_test_is_command kitty && echo yes
   ;;
 
 esac

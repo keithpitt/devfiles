@@ -33,7 +33,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib::test::is_command most && echo yes
+  stdlib_test_is_command most && echo yes
   ;;
 
 esac

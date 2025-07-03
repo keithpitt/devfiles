@@ -18,7 +18,7 @@ shellenv)
   ;;
 
 --is-installed)
-  stdlib::test::is_command lsd && echo yes
+  stdlib_test_is_command lsd && echo yes
   ;;
 
 esac
