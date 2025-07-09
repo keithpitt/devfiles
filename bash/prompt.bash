@@ -18,8 +18,9 @@ shell::prompt::render() {
   shift
 
   format="${format//fg.blue\{/${esc_open}34m${esc_close}}"
-  format="${format//fg.dim\{/${esc_open}2m${esc_close}}"
-  format="${format//fg.black\{/${esc_open}30m${esc_close}}"
+  format="${format//fg.dim\{/${esc_open}\38;2;105;105;105m${esc_close}}"
+  format="${format//fg.dimblue\{/${esc_open}\38;2;47;98;137m${esc_close}}"
+  format="${format//fg.black\{/${esc_open}\38;2;0;0;0m${esc_close}}"
   format="${format//bg.red\{/${esc_open}41m${esc_close}}"
   format="${format//fg.red\{/${esc_open}31m${esc_close}}"
   format="${format//fg.green\{/${esc_open}32m${esc_close}}"
@@ -41,46 +42,45 @@ shell::prompt::render() {
 }
 
 shell::prompt::setup() {
-  exit_status()
-  {
+  exit_status() {
     local -i s="$1"
     local label=""
 
     if [[ $s != 0 ]]; then
       case $s in
-        1)
-          label="general error"
-          ;;
-        2)
-          label="misuse of shell built-ins"
-          ;;
-        126)
-          label="command cannot execute"
-          ;;
-        127)
-          label="command not found"
-          ;;
-        128)
-          label="invalid exit argument"
-          ;;
-        130)
-          label="ctrl-c"
-          ;;
-        255)
-          label="exit status out of range"
-          ;;
-        *)
-          local signal=$((($s - 128) % 256))
-          local sig_name=$(kill -l $signal 2>/dev/null || echo "?")
-          label="signal: $sig_name"
+      1)
+        label="general error"
+        ;;
+      2)
+        label="misuse of shell built-ins"
+        ;;
+      126)
+        label="command cannot execute"
+        ;;
+      127)
+        label="command not found"
+        ;;
+      128)
+        label="invalid exit argument"
+        ;;
+      130)
+        label="ctrl-c"
+        ;;
+      255)
+        label="exit status out of range"
+        ;;
+      *)
+        local signal=$((($s - 128) % 256))
+        local sig_name=$(kill -l $signal 2>/dev/null || echo "?")
+        label="signal: $sig_name"
+        ;;
       esac
 
-      shell::prompt::render "fg.red{󱞽 }bg.red{fg.black{fg.bold{%s} fg.dim{%s}}}fg.red{}" "exit $s" "$label"
+      shell::prompt::render "fg.red{󱞽 }bg.red{fg.black{fg.bold{%s} %s}}fg.red{}" "exit $s" "$label"
     fi
   }
 
-  job_count()
-  {
+  job_count() {
     # need to make sure we pass -r so its only running jobs
     local -i count=$(jobs -r | wc -l)
     if [[ "$count" -gt 0 ]]; then
@@ -88,8 +88,7 @@ shell::prompt::setup() {
     fi
   }
 
-  dynamic_prompt()
-  {
+  dynamic_prompt() {
     local -i exit_status="$?"
 
     exit_status "$exit_status"
@@ -106,9 +105,8 @@ shell::prompt::setup() {
     job_count
   }
 
-
   local ps1_prompt=""
-  shell::prompt::render -v "ps1_prompt" " \$(dynamic_prompt)fg.dim{%s} fg.dim{%s} " "\w" "$"
+  shell::prompt::render -v "ps1_prompt" "\$(dynamic_prompt)fg.dim{ %s} fg.dim{%s} " "\w" "󰯉 "
   export PS1="$ps1_prompt"
 }
 
