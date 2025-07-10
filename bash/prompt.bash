@@ -200,8 +200,10 @@ shell::prompt::setup() {
     shell::prompt::render "fg.dim{%s}" ""
   }
 
+  local cursor='\e[5 q\e]12;white\e'
+
   local ps1_prompt=""
-  shell::prompt::render -v "ps1_prompt" "\$(dynamic_prompt)\$(ps1_prompt_folder_icon)fg.dim{%s}\$(ps1_prompt_path_suffix) fg.dim{%s} " "\w" "\$(ps1_prompt_suffix)"
+  shell::prompt::render -v "ps1_prompt" "$cursor\$(dynamic_prompt)\$(ps1_prompt_folder_icon)fg.dim{%s}\$(ps1_prompt_path_suffix) fg.dim{%s} " "\w" "\$(ps1_prompt_suffix)"
   export PS1="$ps1_prompt"
 }
 
