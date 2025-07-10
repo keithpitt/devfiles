@@ -1,3 +1,9 @@
+# Ignore and erase duplicates
+HISTCONTROL="ignoreboth:erasedups"
+
+# Ignore one and two letter commands
+HISTIGNORE="?:??"
+
 export HISTDIR="$XDG_STATE_HOME/bash"
 export HISTFILE="$HISTDIR/history"
 export HISTSIZE=5000000
@@ -10,3 +16,6 @@ mkdir -p "$HISTDIR"
 # windows). `histappend` tells bash to add to the current history
 # file instead of wiping it
 shopt -s histappend
+
+# Save history right away, instead of waiting for bash to exit
+PROMPT_COMMAND="history -a;$PROMPT_COMMAND"

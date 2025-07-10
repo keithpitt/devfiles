@@ -1,0 +1,46 @@
+# Show completions immediately on first tab
+set show-all-if-ambiguous on
+
+# Show completions if there are more than X matches
+set completion-query-items 50
+
+# Show common prefix before listing completions
+set show-all-if-unmodified on
+
+# Cycle through completions instead of listing them
+set menu-complete-display-prefix on
+
+# Make completion case-insensitive
+set completion-ignore-case on
+
+# Show file type indicators (like ls -F)
+set visible-stats on
+
+# Color completion matches
+set colored-stats on
+set colored-completion-prefix on
+
+# Turn off the completions pager.
+set page-completions off
+
+# Smartly complete items when the cursor is not at the end of the line.
+set skip-completed-text on
+
+# Automatically add slash to the end of symlinked directories when completing.
+set mark-symlinked-directories on
+
+# No bells and don't show weird funky control characters
+set bell-style none
+set echo-control-characters off
+
+# TAB cycles forward and Shift-TAB cycles backward through completion choices.
+"\t": menu-complete
+"\e[Z": menu-complete-backward
+
+# Partially typing a command and pressing <Up> will engage history substring
+# matching, not simply just start of line matching
+"\e[A": history-substring-search-backward
+"\e[B": history-substring-search-forward
+
+# Launch $EDITOR on the current command and execute when finished editing.
+"\ee": edit-and-execute-command

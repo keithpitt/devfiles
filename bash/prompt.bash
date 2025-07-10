@@ -23,7 +23,9 @@ shell::prompt::render() {
   format="${format//fg.black\{/${esc_open}\38;2;0;0;0m${esc_close}}"
   format="${format//bg.red\{/${esc_open}41m${esc_close}}"
   format="${format//fg.red\{/${esc_open}31m${esc_close}}"
+  format="${format//fg.dimred\{/${esc_open}\38;2;186;85;85;m${esc_close}}"
   format="${format//fg.green\{/${esc_open}32m${esc_close}}"
+  format="${format//fg.dimgreen\{/${esc_open}\38;2;147;185;121;m${esc_close}}"
   format="${format//bg.green\{/${esc_open}42m${esc_close}}"
 
   # not great handling, but capture a full bold call instead of just the
@@ -105,8 +107,51 @@ shell::prompt::setup() {
     job_count
   }
 
+  ps1_prompt_folder_icon() {
+    local git_branch="${ git rev-parse --abbrev-ref HEAD 2>/dev/null; }"
+    local c_pwd="${ pwd; }"
+
+    local icon=""
+    local color="fg.dim"
+
+    if [[ "$git_branch" != "" ]]; then
+      # printf " [ $git_branch]"
+      local git_status="${ git status --porcelain; }"
+      if [[ "$git_status" == "" ]]; then
+        icon=" 󱥾"
+        color="fg.dimgreen"
+      else
+        icon=" 󰴋"
+        color="fg.dimred"
+      fi
+    else
+      case "$c_pwd" in
+        "$HOME")
+          icon="󱂵"
+          ;;
+        *Pictures*)
+          icon="󰉏"
+          ;;
+        *Music*)
+          icon="󱍙"
+          ;;
+        *Downloads*)
+          icon="󰉍"
+          ;;
+        *Desktop*)
+          icon="󰇄"
+          ;;
+        *config*)
+          icon="󱁿"
+          ;;
+      esac
+    fi
+
+    shell::prompt::render "$color{%s} " "$icon"
+  }
+
   local ps1_prompt=""
-  shell::prompt::render -v "ps1_prompt" "\$(dynamic_prompt)fg.dim{  %s} fg.dim{%s} " "\w" "󰯉 "
+  shell::prompt::render -v "ps1_prompt" "\$(dynamic_prompt)\$(ps1_prompt_folder_icon)fg.dim{%s} fg.dim{%s} " "\w" "󰯉 "
   export PS1="$ps1_prompt"
 }
 

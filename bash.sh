@@ -8,6 +8,7 @@ logo)
 
 setup)
   os::install "bash"
+  os::linkfile "bash/inputrc" "$HOME/.inputrc"
   ;;
 
 make-default)
@@ -21,6 +22,7 @@ shellenv)
   if [[ "$2" == "bash" ]]; then
     cat "bash/history.bash"
     cat "bash/prompt.bash"
+    cat "bash/navigation.bash"
   else
     echo "# skipping bash shellenv"
   fi
