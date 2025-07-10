@@ -16,6 +16,21 @@ shellenv)
   # man bash always shows the installed version of man, not the one
   # installed with homebrew. dunno why...
   echo 'alias brewman="man -M /opt/homebrew/share/man"'
+
+  if [[ "$2" == "bash" ]]; then
+    echo '
+    if [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]]; then
+      . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+    else
+      echo "bash-completion@2 missing, installing now..."
+      if ! brew install bash-completion@2 > /dev/null; then
+        echo "❌ \`brew install bash-completion@2\` failed with exit code $?"
+      else
+        . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+      fi
+    fi
+    '
+  fi
   ;;
 
 --check-priority)
