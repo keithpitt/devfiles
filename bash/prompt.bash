@@ -19,14 +19,18 @@ shell::prompt::render() {
 
   format="${format//fg.blue\{/${esc_open}34m${esc_close}}"
   format="${format//fg.dim\{/${esc_open}\38;2;105;105;105m${esc_close}}"
+  format="${format//bg.dim\{/${esc_open}\48;2;105;105;105m${esc_close}}"
   format="${format//fg.dimblue\{/${esc_open}\38;2;47;98;137m${esc_close}}"
   format="${format//fg.black\{/${esc_open}\38;2;0;0;0m${esc_close}}"
+  format="${format//fg.white\{/${esc_open}\38;2;255;255;255m${esc_close}}"
   format="${format//bg.red\{/${esc_open}41m${esc_close}}"
   format="${format//fg.red\{/${esc_open}31m${esc_close}}"
   format="${format//fg.dimred\{/${esc_open}\38;2;186;85;85;m${esc_close}}"
   format="${format//fg.green\{/${esc_open}32m${esc_close}}"
   format="${format//fg.dimgreen\{/${esc_open}\38;2;147;185;121;m${esc_close}}"
   format="${format//bg.green\{/${esc_open}42m${esc_close}}"
+  format="${format//fg.default\{/${esc_open}0m${esc_close}}"
+  format="${format//fg.yellow\{/${esc_open}33m${esc_close}}"
 
   # not great handling, but capture a full bold call instead of just the
   # opening so we can reset it's sequene correctly (we can't blindly do a 0m
@@ -115,15 +119,16 @@ shell::prompt::setup() {
     local color="fg.dim"
 
     if [[ "$git_branch" != "" ]]; then
-      # printf " [ $git_branch]"
-      local git_status="${ git status --porcelain; }"
-      if [[ "$git_status" == "" ]]; then
-        icon=" 󱥾"
-        color="fg.dimgreen"
-      else
-        icon=" 󰴋"
-        color="fg.dimred"
-      fi
+      icon=""
+      # icon=" [ $git_branch]"
+      # local git_status="${ git status --porcelain; }"
+      # if [[ "$git_status" == "" ]]; then
+      #   icon=" 󱥾"
+      #   color="fg.dimgreen"
+      # else
+      #   icon=" 󰴋"
+      #   color="fg.dimred"
+      # fi
     else
       case "$c_pwd" in
         "$HOME")
@@ -150,9 +155,62 @@ shell::prompt::setup() {
     shell::prompt::render "$color{%s} " "$icon"
   }
 
+  ps1_prompt_path_suffix() {
+    local git_branch="${ git rev-parse --abbrev-ref HEAD 2>/dev/null; }"
+
+    if [[ "$git_branch" != "" ]]; then
+      local git_status="${ git status --porcelain; }"
+
+      local git_prompt=""
+      git_prompt+="${ shell::prompt::render "fg.default{ %s}" "$git_branch"; }"
+
+      local modified_count="${ echo "$git_status" | grep -e "^ M" | wc -l | stdlib string/trim; }"
+      if [[ "$modified_count" != "0" ]]; then
+        git_prompt+="${ shell::prompt::render " fg.yellow{ %s}" "$modified_count"; }"
+      fi
+
+      local deleted_count="${ echo "$git_status" | grep -e "^ D" | wc -l | stdlib string/trim; }"
+      if [[ "$deleted_count" != "0" ]]; then
+        git_prompt+="${ shell::prompt::render " fg.red{ %s}" "$deleted_count"; }"
+      fi
+
+      local added_count="${ echo "$git_status" | grep -e "^A" | wc -l | stdlib string/trim; }"
+      if [[ "$added_count" != "0" ]]; then
+        git_prompt+="${ shell::prompt::render " fg.green{ %s}" "$added_count"; }"
+      fi
+
+      # if [[ "$git_status" == "" ]]; then
+      #   color="fg.dimgreen"
+      #   icon="󱓏"
+      # else
+      #   color="fg.dimred"
+      #   icon="󱓊"
+      # fi
+
+      # local git_files_added="${ git status --porcelain 2>/dev/null | grep A | wc -l; }"
+      # if [[ "$git_files_added" != "0" ]]; then
+      #   icon+="added"
+      # fi
+
+      echo " $git_prompt"
+    fi
+  }
+
+  ps1_prompt_suffix() {
+    shell::prompt::render "fg.dim{%s}" ""
+  }
+
   local ps1_prompt=""
-  shell::prompt::render -v "ps1_prompt" "\$(dynamic_prompt)\$(ps1_prompt_folder_icon)fg.dim{%s} fg.dim{%s} " "\w" "󰯉 "
+  shell::prompt::render -v "ps1_prompt" "\$(dynamic_prompt)\$(ps1_prompt_folder_icon)fg.dim{%s}\$(ps1_prompt_path_suffix) fg.dim{%s} " "\w" "\$(ps1_prompt_suffix)"
   export PS1="$ps1_prompt"
 }
+
+# ps0_track_command() {
+#   local cmd="${ echo "$1" | sed "s/^[ ]*[0-9]*[ ]*//"; }"
+#
+#   echo "$cmd\n"
+# }
+#
+# export PS0='$(ps0_track_command !!)'
 
 shell::prompt::setup
