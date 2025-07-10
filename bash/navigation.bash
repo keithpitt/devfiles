@@ -8,7 +8,7 @@ shopt -s autocd
 shopt -s cdspell
 
 # direxpand
-shopt -s direxpand dirspell
+# shopt -s direxpand dirspell
 
 # dirspell
 shopt -s dirspell
