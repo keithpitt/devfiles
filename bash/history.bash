@@ -18,4 +18,6 @@ mkdir -p "$HISTDIR"
 shopt -s histappend
 
 # Save history right away, instead of waiting for bash to exit
-PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+# PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
+# I had this turned on, but it ended up being really quite annoying and
+# confusing
