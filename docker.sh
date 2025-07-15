@@ -11,7 +11,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib_test_is_command docker && echo yes
+  stdlib_test command/exists docker && echo yes
   ;;
 
 esac

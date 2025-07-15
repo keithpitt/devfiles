@@ -7,7 +7,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib_test_is_command httpie && echo yes
+  stdlib_test command/exists httpie && echo yes
   ;;
 
 esac

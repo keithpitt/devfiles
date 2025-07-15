@@ -7,7 +7,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib_test_is_command unzip && echo yes
+  stdlib_test command/exists unzip && echo yes
   ;;
 
 esac

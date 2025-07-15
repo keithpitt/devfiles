@@ -33,7 +33,7 @@ motd)
   ;;
 
 --is-installed)
-  stdlib_test_is_command bash && echo yes
+  stdlib_test command/exists bash && echo yes
   ;;
 
 esac

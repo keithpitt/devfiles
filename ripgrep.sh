@@ -7,7 +7,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib_test_is_command rg && echo yes
+  stdlib_test command/exists rg && echo yes
   ;;
 
 esac

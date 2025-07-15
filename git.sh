@@ -42,7 +42,7 @@ setuser)
   ;;
 
 --is-installed)
-  stdlib_test_is_command git && echo yes
+  stdlib_test command/exists git && echo yes
   ;;
 
 esac

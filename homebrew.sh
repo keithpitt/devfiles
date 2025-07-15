@@ -42,7 +42,7 @@ shellenv)
   ;;
 
 --is-installed)
-  stdlib_test_is_command brew && echo yes
+  stdlib_test command/exists brew && echo yes
   ;;
 
 esac

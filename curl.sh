@@ -7,7 +7,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib_test_is_command curl && echo yes
+  stdlib_test command/exists curl && echo yes
   ;;
 
 esac

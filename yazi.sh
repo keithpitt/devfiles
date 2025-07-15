@@ -7,7 +7,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib_test_is_command yazi && echo yes
+  stdlib_test command/exists yazi && echo yes
   ;;
 
 esac

@@ -27,7 +27,7 @@ shellenv)
   ;;
 
 --is-installed)
-  stdlib_test_is_command pnpm && echo yes
+  stdlib_test command/exists pnpm && echo yes
   ;;
 
 esac

@@ -9,7 +9,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib_test_is_command tldc && echo yes
+  stdlib_test command/exists tldc && echo yes
   ;;
 
 esac

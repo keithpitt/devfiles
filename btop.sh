@@ -7,7 +7,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib_test_is_command btop && echo yes
+  stdlib_test command/exists btop && echo yes
   ;;
 
 esac

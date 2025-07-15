@@ -11,7 +11,7 @@ shellenv)
   ;;
 
 --is-installed)
-  stdlib_test_is_command fzf && echo yes
+  stdlib_test command/exists fzf && echo yes
   ;;
 
 esac

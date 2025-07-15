@@ -7,7 +7,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib_test_is_command netcat && echo yes
+  stdlib_test command/exists netcat && echo yes
   ;;
 
 esac

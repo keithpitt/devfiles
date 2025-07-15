@@ -7,7 +7,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib_test_is_command fc-list && echo yes
+  stdlib_test command/exists fc-list && echo yes
   ;;
 
 esac

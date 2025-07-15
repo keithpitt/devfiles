@@ -26,7 +26,7 @@ config)
   ;;
 
 --is-installed)
-  stdlib_test_is_command ghostty && echo yes
+  stdlib_test command/exists ghostty && echo yes
   ;;
 
 esac

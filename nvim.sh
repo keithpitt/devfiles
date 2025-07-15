@@ -61,7 +61,7 @@ configure)
   ;;
 
 --is-installed)
-  stdlib_test_is_command nvim && echo yes
+  stdlib_test command/exists nvim && echo yes
   ;;
 
 esac

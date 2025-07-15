@@ -7,7 +7,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib_test_is_command delta && echo yes
+  stdlib_test command/exists delta && echo yes
   ;;
 
 esac

@@ -19,7 +19,7 @@ configure)
   ;;
 
 --is-installed)
-  stdlib_test_is_command waybar && echo yes
+  stdlib_test command/exists waybar && echo yes
   ;;
 
 esac

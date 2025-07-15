@@ -8,7 +8,7 @@ setup)
   ;;
 
 --is-installed)
-  stdlib_test_is_command fastfetch && echo yes
+  stdlib_test command/exists fastfetch && echo yes
   ;;
 
 esac

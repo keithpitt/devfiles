@@ -15,7 +15,7 @@ configure)
   ;;
 
 --is-installed)
-  stdlib_test_is_command gh && echo yes
+  stdlib_test command/exists gh && echo yes
   ;;
 
 esac
