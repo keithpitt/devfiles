@@ -53,6 +53,8 @@ vim.opt.number = true
 
 -- Enables 24-bit RGB color in the TUI
 vim.opt.termguicolors = true
+vim.opt.background = dark
+
 
 -- Hide the mode indicator (e.g., -- INSERT --)
 vim.opt.showmode = false
@@ -76,24 +78,24 @@ vim.o.breakindent = true
 -- File management settings
 ------------------------------------------------------------
 
-vim.opt.backup = false -- Disable backup files
+vim.opt.backup = false      -- Disable backup files
 vim.opt.writebackup = false -- Enable undo files
-vim.opt.undofile = true -- Disable swap files
-vim.opt.swapfile = false -- Command history length
-vim.opt.history = 2000 --- Number of commands to remember
-vim.opt.autoread = true -- Auto-read files that have been changed outside
+vim.opt.undofile = true     -- Disable swap files
+vim.opt.swapfile = false    -- Command history length
+vim.opt.history = 2000      --- Number of commands to remember
+vim.opt.autoread = true     -- Auto-read files that have been changed outside
 
 ------------------------------------------------------------
 -- Indentation and formatting
 ------------------------------------------------------------
-vim.opt.smarttab = true -- Smart tabbing based on shiftwidth
+vim.opt.smarttab = true   -- Smart tabbing based on shiftwidth
 vim.opt.shiftround = true -- Round indentation to the nearest shiftwidth
-vim.opt.textwidth = 80 -- Maximum text width before line breaks
-vim.opt.expandtab = true -- Convert tabs to spaces
+vim.opt.textwidth = 80    -- Maximum text width before line breaks
+vim.opt.expandtab = true  -- Convert tabs to spaces
 vim.opt.autoindent = true -- Auto-indent new lines
-vim.opt.tabstop = 2 -- Number of spaces per tab
-vim.opt.shiftwidth = 2 -- Number of spaces per indentation level
-vim.opt.softtabstop = -1 -- Adjust tab width during editing
+vim.opt.tabstop = 2       -- Number of spaces per tab
+vim.opt.shiftwidth = 2    -- Number of spaces per indentation level
+vim.opt.softtabstop = -1  -- Adjust tab width during editing
 
 -- Show tabs and other whitespace
 vim.opt.list = true
@@ -180,7 +182,7 @@ require("conform").setup({
   },
 })
 
-vim.cmd.colorscheme("jellybeans")
+vim.cmd.colorscheme("duckbones")
 
 -- Shortcut to either switch to the current file in the sidebar if we're in the editor, of if we're in neotree, the same shortcut will switch back to the editor
 vim.keymap.set("n", "<leader>r", function()
