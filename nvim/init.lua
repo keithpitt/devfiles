@@ -21,18 +21,13 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
 ----
----
---- fil asdf asdfasdf asdfasdf asdfasdf asdfas
 
---- sadfasdfasd sadfasdf asdfasdfas dfasdfasdf asdfasdfasdf
---- asdf asdfasdf asdf asadf asdfasdf asdfasdfa sdfasdf
+--[[
+  Disable Python 2 provider
 
-------------------------------------------------------------
--- Disable Python 2 provider
---
--- Someone else had this in their config, not sure if I need it? But I do like
--- turning stuff off...
-------------------------------------------------------------
+  Someone else had this in their config, not sure if I need it? But I do like turning stuff off...
+]]
+
 vim.g.loaded_python_provider = 0
 vim.g.python_host_prog = vim.fs.joinpath("bin", "python2")
 vim.g.python3_host_prog = vim.fs.joinpath("bin", "python")
@@ -54,7 +49,6 @@ vim.opt.number = true
 -- Enables 24-bit RGB color in the TUI
 vim.opt.termguicolors = true
 vim.opt.background = dark
-
 
 -- Hide the mode indicator (e.g., -- INSERT --)
 vim.opt.showmode = false
@@ -78,24 +72,38 @@ vim.o.breakindent = true
 -- File management settings
 ------------------------------------------------------------
 
-vim.opt.backup = false      -- Disable backup files
-vim.opt.writebackup = false -- Enable undo files
-vim.opt.undofile = true     -- Disable swap files
-vim.opt.swapfile = false    -- Command history length
-vim.opt.history = 2000      --- Number of commands to remember
-vim.opt.autoread = true     -- Auto-read files that have been changed outside
+-- Disable backup files
+vim.opt.backup = false
+
+-- Enable undo files
+vim.opt.writebackup = false
+
+-- Disable swap files
+vim.opt.undofile = true
+
+-- Command history length
+vim.opt.swapfile = false
+
+--- Number of commands to remember
+vim.opt.history = 2000
+
+-- Auto-read files that have been changed outside
+vim.opt.autoread = true
+
+-- Automatically switch the vim working directory when we open a new file
+-- vim.opt.autochdir = true
 
 ------------------------------------------------------------
 -- Indentation and formatting
 ------------------------------------------------------------
-vim.opt.smarttab = true   -- Smart tabbing based on shiftwidth
+vim.opt.smarttab = true -- Smart tabbing based on shiftwidth
 vim.opt.shiftround = true -- Round indentation to the nearest shiftwidth
-vim.opt.textwidth = 80    -- Maximum text width before line breaks
-vim.opt.expandtab = true  -- Convert tabs to spaces
+vim.opt.textwidth = 80 -- Maximum text width before line breaks
+vim.opt.expandtab = true -- Convert tabs to spaces
 vim.opt.autoindent = true -- Auto-indent new lines
-vim.opt.tabstop = 2       -- Number of spaces per tab
-vim.opt.shiftwidth = 2    -- Number of spaces per indentation level
-vim.opt.softtabstop = -1  -- Adjust tab width during editing
+vim.opt.tabstop = 2 -- Number of spaces per tab
+vim.opt.shiftwidth = 2 -- Number of spaces per indentation level
+vim.opt.softtabstop = -1 -- Adjust tab width during editing
 
 -- Show tabs and other whitespace
 vim.opt.list = true
@@ -109,8 +117,8 @@ vim.opt.smartcase = true
 -- Keep signcolumn on by default (signs are icons/color things you can put on the left hand side of the editor for wanrings and stuff)
 vim.o.signcolumn = "yes"
 
--- Rounded boders everywhere
-vim.o.winborder = "rounded"
+-- Change borders
+vim.o.winborder = "none"
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -150,52 +158,46 @@ vim.opt.whichwrap:append("<,>,[,],~")
 ------------------------------------------------------------
 -- Auto format
 ------------------------------------------------------------
-vim.opt.formatoptions:append("j") -- Join comments when appropriate
-vim.opt.formatoptions:append("c") -- Auto-wrap comments
-vim.opt.formatoptions:append("r") -- Auto-insert comment leader on Enter
-vim.opt.formatoptions:append("o") -- Auto-insert comment leader on o/O
-vim.opt.formatoptions:append("q") -- Allow formatting with gq
+
+-- Join comments when appropriate
+vim.opt.formatoptions:append("j")
+
+-- Auto-wrap comments
+vim.opt.formatoptions:append("c")
+
+-- Auto-insert comment leader on Enter
+vim.opt.formatoptions:append("r")
+
+-- Auto-insert comment leader on o/O
+vim.opt.formatoptions:append("o")
+
+-- Allow formatting with gq
+vim.opt.formatoptions:append("q")
+
+-- Force comments to be 80 chars in all files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  command = "setlocal formatoptions+=c textwidth=80",
+})
+
+------------------------------------------------------------
+-- Modules
+------------------------------------------------------------
+
+-- require("netrw-tweaks")
+
+------------------------------------------------------------
+-- Plugins
+------------------------------------------------------------
 
 require("config.lazy")
+require("config.colorscheme")
+require("config.diagnostic")
 
 -- some stuff so code folding uses treesitter instead of older methods
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 99
-
-require("conform").setup({
-  default_format_opts = { lsp_format = "fallback" },
-  format_on_save = {
-    -- I recommend these options. See :help conform.format for details.
-    lsp_format = "fallback",
-    timeout_ms = 500,
-  },
-  formatters_by_ft = {
-    typescript = { "prettier" },
-    typescriptreact = { "prettier" },
-    json = { "prettier" },
-    jsonc = { "prettier" },
-    javascript = { "prettier" },
-    toml = { "prettier" },
-    lua = { "stylua" },
-    -- etc
-  },
-})
-
-vim.cmd.colorscheme("duckbones")
-
--- Shortcut to either switch to the current file in the sidebar if we're in the editor, of if we're in neotree, the same shortcut will switch back to the editor
-vim.keymap.set("n", "<leader>r", function()
-  local bufname = vim.api.nvim_buf_get_name(0)
-  if string.match(bufname, "neo%-tree") then
-    vim.cmd("wincmd w")
-  else
-    vim.cmd("Neotree reveal_file=% reveal_force_cwd")
-  end
-end, { noremap = true, silent = true })
-
--- Custom keymaps for opening/closing directory view
-vim.api.nvim_set_keymap("n", "<leader>s", ":Neotree toggle<cr>", { noremap = true, silent = true })
 
 -- vim.keymap.set( 'n', ';', ':', { desc = "Exit vim" })
 
@@ -203,7 +205,10 @@ vim.keymap.set("n", "\\[", "<cmd>tabprevious<cr>", { desc = "Previous tab", sile
 vim.keymap.set("n", "\\]", "<cmd>tabnext<cr>", { desc = "Next tab", silent = true })
 vim.keymap.set("n", "\\n", "<cmd>tabnew<cr>", { desc = "New tab", silent = true })
 
-vim.keymap.set("n", "<esc>", ":noh<cr>", { desc = "Remove search highlights in normal mode", silent = true })
+vim.keymap.set("n", "<esc>", ":noh<cr>", {
+  desc = "Remove search highlights in normal mode",
+  silent = true,
+})
 
 -- Shortcut `` to jump back to last buffer
 vim.api.nvim_set_keymap("n", "``", "<C-^>", { noremap = true, silent = true })
@@ -213,82 +218,12 @@ vim.api.nvim_set_keymap("n", ";", ":", { noremap = true, silent = true })
 
 -- Inspired from:
 -- http://vim.wikia.com/wiki/Easy_edit_of_files_in_the_same_directory
-vim.api.nvim_set_keymap("n", "<leader>e", '":e " .. expand("%:p:h") .. "/"', { noremap = true, expr = true })
-
-local telescope_actions = require("telescope.actions")
-local telescope_builtin = require("telescope.builtin")
-
-require("telescope").setup({
-  defaults = {
-    mappings = {
-      i = {
-        -- Escape telescope with <ESC> when in insert mode (otherwise you need
-        -- to hit it twice which is kinda annoying)
-        ["<esc>"] = telescope_actions.close,
-      },
-    },
-    preview = {
-      -- Hide previewer when picker starts
-      hide_on_startup = true,
-    },
-  },
-  extensions = {
-    recent_files = {
-      ignore_patterns = { "/tmp/", ".git" },
-      theme = "dropdown",
-    },
-  },
-})
-
-require("telescope").load_extension("recent_files")
-
--- Custom keymaps for toggling telescope
--- vim.keymap.set('n', '<leader>f', ':Telescope frecency workspace=CWD <cr>', { desc = 'Telescope find files', silent = true, noremap = true })
-vim.keymap.set("n", "<leader>f", function()
-  require("telescope").extensions.recent_files.pick({ only_cwd = true })
-end, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>l", telescope_builtin.oldfiles, { desc = "Telescope old files", silent = true })
-vim.keymap.set(
+vim.api.nvim_set_keymap(
   "n",
-  "<leader>d",
-  telescope_builtin.lsp_workspace_symbols,
-  { desc = "Telescope lsp workspace symbols", silent = true }
+  "<leader>e",
+  '":e " .. expand("%:p:h") .. "/"',
+  { noremap = true, expr = true }
 )
-
--- vim.lsp.enable("jsonls")
---
--- vim.lsp.enable("bashls")
--- vim.lsp.config("bashls", {
---   settings = {
---     includeAllWorkspaceSymbols = true,
---   },
--- })
---
--- vim.lsp.enable("vimls")
---
--- vim.lsp.config("lua_ls", {
---   settings = {
---     Lua = {
---       diagnostics = {
---         -- Get the language server to recognize the `vim` global
---         globals = { "vim" },
---       },
---     },
---   },
--- })
--- vim.lsp.enable("lua_ls")
---
--- vim.lsp.enable("gopls")
---
--- vim.lsp.enable("ts_ls")
---
--- vim.lsp.enable("astro")
---
--- vim.lsp.enable("tailwindcss")
-
--- Automatically switch the vim working directory when we open a new file
--- fil
--- vim.opt.autochdir = true
 
 -- It's good practice to namespace custom handlers to avoid collisions
 -- vim.diagnostic.handlers["my/notify"] = {
@@ -317,34 +252,34 @@ vim.keymap.set(
 --
 -- vim.diagnostic.config({ float = { border = "single" } })
 
-vim.diagnostic.config({
-  severity_sort = true,
-  float = { border = "rounded", source = "if_many" },
-  underline = { severity = vim.diagnostic.severity.ERROR },
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "󰅚 ",
-      [vim.diagnostic.severity.WARN] = "󰀪 ",
-      [vim.diagnostic.severity.INFO] = "󰋽 ",
-      [vim.diagnostic.severity.HINT] = "󰌶 ",
-    },
-  },
-  virtual_text = {
-    source = "if_many",
-    spacing = 2,
-    format = function(diagnostic)
-      local diagnostic_message = {
-        [vim.diagnostic.severity.ERROR] = diagnostic.message,
-        [vim.diagnostic.severity.WARN] = diagnostic.message,
-        [vim.diagnostic.severity.INFO] = diagnostic.message,
-        [vim.diagnostic.severity.HINT] = diagnostic.message,
-      }
-      return diagnostic_message[diagnostic.severity]
-    end,
-  },
-})
-
-vim.lsp.inlay_hint.enable(true)
+-- vim.diagnostic.config({
+--   severity_sort = true,
+--   float = { border = "rounded", source = "if_many" },
+--   underline = { severity = vim.diagnostic.severity.ERROR },
+--   signs = {
+--     text = {
+--       [vim.diagnostic.severity.ERROR] = "󰅚 ",
+--       [vim.diagnostic.severity.WARN] = "󰀪 ",
+--       [vim.diagnostic.severity.INFO] = "󰋽 ",
+--       [vim.diagnostic.severity.HINT] = "󰌶 ",
+--     },
+--   },
+--   virtual_text = {
+--     source = "if_many",
+--     spacing = 2,
+--     format = function(diagnostic)
+--       local diagnostic_message = {
+--         [vim.diagnostic.severity.ERROR] = diagnostic.message,
+--         [vim.diagnostic.severity.WARN] = diagnostic.message,
+--         [vim.diagnostic.severity.INFO] = diagnostic.message,
+--         [vim.diagnostic.severity.HINT] = diagnostic.message,
+--       }
+--       return diagnostic_message[diagnostic.severity]
+--     end,
+--   },
+-- })
+--
+-- vim.lsp.inlay_hint.enable(true)
 
 -- https://github.com/echasnovski/mini.completion/tree/main
 -- local mini_completion = require('mini.completion')
@@ -396,71 +331,71 @@ vim.lsp.inlay_hint.enable(true)
 --   end
 -- })
 --
-local dashboard_custom_header = [[
-                            ███╗   ███╗ █████╗  ██████╗ ██╗ ██████╗██╗  ██╗███████╗██╗████████╗██╗  ██╗
-                            ████╗ ████║██╔══██╗██╔════╝ ██║██╔════╝██║ ██╔╝██╔════╝██║╚══██╔══╝██║  ██║
-                            ██╔████╔██║███████║██║  ███╗██║██║     █████╔╝ █████╗  ██║   ██║   ███████║
-                            ██║╚██╔╝██║██╔══██║██║   ██║██║██║     ██╔═██╗ ██╔══╝  ██║   ██║   ██╔══██║
-                            ██║ ╚═╝ ██║██║  ██║╚██████╔╝██║╚██████╗██║  ██╗███████╗██║   ██║   ██║  ██║
-                            ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝   ╚═╝  ╚═╝
-                            ]]
+-- local dashboard_custom_header = [[
+--                             ███╗   ███╗ █████╗  ██████╗ ██╗ ██████╗██╗  ██╗███████╗██╗████████╗██╗  ██╗
+--                             ████╗ ████║██╔══██╗██╔════╝ ██║██╔════╝██║ ██╔╝██╔════╝██║╚══██╔══╝██║  ██║
+--                             ██╔████╔██║███████║██║  ███╗██║██║     █████╔╝ █████╗  ██║   ██║   ███████║
+--                             ██║╚██╔╝██║██╔══██║██║   ██║██║██║     ██╔═██╗ ██╔══╝  ██║   ██║   ██╔══██║
+--                             ██║ ╚═╝ ██║██║  ██║╚██████╔╝██║╚██████╗██║  ██╗███████╗██║   ██║   ██║  ██║
+--                             ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝   ╚═╝   ╚═╝  ╚═╝
+--                             ]]
+--
+-- require("dashboard").setup({
+--   theme = "hyper",
+--   hide = {
+--     statusline = true,
+--     tabline = true,
+--     winbar = true,
+--   },
+--   change_to_vcs_root = true,
+--   config = {
+--     header = vim.split(dashboard_custom_header, "\n"),
+--     project = {
+--       action = function(path)
+--         require("telescope").extensions.recent_files.pick({ cwd = path, only_cwd = true })
+--       end,
+--     },
+--     shortcut = {
+--       { desc = "󰊳 Update", group = "@property", action = "Lazy update", key = "u" },
+--       -- {
+--       --   icon = ' ',
+--       --   icon_hl = '@variable',
+--       --   desc = 'Files',
+--       --   group = 'Label',
+--       --   action = 'Telescope recent_files',
+--       --   key = 'f',
+--       -- },
+--       -- {
+--       --   desc = ' Apps',
+--       --   group = 'DiagnosticHint',
+--       --   action = 'Telescope app',
+--       --   key = 'a',
+--       -- },
+--       -- {
+--       --   desc = ' dotfiles',
+--       --   group = 'Number',
+--       --   action = 'Telescope dotfiles',
+--       --   key = 'd',
+--       -- },
+--     },
+--   },
+-- })
 
-require("dashboard").setup({
-  theme = "hyper",
-  hide = {
-    statusline = true,
-    tabline = true,
-    winbar = true,
-  },
-  change_to_vcs_root = true,
-  config = {
-    header = vim.split(dashboard_custom_header, "\n"),
-    project = {
-      action = function(path)
-        require("telescope").extensions.recent_files.pick({ cwd = path, only_cwd = true })
-      end,
-    },
-    shortcut = {
-      { desc = "󰊳 Update", group = "@property", action = "Lazy update", key = "u" },
-      -- {
-      --   icon = ' ',
-      --   icon_hl = '@variable',
-      --   desc = 'Files',
-      --   group = 'Label',
-      --   action = 'Telescope recent_files',
-      --   key = 'f',
-      -- },
-      -- {
-      --   desc = ' Apps',
-      --   group = 'DiagnosticHint',
-      --   action = 'Telescope app',
-      --   key = 'a',
-      -- },
-      -- {
-      --   desc = ' dotfiles',
-      --   group = 'Number',
-      --   action = 'Telescope dotfiles',
-      --   key = 'd',
-      -- },
-    },
-  },
-})
-
-vim.api.nvim_create_augroup("Dashboard_au", { clear = true })
-vim.api.nvim_create_autocmd("Filetype", {
-  group = "Dashboard_au",
-  pattern = "dashboard",
-  callback = function()
-    vim.opt_local.ruler = false
-    vim.opt_local.fillchars:append({ eob = " " })
-  end,
-})
-
-vim.api.nvim_create_autocmd("BufLeave", {
-  group = "Dashboard_au",
-  callback = function()
-    vim.opt_local.ruler = true
-  end,
-})
+-- vim.api.nvim_create_augroup("Dashboard_au", { clear = true })
+-- vim.api.nvim_create_autocmd("Filetype", {
+--   group = "Dashboard_au",
+--   pattern = "dashboard",
+--   callback = function()
+--     vim.opt_local.ruler = false
+--     vim.opt_local.fillchars:append({ eob = " " })
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("BufLeave", {
+--   group = "Dashboard_au",
+--   callback = function()
+--     vim.opt_local.ruler = true
+--   end,
+-- })
 
 -- require("tree-sitter-astro")

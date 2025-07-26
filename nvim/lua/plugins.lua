@@ -1,82 +1,97 @@
 return {
-  {
-    "zenbones-theme/zenbones.nvim",
-    dependencies = "rktjmp/lush.nvim",
-    lazy = false,
-    priority = 1000,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter",
+  -- {
+  --   "nvim-treesitter/nvim-treesitter",
 
-    dependencies = {
-      "virchau13/tree-sitter-astro",
-    },
+  --   dependencies = {
+  --     "virchau13/tree-sitter-astro",
+  --   },
 
-    build = ":TSUpdate",
+  --   build = ":TSUpdate",
 
-    opts = {
-      ensure_installed = {
-        "typescript",
-        "python",
-        "rust",
-        "go",
-        "ruby",
-        "bash",
-      },
-      sync_install = false,
-      auto_install = true,
-      highlight = {
-        enable = true,
-      },
-      indent = {
-        enable = true,
-      },
-    },
+  --   opts = {
+  --     ensure_installed = {
+  --       "typescript",
+  --       "python",
+  --       "rust",
+  --       "go",
+  --       "ruby",
+  --       "bash",
+  --     },
+  --     sync_install = false,
+  --     auto_install = true,
+  --     highlight = {
+  --       enable = true,
+  --     },
+  --     indent = {
+  --       enable = true,
+  --     },
+  --   },
 
-    config = function(_, opts)
-      require("nvim-treesitter.configs").setup(opts)
-    end,
-  },
+  --   config = function(_, opts)
+  --     require("nvim-treesitter.configs").setup(opts)
+  --   end,
+  -- },
 
-  {
-    "habamax/vim-asciidoctor",
-  },
+  -- {
+  --   "habamax/vim-asciidoctor",
+  -- },
 
-  {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      options = {
-        disabled_filetypes = { "neo-tree", "trouble" },
-        ignore_focus = { "neo-tree", "trouble", "telescope" },
-      },
-      sections = {
-        lualine_a = {
-          {
-            "lsp_status",
-            icon = "", -- f013
-            symbols = {
-              -- Standard unicode symbols to cycle through for LSP progress:
-              spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
-              -- Standard unicode symbol for when LSP is done:
-              done = "✓",
-              -- Delimiter inserted between LSP names:
-              separator = " ",
-            },
-            -- List of LSP names to ignore (e.g., `null-ls`):
-            ignore_lsp = {},
-          },
-        },
-      },
-    },
-  },
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   opts = {
+  --     options = {
+  --       disabled_filetypes = { "neo-tree", "trouble" },
+  --       ignore_focus = { "neo-tree", "trouble", "telescope" },
+  --     },
+  --     sections = {
+  --       lualine_a = {
+  --         {
+  --           "lsp_status",
+  --           icon = "", -- f013
+  --           symbols = {
+  --             -- Standard unicode symbols to cycle through for LSP progress:
+  --             spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+  --             -- Standard unicode symbol for when LSP is done:
+  --             done = "✓",
+  --             -- Delimiter inserted between LSP names:
+  --             separator = " ",
+  --           },
+  --           -- List of LSP names to ignore (e.g., `null-ls`):
+  --           ignore_lsp = {},
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
 
   -- Nicer looking netrw with icons
   -- { 'nvim-tree/nvim-web-devicons', opts = {} },
-  -- { 'prichrd/netrw.nvim', opts = {} },
+  -- {
+  --   "prichrd/netrw.nvim",
+  --   config = function()
+  --     require("netrw").setup({
+  --       -- File icons to use when `use_devicons` is false or if
+  --       -- no icon is found for the given file type.
+  --       -- icons = {
+  --       --   symlink = "",
+  --       --   directory = "",
+  --       --   file = "",
+  --       -- },
+  --       -- Uses mini.icon or nvim-web-devicons if true, otherwise use the file icon specified above
+  --       use_devicons = true,
+  --       -- mappings = {
+  --       --   -- Function mappings receive an object describing the node under the cursor
+  --       --   ['p'] = function(payload) print(vim.inspect(payload)) end,
+  --       --   -- String mappings are executed as vim commands
+  --       --   ['<Leader>p'] = ":echo 'hello world'<CR>",
+  --       -- },
+  --     })
+  --   end,
+  -- },
 
   -- Force background of vim to be transparent
-  { "xiyaowong/transparent.nvim", opts = {} },
+  -- { "xiyaowong/transparent.nvim", opts = {} },
 
   -- Automatically make folders if they don't exist
   { "jghauser/mkdir.nvim" },
@@ -93,199 +108,302 @@ return {
   { "duane9/nvim-rg" },
 
   -- Replacement for netrw
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
+  -- {
+  --   "nvim-neo-tree/neo-tree.nvim",
+  --   branch = "v3.x",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-tree/nvim-web-devicons",
+  --     "MunifTanjim/nui.nvim",
 
-      -- Add image support
-      { "3rd/image.nvim", opts = {} },
-    },
-    -- neo-tree will lazily load itself
-    lazy = false,
+  --     -- Add image support
+  --     { "3rd/image.nvim", opts = {} },
+  --   },
+  --   -- neo-tree will lazily load itself
+  --   lazy = false,
 
-    opts = {
-      -- If we've closed our last buffer, then our work here is done
-      close_if_last_window = true,
+  --   opts = {
+  --     -- If we've closed our last buffer, then our work here is done
+  --     close_if_last_window = true,
 
-      -- A more tighter window
-      -- window = {
-      -- width = "fit_content",
-      -- },
+  --     -- A more tighter window
+  --     -- window = {
+  --     -- width = "fit_content",
+  --     -- },
 
-      filesystem = {
-        -- Make "nvim ." work better
-        hijack_netrw_behavior = "open_current",
+  --     filesystem = {
+  --       -- Make "nvim ." work better
+  --       hijack_netrw_behavior = "open_current",
 
-        -- Use telescope for search
-        window = {
-          mappings = {
-            -- disable fuzzy finder
-            ["/"] = "noop",
-          },
-        },
+  --       -- Use telescope for search
+  --       window = {
+  --         mappings = {
+  --           -- disable fuzzy finder
+  --           ["/"] = "noop",
+  --         },
+  --       },
 
-        -- Ensure the sidebar's working directory is the same as the current file
-        bind_to_cwd = true,
-        cwd_target = {
-          sidebar = "tab",
-          current = "window",
-        },
+  --       -- Ensure the sidebar's working directory is the same as the current file
+  --       bind_to_cwd = true,
+  --       cwd_target = {
+  --         sidebar = "tab",
+  --         current = "window",
+  --       },
 
-        filtered_items = {
-          visible = true,
-          -- hide_dotfiles = false,
-          never_show = {
-            ".DS_Store",
-            "thumbs.db",
-          },
-        },
-      },
-    },
-  },
-
-  -- Best theme ever
-  {
-    "wtfox/jellybeans.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      italics = false,
-    },
-  },
-
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-  },
+  --       filtered_items = {
+  --         visible = true,
+  --         -- hide_dotfiles = false,
+  --         never_show = {
+  --           ".DS_Store",
+  --           "thumbs.db",
+  --         },
+  --       },
+  --     },
+  --   },
+  --
+  --   config = function()
+  -- Shortcut to either switch to the current file in the sidebar if we're in the editor, of if we're in neotree, the same shortcut will switch back to the editor
+  -- vim.keymap.set("n", "<leader>r", function()
+  --   local bufname = vim.api.nvim_buf_get_name(0)
+  --   if string.match(bufname, "neo%-tree") then
+  --     vim.cmd("wincmd w")
+  --   else
+  --     vim.cmd("Neotree reveal_file=% reveal_force_cwd")
+  --   end
+  -- end, { noremap = true, silent = true })
+  --
+  -- -- Custom keymaps for opening/closing directory view
+  -- vim.api.nvim_set_keymap("n", "<leader>s", ":Neotree toggle<cr>", { noremap = true, silent = true })
+  --   end
+  -- },
 
   -- Kinda like ctrl-p
-  {
-    "nvim-telescope/telescope.nvim",
-    tag = "0.1.8",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      {
-        "smartpde/telescope-recent-files",
-        commit = "eb190c0baded1cbfa9d8767c817b054377683163",
-      },
-    },
-    config = function()
-      require("telescope").load_extension("recent_files")
-    end,
-  },
+  -- {
+  --   "nvim-telescope/telescope.nvim",
+  --   tag = "0.1.8",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --     {
+  --       "smartpde/telescope-recent-files",
+  --       commit = "eb190c0baded1cbfa9d8767c817b054377683163",
+  --     },
+  --   },
+  --   config = function()
+  --     require("telescope").load_extension("recent_files")
 
-  {
-    "nvim-telescope/telescope-frecency.nvim",
-    version = "*",
-    config = function()
-      require("telescope").load_extension("frecency")
-    end,
-  },
+  --     local telescope_actions = require("telescope.actions")
+  --     local telescope_builtin = require("telescope.builtin")
+
+  --     require("telescope").setup({
+  --       defaults = {
+  --         mappings = {
+  --           i = {
+  --             -- Escape telescope with <ESC> when in insert mode (otherwise you need
+  --             -- to hit it twice which is kinda annoying)
+  --             ["<esc>"] = telescope_actions.close,
+  --           },
+  --         },
+  --         preview = {
+  --           -- Hide previewer when picker starts
+  --           hide_on_startup = true,
+  --         },
+  --       },
+  --       extensions = {
+  --         recent_files = {
+  --           ignore_patterns = { "/tmp/", ".git" },
+  --           theme = "dropdown",
+  --         },
+  --       },
+  --     })
+
+  --     require("telescope").load_extension("recent_files")
+
+  --     -- Custom keymaps for toggling telescope
+  --     -- vim.keymap.set('n', '<leader>f', ':Telescope frecency workspace=CWD <cr>', { desc = 'Telescope find files', silent = true, noremap = true })
+  --     vim.keymap.set("n", "<leader>f", function()
+  --       require("telescope").extensions.recent_files.pick({ only_cwd = true })
+  --     end, { noremap = true, silent = true })
+  --     vim.keymap.set(
+  --       "n",
+  --       "<leader>l",
+  --       telescope_builtin.oldfiles,
+  --       { desc = "Telescope old files", silent = true }
+  --     )
+  --     vim.keymap.set(
+  --       "n",
+  --       "<leader>d",
+  --       telescope_builtin.lsp_workspace_symbols,
+  --       { desc = "Telescope lsp workspace symbols", silent = true }
+  --     )
+  --   end,
+  -- },
+
+  -- {
+  --   "nvim-telescope/telescope-frecency.nvim",
+  --   version = "*",
+  --   config = function()
+  --     require("telescope").load_extension("frecency")
+  --   end,
+  -- },
 
   -- Removes trailing white space and empty lines at EOF on save
-  {
-    "mcauley-penney/tidy.nvim",
-    config = true,
-  },
+  -- {
+  --   "mcauley-penney/tidy.nvim",
+  --   config = true,
+  -- },
 
   -- Some LSPs don't support formatting, this fills the gaps
-  { "stevearc/conform.nvim" },
 
   -- Bunch of random cool extras
-  {
-    "echasnovski/mini.nvim",
-    version = "*",
-  },
+  -- {
+  --   "echasnovski/mini.nvim",
+  --   version = "*",
+  -- },
 
   -- Better autochdir
-  {
-    "airblade/vim-rooter",
-  },
+  -- {
+  --   "airblade/vim-rooter",
+  -- },
 
   -- Sync terminal background color with nvim
-  {
-    "typicode/bg.nvim",
-  },
+  -- {
+  --   "typicode/bg.nvim",
+  -- },
 
-  {
-    "nvimdev/dashboard-nvim",
-    event = "VimEnter",
-    dependencies = { { "nvim-tree/nvim-web-devicons" } },
-  },
+  -- {
+  --   "nvimdev/dashboard-nvim",
+  --   event = "VimEnter",
+  --   dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  -- },
 
   {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
     opts = {
+      -- Pretty vim.notify
       notifier = { enabled = true },
-    },
-  },
-  {
-    "folke/trouble.nvim",
-    opts = {
-      focus = true,
-      modes = {
-        preview_float = {
-          mode = "diagnostics",
-          preview = {
-            type = "float",
-            relative = "editor",
-            border = "rounded",
-            title = "Preview",
-            title_pos = "center",
-            position = { 0, -2 },
-            size = { width = 0.3, height = 0.3 },
-            zindex = 200,
+      -- Auto-show LSP references and quickly navigate between them
+      words = { enabled = true },
+      -- Auto-show LSP references and quickly navigate between them
+      picker = {
+        enabled = true,
+      },
+      -- A file explorer (picker in disguise)
+      explorer = {
+        enabled = true,
+        replace_netrw = true,
+      },
+      ppicker = {
+        sources = {
+          explorer = {
+            auto_close = true,
+            -- your explorer picker configuration comes here
+            -- or leave it empty to use the default settings
           },
         },
       },
-    }, -- for default options, refer to the configuration section for custom setup.
-    cmd = "Trouble",
+    },
     keys = {
       {
-        "<leader>z",
-        "<cmd>Trouble diagnostics toggle preview_float<cr>",
-        desc = "Diagnostics (Trouble)",
+        "<leader>l",
+        function()
+          Snacks.picker.recent()
+        end,
+        desc = "Recent",
       },
       {
-        "<leader>x",
-        "<cmd>Trouble next diagnostics<cr>",
-        desc = "Diagnostics next in list (Trouble)",
+        "<leader>f",
+        function()
+          Snacks.picker.files()
+        end,
+        desc = "Recent",
       },
-      -- {
-      --   "<leader>xX",
-      --   "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-      --   desc = "Buffer Diagnostics (Trouble)",
-      -- },
-      -- {
-      --   "<leader>cs",
-      --   "<cmd>Trouble symbols toggle focus=false<cr>",
-      --   desc = "Symbols (Trouble)",
-      -- },
-      -- {
-      --   "<leader>cl",
-      --   "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-      --   desc = "LSP Definitions / references / ... (Trouble)",
-      -- },
-      -- {
-      --   "<leader>xL",
-      --   "<cmd>Trouble loclist toggle<cr>",
-      --   desc = "Location List (Trouble)",
-      -- },
-      -- {
-      --   "<leader>xQ",
-      --   "<cmd>Trouble qflist toggle<cr>",
-      --   desc = "Quickfix List (Trouble)",
-      -- },
+      {
+        "<leader>r",
+        function()
+          Snacks.explorer.open()
+        end,
+        desc = "File Explorer",
+      },
+      {
+        "]]",
+        function()
+          Snacks.words.jump(vim.v.count1)
+        end,
+        desc = "Next Reference",
+        mode = { "n", "t" },
+      },
+      {
+        "[[",
+        function()
+          Snacks.words.jump(-vim.v.count1)
+        end,
+        desc = "Prev Reference",
+        mode = { "n", "t" },
+      },
     },
   },
+  -- {
+  --   "folke/trouble.nvim",
+  --   opts = {
+  --     focus = true,
+  --     modes = {
+  --       preview_float = {
+  --         mode = "diagnostics",
+  --         preview = {
+  --           type = "float",
+  --           relative = "editor",
+  --           border = "rounded",
+  --           title = "Preview",
+  --           title_pos = "center",
+  --           position = { 0, -2 },
+  --           size = { width = 0.3, height = 0.3 },
+  --           zindex = 200,
+  --         },
+  --       },
+  --     },
+  --   }, -- for default options, refer to the configuration section for custom setup.
+  --   cmd = "Trouble",
+  --   keys = {
+  --     {
+  --       "<leader>z",
+  --       "<cmd>Trouble diagnostics toggle preview_float<cr>",
+  --       desc = "Diagnostics (Trouble)",
+  --     },
+  --     {
+  --       "<leader>x",
+  --       "<cmd>Trouble next diagnostics<cr>",
+  --       desc = "Diagnostics next in list (Trouble)",
+  --     },
+  --     -- {
+  --     --   "<leader>xX",
+  --     --   "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+  --     --   desc = "Buffer Diagnostics (Trouble)",
+  --     -- },
+  --     -- {
+  --     --   "<leader>cs",
+  --     --   "<cmd>Trouble symbols toggle focus=false<cr>",
+  --     --   desc = "Symbols (Trouble)",
+  --     -- },
+  --     -- {
+  --     --   "<leader>cl",
+  --     --   "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+  --     --   desc = "LSP Definitions / references / ... (Trouble)",
+  --     -- },
+  --     -- {
+  --     --   "<leader>xL",
+  --     --   "<cmd>Trouble loclist toggle<cr>",
+  --     --   desc = "Location List (Trouble)",
+  --     -- },
+  --     -- {
+  --     --   "<leader>xQ",
+  --     --   "<cmd>Trouble qflist toggle<cr>",
+  --     --   desc = "Quickfix List (Trouble)",
+  --     -- },
+  --   },
+  -- },
   -- { -- Useful plugin to show you pending keybinds.
   --   'folke/which-key.nvim',
   --   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
@@ -318,116 +436,4 @@ return {
   --   --   },
   --   -- },
   -- },
-  --
-  -- Autocomplete engine (LSP, snippets etc)
-  -- see keymap:
-  -- https://cmp.saghen.dev/configuration/keymap.html#default
-  {
-    {
-      "saghen/blink.cmp",
-      -- optional: provides snippets for the snippet source
-      dependencies = {
-        "rafamadriz/friendly-snippets",
-        "onsails/lspkind.nvim",
-        "nvim-tree/nvim-web-devicons",
-      },
-
-      -- use a release tag to download pre-built binaries
-      version = "1.*",
-      -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-      -- build = 'cargo build --release',
-      -- If you use nix, you can build from source using latest nightly rust with:
-      -- build = 'nix run .#build-plugin',
-
-      ---@module 'blink.cmp'
-      ---@type blink.cmp.Config
-      opts = {
-        -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-        -- 'super-tab' for mappings similar to vscode (tab to accept)
-        -- 'enter' for enter to accept
-        -- 'none' for no mappings
-        --
-        -- All presets have the following mappings:
-        -- C-space: Open menu or open docs if already open
-        -- C-n/C-p or Up/Down: Select next/previous item
-        -- C-e: Hide menu
-        -- C-k: Toggle signature help (if signature.enabled = true)
-        --
-        -- See :h blink-cmp-config-keymap for defining your own keymap
-        keymap = {
-          preset = "enter",
-          ["<Tab>"] = { "select_and_accept" },
-        },
-
-        appearance = {
-          -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-          -- Adjusts spacing to ensure icons are aligned
-          nerd_font_variant = "mono",
-        },
-
-        completion = {
-          documentation = {
-            auto_show = true,
-          },
-
-          trigger = {
-            show_on_keyword = true,
-            show_in_snippet = false,
-          },
-
-          menu = {
-            draw = {
-              components = {
-                kind_icon = {
-                  text = function(ctx)
-                    local icon = ctx.kind_icon
-                    if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                      local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
-                      if dev_icon then
-                        icon = dev_icon
-                      end
-                    else
-                      icon = require("lspkind").symbolic(ctx.kind, {
-                        mode = "symbol",
-                      })
-                    end
-
-                    return icon .. ctx.icon_gap
-                  end,
-
-                  -- Optionally, use the highlight groups from nvim-web-devicons
-                  -- You can also add the same function for `kind.highlight` if you want to
-                  -- keep the highlight groups in sync with the icons.
-                  highlight = function(ctx)
-                    local hl = ctx.kind_hl
-                    if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                      local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
-                      if dev_icon then
-                        hl = dev_hl
-                      end
-                    end
-                    return hl
-                  end,
-                },
-              },
-            },
-          },
-        },
-
-        -- Default list of enabled providers defined so that you can extend it
-        -- elsewhere in your config, without redefining it, due to `opts_extend`
-        sources = {
-          default = { "lsp", "path", "snippets", "buffer" },
-        },
-
-        -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
-        -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
-        -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
-        --
-        -- See the fuzzy documentation for more information
-        fuzzy = { implementation = "prefer_rust_with_warning" },
-      },
-      opts_extend = { "sources.default" },
-    },
-  },
 }
