@@ -26,6 +26,19 @@ return {
       {
         "neovim/nvim-lspconfig",
         config = function()
+          -- Set default environment for all LSPs to inherit current shell
+          vim.lsp.config("*", {
+            cmd_env = {
+              SHELL = vim.env.SHELL,
+              BASH = vim.env.BASH or "/opt/homebrew/bin/bash"
+            }
+          })
+
+          -- Disable bashls for .env files
+          vim.lsp.config("bashls", {
+            filetypes = { "sh", "bash" }, -- Explicitly exclude .env files
+          })
+
           vim.lsp.config("lua_ls", {
             -- Copy/pasted from https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
             on_init = function(client)

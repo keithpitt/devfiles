@@ -38,3 +38,7 @@ macos-titlebar-style = transparent
 
 # command = /opt/homebrew/bin/bash -q
 keybind = shift+enter=text:\n
+
+env = COLORSCHEME=jellybeans
+
+auto-update-channel = tip

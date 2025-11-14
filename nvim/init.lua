@@ -192,6 +192,22 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal formatoptions+=c textwidth=80",
 })
 
+-- Disable tab display for Go files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.opt_local.list = false
+  end,
+})
+
+-- Set .env files to env filetype instead of bash
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.env", "*.env.*", ".env", ".env.*" },
+  callback = function()
+    vim.bo.filetype = "env"
+  end,
+})
+
 ------------------------------------------------------------
 -- Modules
 ------------------------------------------------------------
@@ -205,40 +221,12 @@ vim.api.nvim_create_autocmd("FileType", {
 require("config.lazy")
 require("config.colorscheme")
 require("config.diagnostic")
+require("config.keymaps")
 
 -- some stuff so code folding uses treesitter instead of older methods
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevel = 99
-
--- vim.keymap.set( 'n', ';', ':', { desc = "Exit vim" })
-
-vim.keymap.set("n", "\\[", "<cmd>tabprevious<cr>", { desc = "Previous tab", silent = true })
-vim.keymap.set("n", "\\]", "<cmd>tabnext<cr>", { desc = "Next tab", silent = true })
-vim.keymap.set("n", "\\n", "<cmd>tabnew<cr>", { desc = "New tab", silent = true })
-
-vim.keymap.set("n", "<esc>", ":noh<cr>", {
-  desc = "Remove search highlights in normal mode",
-  silent = true,
-})
-
--- Shortcut `` to jump back to last buffer
-vim.api.nvim_set_keymap("n", "``", "<C-^>", { noremap = true, silent = true })
-
--- Save 1000s of hours by making ; a shortcut to :
-vim.api.nvim_set_keymap("n", ";", ":", { noremap = true, silent = true })
-
--- Map ,qq to quit all
-vim.api.nvim_set_keymap("n", "<leader>qq", ":qa<CR>", { noremap = true, silent = true })
-
--- Inspired from:
--- http://vim.wikia.com/wiki/Easy_edit_of_files_in_the_same_directory
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>e",
-  '":e " .. expand("%:p:h") .. "/"',
-  { noremap = true, expr = true }
-)
 
 -- It's good practice to namespace custom handlers to avoid collisions
 -- vim.diagnostic.handlers["my/notify"] = {

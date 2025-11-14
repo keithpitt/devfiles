@@ -17,4 +17,8 @@ return {
       { "<leader>g", "<cmd>TestVisit<CR>", desc = "Go to test file" },
     },
   },
+  {
+    "overleaf/vim-env-syntax",
+    ft = "env",
+  },
 }
