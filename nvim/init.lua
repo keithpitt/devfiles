@@ -152,6 +152,18 @@ vim.opt.ttimeoutlen = 10 -- Time in ms for key code sequence
 -- Completion options
 vim.opt.completeopt = { "menu", "menuone", "noselect", "nosort" }
 
+-- Command-line completion settings
+vim.opt.wildmenu = true -- Enable enhanced command-line completion
+vim.opt.wildmode = "longest,list,full" -- Complete longest, show list, then cycle through
+vim.opt.wildignorecase = true -- Case-insensitive path completion
+vim.opt.wildoptions = "pum" -- Use popup menu for command-line completion
+
+-- Use ripgrep for :grep command with proper path completion
+if vim.fn.executable("rg") == 1 then
+  vim.opt.grepprg = "rg --vimgrep --smart-case"
+  vim.opt.grepformat = "%f:%l:%c:%m"
+end
+
 -- Allow cursor movement across line ends
 vim.opt.whichwrap:append("<,>,[,],~")
 
@@ -215,6 +227,9 @@ vim.api.nvim_set_keymap("n", "``", "<C-^>", { noremap = true, silent = true })
 
 -- Save 1000s of hours by making ; a shortcut to :
 vim.api.nvim_set_keymap("n", ";", ":", { noremap = true, silent = true })
+
+-- Map ,qq to quit all
+vim.api.nvim_set_keymap("n", "<leader>qq", ":qa<CR>", { noremap = true, silent = true })
 
 -- Inspired from:
 -- http://vim.wikia.com/wiki/Easy_edit_of_files_in_the_same_directory

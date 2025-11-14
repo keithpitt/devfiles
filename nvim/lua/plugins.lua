@@ -289,18 +289,33 @@ return {
       -- Auto-show LSP references and quickly navigate between them
       picker = {
         enabled = true,
+        sources = {
+          explorer = {
+            -- follow_file = false,
+            -- auto_close = true,
+          },
+          files = {
+            -- follow_file = false,
+            auto_close = true,
+          },
+        },
+        win = {
+          input = {
+            keys = {
+              ["<Esc>"] = { "close", mode = { "n", "i" } },
+            },
+          },
+        },
       },
       -- A file explorer (picker in disguise)
       explorer = {
         enabled = true,
         replace_netrw = true,
-      },
-      ppicker = {
-        sources = {
-          explorer = {
-            auto_close = true,
-            -- your explorer picker configuration comes here
-            -- or leave it empty to use the default settings
+        win = {
+          input = {
+            keys = {
+              ["<leader>b"] = "picker_grep",
+            },
           },
         },
       },
@@ -312,6 +327,13 @@ return {
           Snacks.picker.recent()
         end,
         desc = "Recent",
+      },
+      {
+        "<leader>~",
+        function()
+          Snacks.picker.resume()
+        end,
+        desc = "Resume",
       },
       {
         "<leader>f",
@@ -326,6 +348,13 @@ return {
           Snacks.explorer.open()
         end,
         desc = "File Explorer",
+      },
+      {
+        "<leader>g",
+        function()
+          Snacks.picker.grep()
+        end,
+        desc = "Grep",
       },
       {
         "]]",

@@ -1,12 +1,32 @@
 [core]
     pager = delta
 
+[diff]
+    context = 10
+
 [interactive]
     diffFilter = delta --color-only
 
 [delta]
     navigate = true  # use n and N to move between diff sections
     dark = true      # or light = true, or omit for auto-detection
+    line-numbers = true
+    line-numbers-left-format = ""
+    line-numbers-right-format = "{np:>4}│"
+    line-numbers-zero-style = "#666666"
+    hunk-header-style = "file"
+    hunk-header-decoration-style = "#666666"
+    hunk-header-file-style = "#666666"
+    zero-style = "syntax"  # Normal syntax for unchanged context lines
+    minus-style = "syntax #3f0010"  # Subtle red background for removed
+    minus-non-emph-style = "syntax #3f0010"  # Same subtle background for unchanged parts in removed lines
+    minus-emph-style = "syntax #5f0020"  # Slightly brighter red for emphasized parts
+    plus-style = "syntax #003300"  # Subtle green background for added
+    plus-non-emph-style = "syntax #003300"  # Same subtle background for unchanged parts in added lines
+    plus-emph-style = "syntax #004400"  # Slightly brighter green for emphasized parts
+
+[push]
+  autoSetupRemote = true
 
 [merge]
     conflictstyle = zdiff3

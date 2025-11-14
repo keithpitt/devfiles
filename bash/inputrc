@@ -39,8 +39,11 @@ set echo-control-characters off
 
 # Partially typing a command and pressing <Up> will engage history substring
 # matching, not simply just start of line matching
-"\e[A": history-substring-search-backward
-"\e[B": history-substring-search-forward
+# "\e[A": history-substring-search-backward
+# "\e[B": history-substring-search-forward
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
 
 # Launch $EDITOR on the current command and execute when finished editing.
 "\ee": edit-and-execute-command

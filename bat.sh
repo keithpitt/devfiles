@@ -16,6 +16,7 @@ configure)
 
 shellenv)
   echo 'export BAT_THEME="ansi"'
+  echo 'export BAT_STYLE="numbers,changes,header"'
   # batman --export-env # batman is part of bat-extras
   ;;
 
