@@ -293,16 +293,24 @@ return {
           explorer = {
             -- follow_file = false,
             -- auto_close = true,
+            hidden = true,
+            -- ignored = true,
           },
           files = {
             -- follow_file = false,
             auto_close = true,
+            -- hidden = true,
+            -- ignored = true,
           },
         },
         win = {
           input = {
             keys = {
               ["<Esc>"] = { "close", mode = { "n", "i" } },
+              ["``"] = function()
+                -- Switch to the previous window (main editor)
+                vim.cmd("wincmd p")
+              end,
             },
           },
         },

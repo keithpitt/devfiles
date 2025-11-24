@@ -15,6 +15,7 @@ return {
           json = { "prettier" },
           jsonc = { "prettier" },
           javascript = { "prettier" },
+          yaml = { "prettier" },
           toml = { "prettier" },
           lua = { "stylua" },
         },

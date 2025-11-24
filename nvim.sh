@@ -58,6 +58,7 @@ lsps)
 configure)
   os::linkfile "nvim/init.lua" "$NVIM_CONFIG_PATH/init.lua"
   os::linkfile "nvim/lua" "$NVIM_CONFIG_PATH/lua"
+  os::linkfile "nvim/after" "$NVIM_CONFIG_PATH/after"
   ;;
 
 --is-installed)

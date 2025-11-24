@@ -12,6 +12,7 @@ return {
         "bashls",
         "vimls",
         "lua_ls",
+        "yamlls",
         "gopls",
         "ts_ls",
         "astro",
@@ -30,8 +31,8 @@ return {
           vim.lsp.config("*", {
             cmd_env = {
               SHELL = vim.env.SHELL,
-              BASH = vim.env.BASH or "/opt/homebrew/bin/bash"
-            }
+              BASH = vim.env.BASH or "/opt/homebrew/bin/bash",
+            },
           })
 
           -- Disable bashls for .env files
