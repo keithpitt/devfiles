@@ -20,7 +20,7 @@ keybind = cmd+v=paste_from_clipboard
 
 keybind = ctrl+l=clear_screen
 
-theme = jellybeans
+theme = Ayu
 
 # when you resize a ghostty window it shows a little tooltp thing in the center
 # of the window of it's current size. it's kinda annoying in a tiling window
@@ -39,6 +39,7 @@ macos-titlebar-style = transparent
 # command = /opt/homebrew/bin/bash -q
 keybind = shift+enter=text:\n
 
-env = COLORSCHEME=jellybeans
+env = COLORSCHEME=ayu
+env = AYU_COLOR="light"
 
 auto-update-channel = tip
