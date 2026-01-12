@@ -48,7 +48,7 @@ vim.opt.number = true
 
 -- Enables 24-bit RGB color in the TUI
 vim.opt.termguicolors = true
-vim.opt.background = dark
+vim.opt.background = "dark"
 
 -- Hide the mode indicator (e.g., -- INSERT --)
 vim.opt.showmode = false

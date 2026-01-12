@@ -38,3 +38,6 @@ Thumbs.db
 # Environment #
 ###############
 .env
+
+**/.claude/settings.local.json
+ghostty/config.local

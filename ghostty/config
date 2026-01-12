@@ -1,5 +1,7 @@
 # live reload with ctrl+shift+,
 
+config-file = ?~/.config/ghostty/config.local
+
 font-family = JetBrains Mono SemiBold
 font-size = 14
 font-feature = -calt, -liga, -dlig
@@ -20,7 +22,7 @@ keybind = cmd+v=paste_from_clipboard
 
 keybind = ctrl+l=clear_screen
 
-theme = Ayu
+theme = Material Ocean
 
 # when you resize a ghostty window it shows a little tooltp thing in the center
 # of the window of it's current size. it's kinda annoying in a tiling window
@@ -39,7 +41,9 @@ macos-titlebar-style = transparent
 # command = /opt/homebrew/bin/bash -q
 keybind = shift+enter=text:\n
 
-env = COLORSCHEME=ayu
-env = AYU_COLOR="light"
+# env = COLORSCHEME=duckbones
+# env = NEOVIM_THEME=spaceduck
+env = NEOVIM_THEME="material"
+env = NEOVIM_THEME_VARIANT="deep ocean"
 
 auto-update-channel = tip

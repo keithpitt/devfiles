@@ -1,24 +1,43 @@
+local function strip_quotes(str)
+  if str then
+    return str:gsub('^"(.*)"$', '%1')
+  end
+  return str
+end
+
 return {
   {
     "zenbones-theme/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim",
-    lazy = true,
+    lazy = false,
     priority = 1000,
+    cond = function()
+      return strip_quotes(os.getenv("NEOVIM_THEME")) == "zenbones"
+    end,
   },
   {
     "oxfist/night-owl.nvim",
-    lazy = true,
+    lazy = false,
     priority = 1000,
+    cond = function()
+      return strip_quotes(os.getenv("NEOVIM_THEME")) == "night-owl"
+    end,
   },
   {
     "yorumicolors/yorumi.nvim",
-    lazy = true,
+    lazy = false,
     priority = 1000,
+    cond = function()
+      return strip_quotes(os.getenv("NEOVIM_THEME")) == "yorumi"
+    end,
   },
   {
     "Shatur/neovim-ayu",
-    lazy = true,
+    lazy = false,
     priority = 1000,
+    cond = function()
+      return strip_quotes(os.getenv("NEOVIM_THEME")) == "ayu"
+    end,
     config = function()
       require('ayu').setup({
         -- mirage = true, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
@@ -29,11 +48,14 @@ return {
   },
   {
     "rebelot/kanagawa.nvim",
-    lazy = true,
+    lazy = false,
     priority = 1000,
+    cond = function()
+      return strip_quotes(os.getenv("NEOVIM_THEME")) == "kanagawa"
+    end,
     config = function()
       require("kanagawa").setup({
-        theme = wave,
+        theme = "wave",
         overrides = function(colors)
           local theme = colors.theme
 
@@ -80,16 +102,80 @@ return {
   },
   {
     "wtfox/jellybeans.nvim",
-    lazy = true,
+    lazy = false,
     priority = 1000,
+    cond = function()
+      return strip_quotes(os.getenv("NEOVIM_THEME")) == "jellybeans"
+    end,
     opts = {
       italics = false,
     },
   },
   {
     "catppuccin/nvim",
-    lazy = true,
+    lazy = false,
     name = "catppuccin",
     priority = 1000,
+    cond = function()
+      return strip_quotes(os.getenv("NEOVIM_THEME")) == "catppuccin"
+    end,
+  },
+  {
+    "pineapplegiant/spaceduck",
+    lazy = false,
+    priority = 1000,
+    cond = function()
+      return strip_quotes(os.getenv("NEOVIM_THEME")) == "spaceduck"
+    end,
+  },
+  {
+    "marko-cerovac/material.nvim",
+    lazy = false,
+    priority = 1000,
+    cond = function()
+      return strip_quotes(os.getenv("NEOVIM_THEME")) == "material"
+    end,
+    config = function()
+      require('material').setup({
+        contrast = {
+          terminal = false,
+          sidebars = false,
+          floating_windows = false,
+          cursor_line = false,
+          lsp_virtual_text = false,
+          non_current_windows = false,
+          filetypes = {},
+        },
+        styles = {
+          comments = { italic = true },
+          strings = {},
+          keywords = {},
+          functions = {},
+          variables = {},
+          operators = {},
+          types = {},
+        },
+        plugins = {
+          "nvim-treesitter",
+          "nvim-web-devicons",
+        },
+        disable = {
+          colored_cursor = false,
+          borders = false,
+          background = false,
+          term_colors = false,
+          eob_lines = false,
+        },
+        high_visibility = {
+          lighter = false,
+          darker = false,
+        },
+        lualine_style = "default",
+        async_loading = true,
+        custom_colors = nil,
+        custom_highlights = {},
+      })
+      vim.g.material_style = "deep ocean"
+    end
   },
 }
