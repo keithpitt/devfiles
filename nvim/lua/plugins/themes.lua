@@ -5,6 +5,10 @@ local function strip_quotes(str)
   return str
 end
 
+local function get_theme()
+  return strip_quotes(os.getenv("NEOVIM_THEME")) or strip_quotes(os.getenv("COLORSCHEME"))
+end
+
 return {
   {
     "zenbones-theme/zenbones.nvim",
@@ -12,7 +16,7 @@ return {
     lazy = false,
     priority = 1000,
     cond = function()
-      return strip_quotes(os.getenv("NEOVIM_THEME")) == "zenbones"
+      return get_theme() == "zenbones"
     end,
   },
   {
@@ -20,7 +24,7 @@ return {
     lazy = false,
     priority = 1000,
     cond = function()
-      return strip_quotes(os.getenv("NEOVIM_THEME")) == "night-owl"
+      return get_theme() == "night-owl"
     end,
   },
   {
@@ -28,7 +32,7 @@ return {
     lazy = false,
     priority = 1000,
     cond = function()
-      return strip_quotes(os.getenv("NEOVIM_THEME")) == "yorumi"
+      return get_theme() == "yorumi"
     end,
   },
   {
@@ -36,7 +40,7 @@ return {
     lazy = false,
     priority = 1000,
     cond = function()
-      return strip_quotes(os.getenv("NEOVIM_THEME")) == "ayu"
+      return get_theme() == "ayu"
     end,
     config = function()
       require('ayu').setup({
@@ -51,7 +55,7 @@ return {
     lazy = false,
     priority = 1000,
     cond = function()
-      return strip_quotes(os.getenv("NEOVIM_THEME")) == "kanagawa"
+      return get_theme() == "kanagawa"
     end,
     config = function()
       require("kanagawa").setup({
@@ -105,7 +109,7 @@ return {
     lazy = false,
     priority = 1000,
     cond = function()
-      return strip_quotes(os.getenv("NEOVIM_THEME")) == "jellybeans"
+      return get_theme() == "jellybeans"
     end,
     opts = {
       italics = false,
@@ -117,7 +121,7 @@ return {
     name = "catppuccin",
     priority = 1000,
     cond = function()
-      return strip_quotes(os.getenv("NEOVIM_THEME")) == "catppuccin"
+      return get_theme() == "catppuccin"
     end,
   },
   {
@@ -125,7 +129,7 @@ return {
     lazy = false,
     priority = 1000,
     cond = function()
-      return strip_quotes(os.getenv("NEOVIM_THEME")) == "spaceduck"
+      return get_theme() == "spaceduck"
     end,
   },
   {
@@ -133,7 +137,7 @@ return {
     lazy = false,
     priority = 1000,
     cond = function()
-      return strip_quotes(os.getenv("NEOVIM_THEME")) == "material"
+      return get_theme() == "material"
     end,
     config = function()
       require('material').setup({
