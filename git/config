@@ -50,3 +50,5 @@
     helper = !/opt/homebrew/bin/gh auth git-credential
 [init]
 	defaultBranch = main
+[rebase]
+	autostash = true
