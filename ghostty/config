@@ -22,7 +22,7 @@ keybind = cmd+v=paste_from_clipboard
 
 keybind = ctrl+l=clear_screen
 
-theme = Material Ocean
+theme = Kanagawa Wave
 
 # when you resize a ghostty window it shows a little tooltp thing in the center
 # of the window of it's current size. it's kinda annoying in a tiling window
@@ -43,7 +43,9 @@ keybind = shift+enter=text:\n
 
 # env = COLORSCHEME=duckbones
 # env = NEOVIM_THEME=spaceduck
-env = NEOVIM_THEME="material"
-env = NEOVIM_THEME_VARIANT="deep ocean"
+env = NEOVIM_THEME="kanagawa"
+env = NEOVIM_THEME_VARIANT="wave"
 
 auto-update-channel = tip
+
+# shell-integration-features = ssh-env,ssh-terminfo

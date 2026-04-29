@@ -34,6 +34,10 @@ local function set_nvim_colorscheme()
     vim.g.material_style = neovim_theme_variant
   end
 
+  if neovim_theme == "catppuccin" and neovim_theme_variant then
+    require("catppuccin").setup({ flavour = neovim_theme_variant })
+  end
+
   local theme_to_load = neovim_theme or "blue"
   local success, err = pcall(function()
     vim.cmd("colorscheme " .. theme_to_load)

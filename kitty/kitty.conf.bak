@@ -1,7 +1,7 @@
 # Make the title bar the same color as the background. This needs to be after
 # the theme because some themes change the title bar color manually, and it
 # usually sucks.
-macos_titlebar_color background
+# macos_titlebar_color background
 
 # Some nice padding around the terminal
 window_padding_width 5 15 10 15
@@ -249,9 +249,8 @@ wayland_enable_ime no
 geninclude theme.sh
 
 # BEGIN_KITTY_THEME
-# Catppuccin Kitty Mocha
-# include current-theme.conf
-include catppuccin-mocha.conf
+# srcery
+include current-theme.conf
 # END_KITTY_THEME
 #
 #
