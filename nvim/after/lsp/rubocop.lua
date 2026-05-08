@@ -1,3 +1,8 @@
 return {
   cmd = { "mise", "exec", "--", "bundle", "exec", "rubocop", "--lsp" },
+
+  on_attach = function(client)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+  end,
 }

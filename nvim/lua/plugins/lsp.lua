@@ -17,6 +17,7 @@ return {
         "ts_ls",
         "astro",
         "tailwindcss",
+        "cssls",
       },
     },
     dependencies = {
@@ -39,6 +40,15 @@ return {
           vim.lsp.config("bashls", {
             filetypes = { "sh", "bash" }, -- Explicitly exclude .env files
           })
+
+          -- Auto-enable any LSP that has a config file in after/lsp/.
+          -- Mason's automatic_enable only covers Mason-installed servers,
+          -- so this picks up locally-managed ones (e.g. mise/bundle).
+          local lsp_configs = vim.api.nvim_get_runtime_file("after/lsp/*.lua", true)
+          for _, path in ipairs(lsp_configs) do
+            local name = vim.fn.fnamemodify(path, ":t:r")
+            vim.lsp.enable(name)
+          end
 
           vim.lsp.config("lua_ls", {
             -- Copy/pasted from https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls

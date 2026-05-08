@@ -4,8 +4,7 @@ return {
   cmd = { "mise", "exec", "--", "ruby-lsp" },
 
   init_options = {
-    formatter = "standard",
-    linters = { "standard" },
+    formatter = "auto",
     addonSettings = {
       ["Ruby LSP Rails"] = {
         enablePendingMigrationsPrompt = false,

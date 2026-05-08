@@ -17,7 +17,11 @@ return {
           javascript = { "prettier" },
           yaml = { "prettier" },
           toml = { "prettier" },
+          css = { "prettier" },
+          scss = { "prettier" },
+          less = { "prettier" },
           lua = { "stylua" },
+          ruby = { lsp_format = "prefer" },
         },
       })
     end,
