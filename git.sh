@@ -10,8 +10,23 @@ setup)
   ;;
 
 configure)
-  os::linkfile "git/config" "$GIT_CONFIG_PATH/config"
+  os::linkfile "git/config" "$GIT_CONFIG_PATH/shared"
   os::linkfile "git/ignore" "$GIT_CONFIG_PATH/ignore"
+
+  # ~/.config/git/config is a thin local file that includes the tracked
+  # dotfile (~/.config/git/shared) and the per-machine user file. Tools
+  # that auto-edit the global config (1Password, `git lfs install`, etc.)
+  # write here, leaving the tracked dotfile clean.
+  if [ ! -f "$GIT_CONFIG_PATH/config" ] || [ -L "$GIT_CONFIG_PATH/config" ]; then
+    rm -f "$GIT_CONFIG_PATH/config"
+    cat >"$GIT_CONFIG_PATH/config" <<'EOF'
+[include]
+    path = ~/.config/git/shared
+
+[include]
+    path = ~/.config/git/user
+EOF
+  fi
 
   if [ ! -f "$GIT_CONFIG_PATH/user" ]; then
     echo "please run: devmachine git setuser"

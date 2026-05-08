@@ -48,7 +48,9 @@
 [credential "https://gist.github.com"]
     helper =
     helper = !/opt/homebrew/bin/gh auth git-credential
+
 [init]
-	defaultBranch = main
+    defaultBranch = main
+
 [rebase]
-	autostash = true
+    autostash = true
