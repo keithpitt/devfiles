@@ -182,3 +182,40 @@ g() {
   echo "g: no folder matching '$name' found under ~/Code or ~/Work" >&2
   return 1
 }
+
+_g() {
+  local aliases_file="${XDG_DATA_HOME:-$HOME/.local/share}/g/aliases"
+  local -a alias_list repo_list
+  local base p a_name a_path
+
+  case $CURRENT in
+    2)
+      if [[ ${words[2]} == +* ]]; then
+        compadd -- '+aliases'
+        return
+      fi
+      if [[ -f "$aliases_file" ]]; then
+        while IFS=$'\t' read -r a_name a_path; do
+          [[ -n "$a_name" ]] && alias_list+=("$a_name")
+        done < "$aliases_file"
+      fi
+      for base in "$HOME/Code" "$HOME/Work"; do
+        [[ -d "$base" ]] || continue
+        for p in "$base"/*(N/);   do repo_list+=("${p:t}"); done
+        for p in "$base"/*/*(N/); do [[ -e "$p/.git" ]] && repo_list+=("${p:t}"); done
+      done
+      repo_list=(${(u)repo_list})
+      _alternative \
+        'aliases:alias:compadd -a alias_list' \
+        'repos:repository:compadd -a repo_list' \
+        'subcmds:subcommand:compadd -- +aliases'
+      ;;
+    3)
+      [[ ${words[2]} == "+aliases" ]] && compadd -- list add
+      ;;
+    5)
+      [[ ${words[2]} == "+aliases" && ${words[3]} == "add" ]] && _files -/
+      ;;
+  esac
+}
+compdef _g g 2>/dev/null
