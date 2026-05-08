@@ -20,6 +20,7 @@ shellenv)
     cat "zsh/prompt.zsh"
     cat "zsh/completions.zsh"
     cat "zsh/history.zsh"
+    cat "zsh/g.zsh"
   else
     echo "# skipping zsh shellenv"
   fi
