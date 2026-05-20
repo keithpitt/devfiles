@@ -327,6 +327,12 @@ return {
           },
         },
       },
+      -- Wrap long notification text instead of truncating it
+      styles = {
+        notification = {
+          wo = { wrap = true },
+        },
+      },
     },
     keys = {
       {

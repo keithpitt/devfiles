@@ -4,13 +4,13 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     config = function()
-      local ensure_installed = { "ruby", "html", "graphql", "embedded_template" }
+      local ensure_installed = { "ruby", "html", "graphql", "embedded_template", "sql" }
 
       require("nvim-treesitter").install(ensure_installed)
 
       -- Map parsers → filetypes that should get treesitter highlighting/indent.
       -- `embedded_template` is the parser; the filetype is `eruby`.
-      local filetypes = { "ruby", "html", "graphql", "eruby" }
+      local filetypes = { "ruby", "html", "graphql", "eruby", "sql" }
 
       vim.api.nvim_create_autocmd("FileType", {
         pattern = filetypes,
