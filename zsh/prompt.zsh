@@ -29,6 +29,8 @@ PROMPT_GIT_PATH_COLOR=$FG[067]
 PROMPT_GIT_REPO_ICON=$'\uF1D2'  # nf-fa-git_alt
 PROMPT_GITHUB_REPO_ICON=$''  # nf-fa-github
 PROMPT_GIT_BRANCH_ICON=$'\uE726'  # nf-dev-git_branch
+PROMPT_GIT_WORKTREE_ICON=$'\uF1BB'  # nf-fa-tree
+PROMPT_GIT_WORKTREE_COLOR=$FG[141]
 
 # Set required options.
 setopt promptsubst
@@ -59,10 +61,23 @@ precmd() {
       fi
     fi
 
+    # Detect linked worktrees: their git-dir differs from the shared common dir.
+    local is_worktree=0 git_dir git_common_dir wt_repo=""
+    git_dir=$(command git rev-parse --absolute-git-dir 2>/dev/null)
+    git_common_dir=$(command git rev-parse --git-common-dir 2>/dev/null)
+    git_common_dir="${git_common_dir:A}"
+    if [[ -n "$git_dir" && "$git_dir" != "$git_common_dir" ]]; then
+      is_worktree=1
+      wt_repo="${git_common_dir:h:t}"  # the repo dir that owns this worktree
+    fi
+
     local repo_icon="$PROMPT_GIT_REPO_ICON"
     [[ "$host" == "github.com" ]] && repo_icon="$PROMPT_GITHUB_REPO_ICON"
 
+    # In a worktree, name the real repo (from the common dir) rather than the
+    # worktree's own folder, which is not a repo in its own right.
     local repo_label="${git_root:t}"
+    (( is_worktree )) && [[ -n "$wt_repo" ]] && repo_label="$wt_repo"
     [[ -n "$org_name" ]] && repo_label="${org_name}/${repo_label}"
 
     local rel_path="${PWD#$git_root}"
@@ -93,10 +108,26 @@ precmd() {
         PROMPT_BRANCH_COLOR="$PROMPT_SUCCESS_COLOR"
       fi
     fi
+
+    # Right-hand branch segment. In a worktree, swap the branch icon for the
+    # worktree icon (fixed accent colour) and prefix the worktree folder name
+    # when it differs from the branch, so worktrees stand out at a glance.
+    if (( is_worktree )); then
+      local branch_part="${vcs_info_msg_1_#${PROMPT_GIT_BRANCH_ICON} }"
+      local wt_folder="${git_root:t}"
+      PROMPT_VCS=""
+      [[ -n "$wt_folder" && "$wt_folder" != "$branch_part" ]] && \
+        PROMPT_VCS+="${PROMPT_VCS_INFO_COLOR}${wt_folder} "
+      PROMPT_VCS+="${PROMPT_GIT_WORKTREE_COLOR}${PROMPT_GIT_WORKTREE_ICON} "
+      PROMPT_VCS+="${PROMPT_BRANCH_COLOR}${branch_part}${FX[reset]}"
+    else
+      PROMPT_VCS="${PROMPT_BRANCH_COLOR}${vcs_info_msg_1_}${FX[reset]}"
+    fi
   else
     PROMPT_LOCATION="%{$FG[242]%}%~%{$FX[reset]%}"
     PROMPT_PREFIX=""
     PROMPT_BRANCH_COLOR="$PROMPT_VCS_INFO_COLOR"
+    PROMPT_VCS="${PROMPT_VCS_INFO_COLOR}${vcs_info_msg_1_}${FX[reset]}"
   fi
 }
 
@@ -111,4 +142,4 @@ zstyle ':vcs_info:*:*' nvcsformats "" ""
 
 # Define prompts.
 PROMPT='${PROMPT_PREFIX:+${PROMPT_PREFIX} }'"${SSH_TTY:+[%n@%m] }"'${PROMPT_LOCATION}'" %(0?.%{$PROMPT_SUCCESS_COLOR%}.%{$PROMPT_FAILURE_COLOR%})%(!.$PROMPT_ROOT_END.$PROMPT_DEFAULT_END)%{$FX[reset]%} "
-RPROMPT='${PROMPT_BRANCH_COLOR}${vcs_info_msg_1_}'"%{$FX[reset]%}"
+RPROMPT='${PROMPT_VCS}'
