@@ -49,3 +49,4 @@ env = NEOVIM_THEME_VARIANT="wave"
 auto-update-channel = tip
 
 # shell-integration-features = ssh-env,ssh-terminfo
+macos-option-as-alt = left
