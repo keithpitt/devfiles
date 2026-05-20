@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Generic git hook dispatcher. Invoked via symlinks named after the hook type
+# (pre-commit, pre-push, commit-msg, ...). For pre-commit, additionally
+# validates the active user.name/user.email against ~/.config/git/user to
+# catch stray `git config --global user.* ...` writes from other tools.
+#
+# Because we set core.hooksPath globally, .git/hooks/<name> is bypassed by
+# git. This dispatcher restores that behavior by exec'ing the repo-local
+# hook if one exists (e.g. hooks installed by hk, husky, pre-commit, etc.).
+set -euo pipefail
+
+hook_name=$(basename "$0")
+
+if [[ "$hook_name" == "pre-commit" ]]; then
+  user_file="$HOME/.config/git/user"
+  if [[ -r "$user_file" ]]; then
+    expected_email=$(git config --file "$user_file" --get user.email 2>/dev/null || true)
+    expected_name=$(git config --file "$user_file" --get user.name 2>/dev/null || true)
+    actual_email=$(git config --get user.email 2>/dev/null || true)
+    actual_name=$(git config --get user.name 2>/dev/null || true)
+
+    fail=0
+    if [[ -n "$expected_email" && "$expected_email" != "$actual_email" ]]; then
+      printf >&2 'pre-commit: git user.email does not match %s\n  expected: %s\n  actual:   %s\n' \
+        "$user_file" "$expected_email" "${actual_email:-<unset>}"
+      fail=1
+    fi
+    if [[ -n "$expected_name" && "$expected_name" != "$actual_name" ]]; then
+      printf >&2 'pre-commit: git user.name does not match %s\n  expected: %s\n  actual:   %s\n' \
+        "$user_file" "$expected_name" "${actual_name:-<unset>}"
+      fail=1
+    fi
+    if (( fail )); then
+      printf >&2 '\nFind the override:\n  git config --show-origin --get-all user.email\n  git config --show-origin --get-all user.name\n'
+      exit 1
+    fi
+  fi
+fi
+
+git_dir=$(git rev-parse --git-dir)
+local_hook="$git_dir/hooks/$hook_name"
+if [[ -x "$local_hook" ]]; then
+  exec "$local_hook" "$@"
+fi

@@ -12,6 +12,7 @@ setup)
 configure)
   os::linkfile "git/config" "$GIT_CONFIG_PATH/shared"
   os::linkfile "git/ignore" "$GIT_CONFIG_PATH/ignore"
+  os::linkfile "git/hooks" "$GIT_CONFIG_PATH/hooks"
 
   # ~/.config/git/config is a thin local file that includes the tracked
   # dotfile (~/.config/git/shared) and the per-machine user file. Tools
